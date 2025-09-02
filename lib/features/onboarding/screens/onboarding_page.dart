@@ -1,4 +1,5 @@
 import 'package:alopr/core/common/buttons.dart';
+import 'package:alopr/features/authentication/presentation/screens/register_page.dart';
 import 'package:alopr/features/onboarding/widgets/onboarding_model.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,7 @@ class _OnboardingPageState extends State<OnboardingPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundLight,
       body: Stack(
         children: [
           /// الصفحة الأصلية اللي هتظهر بعد الريڤيل
@@ -66,15 +67,36 @@ class _OnboardingPageState extends State<OnboardingPage>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Align(
-                    alignment: currentIndex == 7
-                        ? Alignment.center
-                        : Alignment.topLeft,
-                    child: SizedBox(
-                      height: 56.h,
-                      width: 56.w,
-                      child: Image.asset("images/icon.png"),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: currentIndex == 7
+                            ? Alignment.center
+                            : Alignment.topLeft,
+                        child: SizedBox(
+                          height: 56.h,
+                          width: 56.w,
+                          child: Image.asset("images/icon.png"),
+                        ),
+                      ),
+                      if (currentIndex != 7 && currentIndex != 0)
+                        Padding(
+                          padding: EdgeInsets.only(right: 16).r,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => RegisterPage(),
+                              ));
+                            },
+                            child: Text(
+                              'Skip',
+                              style: AppTexts.regular
+                                  .copyWith(color: AppColors.primaryLight),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                   if (currentIndex == 7)
                     Text(
@@ -88,40 +110,42 @@ class _OnboardingPageState extends State<OnboardingPage>
                       children: [
                         Expanded(
                           child: PageView.builder(
+                            physics: NeverScrollableScrollPhysics(),
                             onPageChanged: (index) {
                               setState(() {
                                 currentIndex = index;
                               });
                             },
                             controller: _pageController,
-                            itemCount: onboardingTitle.length,
+                            itemCount: onboardingData.length,
                             itemBuilder: (context, index) {
+                              final data = onboardingData[index];
                               return Column(
                                 children: [
                                   SizedBox(
                                     height: 280.h,
                                     width: 375.w,
                                     child: SvgPicture.asset(
-                                      onboardingImages[index],
+                                      data.image,
                                       fit: BoxFit.contain,
                                     ),
                                   ),
                                   SizedBox(height: 24.h),
                                   Text(
-                                    onboardingMainTitle[index],
+                                    data.mainTitle,
                                     style: AppTexts.regular,
                                     textAlign: TextAlign.center,
                                   ),
                                   SizedBox(height: 16.h),
                                   Text(
-                                    onboardingTitle[index],
+                                    data.title,
                                     style: AppTexts.heading
                                         .copyWith(fontSize: 20.sp),
                                     textAlign: TextAlign.center,
                                   ),
                                   SizedBox(height: 16.h),
                                   Text(
-                                    onboardingSubTitle[index],
+                                    data.subTitle,
                                     style: AppTexts.regular.copyWith(
                                         color: AppColors.paragraphLight),
                                     textAlign: TextAlign.center,
@@ -141,7 +165,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                                   size: Size(6, 6),
                                   activeColor: AppColors.primaryLight,
                                   activeSize: Size(8, 8)),
-                              dotsCount: 7,
+                              dotsCount: 6,
                               position: currentIndex.toDouble() - 1,
                             ),
                           ),
@@ -151,10 +175,16 @@ class _OnboardingPageState extends State<OnboardingPage>
                           MainAppButton(
                             bouttonWidth: 196,
                             onPressed: () {
-                              _pageController.nextPage(
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeInOut,
-                              );
+                              if (currentIndex == 7) {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => RegisterPage(),
+                                ));
+                              } else {
+                                _pageController.nextPage(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
+                                );
+                              }
                             },
                             text: currentIndex == 7
                                 ? "Register Now"
@@ -187,15 +217,16 @@ class _OnboardingPageState extends State<OnboardingPage>
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              InkWell(
-                                onTap: () {
-                                  _pageController.previousPage(
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeInOut,
-                                  );
-                                },
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 16).r,
+                              Padding(
+                                padding: EdgeInsets.only(left: 16).r,
+                                child: InkWell(
+                                  onTap: () {
+                                    _pageController.previousPage(
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      curve: Curves.easeInOut,
+                                    );
+                                  },
                                   child: Text(
                                     'Back',
                                     style: AppTexts.regular.copyWith(

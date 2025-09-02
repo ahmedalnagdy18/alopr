@@ -30,28 +30,5 @@ class MainAppButton extends StatelessWidget {
       icon: icon,
       iconAlignment: IconAlignment.end,
     );
-
-    // MaterialButton(
-    //   elevation: 0,
-    //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-    //   onPressed: onPressed,
-    //   color: AppColors.primaryLight,
-    //   shape: ContinuousRectangleBorder(
-    //     borderRadius: BorderRadius.circular(16),
-    //   ),
-    //   child: Row(
-    //     mainAxisSize: MainAxisSize.min,
-    //     children: [
-    //       Text(
-    //         text,
-    //         style: AppTexts.regular.copyWith(color: Colors.white),
-    //       ),
-    //       if (widget != null) ...[
-    //         const SizedBox(width: 16),
-    //         widget!,
-    //       ],
-    //     ],
-    //   ),
-    // );
   }
 }
