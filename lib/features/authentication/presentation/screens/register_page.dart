@@ -16,6 +16,8 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   int selectRole = 0;
+  bool isObscure1 = true;
+  bool isObscure2 = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,6 +132,17 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         SizedBox(height: 4.h),
                         TextFieldWidget(
+                          obscureText: isObscure1,
+                          suffixIcon: InkwellWidget(
+                            onTap: () {
+                              setState(() {
+                                isObscure1 = !isObscure1;
+                              });
+                            },
+                            child: Icon(isObscure1
+                                ? Icons.visibility_off
+                                : Icons.visibility),
+                          ),
                           hintText: "Enter your password",
                         ),
                         SizedBox(height: 12.h),
@@ -139,6 +152,17 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         SizedBox(height: 4.h),
                         TextFieldWidget(
+                          obscureText: isObscure2,
+                          suffixIcon: InkwellWidget(
+                            onTap: () {
+                              setState(() {
+                                isObscure2 = !isObscure2;
+                              });
+                            },
+                            child: Icon(isObscure2
+                                ? Icons.visibility_off
+                                : Icons.visibility),
+                          ),
                           hintText: "Re-enter your password",
                         ),
                         SizedBox(height: 12.h),
