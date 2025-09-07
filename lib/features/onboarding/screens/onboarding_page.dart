@@ -1,4 +1,6 @@
 import 'package:alopr/core/common/buttons.dart';
+import 'package:alopr/core/common/inkweel_widget.dart';
+import 'package:alopr/features/authentication/presentation/screens/login_page.dart';
 import 'package:alopr/features/authentication/presentation/screens/register_page.dart';
 import 'package:alopr/features/onboarding/widgets/onboarding_model.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -205,10 +207,17 @@ class _OnboardingPageState extends State<OnboardingPage>
                                       .withValues(alpha: 0.35),
                                 ),
                               ),
-                              Text(
-                                'Login',
-                                style: AppTexts.regular
-                                    .copyWith(color: AppColors.primaryLight),
+                              InkwellWidget(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => LoginPage(),
+                                  ));
+                                },
+                                child: Text(
+                                  'Login',
+                                  style: AppTexts.regular
+                                      .copyWith(color: AppColors.primaryLight),
+                                ),
                               ),
                             ],
                           ),

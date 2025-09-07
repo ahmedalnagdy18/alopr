@@ -46,3 +46,10 @@ TextInputFormatter noSpaceFormatter() {
     },
   );
 } //  noSpaceFormatter(),   to call it
+
+
+// or
+
+//  inputFormatters: [
+//              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+//                           ],

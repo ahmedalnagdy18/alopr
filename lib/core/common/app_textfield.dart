@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class TextFieldWidget extends StatelessWidget {
+class AppTextField extends StatelessWidget {
   final String? hintText;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final bool? obscureText;
   final TextInputType? keyboardType;
-  final TextEditingController? mycontroller;
+  final TextEditingController? controller;
   final String? Function(String?)? validator;
   final int? maxLines;
   final String? label;
@@ -25,13 +25,14 @@ class TextFieldWidget extends StatelessWidget {
   final bool? readOnly;
   final Color? hintTextColor;
   final Function(String)? onFieldSubmitted;
+  final AutovalidateMode? autovalidateMode;
 
-  const TextFieldWidget({
+  const AppTextField({
     super.key,
     this.hintText,
     this.suffixIcon,
     this.obscureText,
-    this.mycontroller,
+    this.controller,
     this.prefixIcon,
     this.keyboardType,
     this.validator,
@@ -48,11 +49,13 @@ class TextFieldWidget extends StatelessWidget {
     this.readOnly,
     this.hintTextColor,
     this.onFieldSubmitted,
+    this.autovalidateMode,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autovalidateMode: autovalidateMode,
       cursorColor: AppColors.primaryLight,
       onFieldSubmitted: onFieldSubmitted,
       readOnly: readOnly ?? false,
@@ -63,7 +66,8 @@ class TextFieldWidget extends StatelessWidget {
       obscureText: obscureText ?? false,
       maxLength: maxLength,
       maxLines: maxLines ?? 1,
-      controller: mycontroller,
+      minLines: 1,
+      controller: controller,
       validator: validator,
       inputFormatters: inputFormatters,
       keyboardType: keyboardType,
@@ -82,6 +86,7 @@ class TextFieldWidget extends StatelessWidget {
             color: Colors.red,
           ),
         ),
+
         errorStyle: errorStyle,
         //  AppTexts.small.copyWith(
         //   color: AppColors.errorColor,

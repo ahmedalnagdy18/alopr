@@ -8,27 +8,35 @@ class MainAppButton extends StatelessWidget {
       required this.onPressed,
       required this.text,
       this.icon,
-      this.bouttonWidth});
-  final void Function() onPressed;
+      this.padding,
+      this.bouttonWidth,
+      this.backgroundColor});
+  final void Function()? onPressed;
   final String? text;
   final Widget? icon;
   final double? bouttonWidth;
+  final EdgeInsetsGeometry? padding;
+  final Color? backgroundColor;
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      style: ButtonStyle(
-          minimumSize: WidgetStatePropertyAll(Size(bouttonWidth ?? 0, 40)),
-          backgroundColor: WidgetStatePropertyAll(AppColors.primaryLight),
-          iconColor: WidgetStatePropertyAll(Colors.white),
-          shape: WidgetStatePropertyAll(ContinuousRectangleBorder(
-              borderRadius: BorderRadiusGeometry.circular(16)))),
-      onPressed: onPressed,
-      label: Text(
-        text ?? "",
-        style: AppTexts.regular.copyWith(color: Colors.white),
+    return Padding(
+      padding: padding ?? EdgeInsetsGeometry.zero,
+      child: ElevatedButton.icon(
+        style: ButtonStyle(
+            minimumSize: WidgetStatePropertyAll(Size(bouttonWidth ?? 0, 40)),
+            backgroundColor: WidgetStatePropertyAll(
+                backgroundColor ?? AppColors.primaryLight),
+            iconColor: WidgetStatePropertyAll(Colors.white),
+            shape: WidgetStatePropertyAll(ContinuousRectangleBorder(
+                borderRadius: BorderRadiusGeometry.circular(16)))),
+        onPressed: onPressed,
+        label: Text(
+          text ?? "",
+          style: AppTexts.regular.copyWith(color: Colors.white),
+        ),
+        icon: icon,
+        iconAlignment: IconAlignment.end,
       ),
-      icon: icon,
-      iconAlignment: IconAlignment.end,
     );
   }
 }
