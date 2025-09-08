@@ -23,7 +23,7 @@ class AppTexts {
   static TextStyle subHeading = GoogleFonts.ibmPlexSans(
     fontSize: 12.sp,
     color: AppColors.headingLight,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600,
   );
 
 // body

@@ -26,6 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final GlobalKey<FormState> _key = GlobalKey();
   bool firstSeen = true;
   bool isButtonEnabled = false;
+  String? role;
 
   final _fullName = FieldControl();
   final _email = FieldControl();
@@ -249,7 +250,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         });
                         if (_key.currentState!.validate()) {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => OtpPage(),
+                            builder: (context) => OtpPage(
+                              role:
+                                  selectRole == 0 ? role = "doctor" : "patient",
+                            ),
                           ));
                         }
                       }

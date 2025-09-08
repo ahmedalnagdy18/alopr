@@ -8,6 +8,7 @@ class AppColors {
   // Base Colors
   static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
+  static const Color error = Color(0xFFDB2525);
 
   // Light mood
   static const Color primaryLight = Color(0xFF4A90E2);
