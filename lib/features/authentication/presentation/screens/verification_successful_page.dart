@@ -41,20 +41,23 @@ class VerificationSuccessfulPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                MainAppButton(
-                    bouttonWidth: double.infinity,
-                    onPressed: () {
-                      if (role == "doctor") {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => HomePage(
-                            role: role,
-                          ),
-                        ));
-                      } else if (role == "patient") {
-                        print("Patient");
-                      }
-                    },
-                    text: 'Continue to Home')
+                Padding(
+                  padding: EdgeInsets.only(bottom: 4.r),
+                  child: MainAppButton(
+                      bouttonWidth: double.infinity,
+                      onPressed: () {
+                        if (role == "doctor") {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => HomePage(
+                              role: role,
+                            ),
+                          ));
+                        } else if (role == "patient") {
+                          print("Patient");
+                        }
+                      },
+                      text: 'Continue to Home'),
+                )
               ],
             ),
           ),

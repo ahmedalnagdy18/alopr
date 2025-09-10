@@ -86,46 +86,28 @@ class _SettingPageState extends State<SettingPage> {
                 child: ExpansionTile(
                   iconColor: AppColors.black,
                   tilePadding: EdgeInsets.all(0),
-                  childrenPadding: EdgeInsets.only(left: 65.r, right: 0),
+                  childrenPadding: EdgeInsets.symmetric(horizontal: 10.w),
                   shape: Border.all(color: Colors.transparent),
                   leading: SvgPicture.asset('images/language.svg'),
                   title: Text("Language", style: AppTexts.regular),
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("English"),
-                        Radio(
-                          activeColor: AppColors.primaryLight,
-                          backgroundColor:
-                              WidgetStatePropertyAll(AppColors.white),
-                          value: "English",
-                          groupValue: _selectedLang,
-                          onChanged: (val) {
-                            setState(() {
-                              _selectedLang = val!;
-                            });
-                          },
-                        ),
-                      ],
+                    _languageWidget(
+                      value: "English",
+                      onChanged: (val) {
+                        setState(() {
+                          _selectedLang = val!;
+                        });
+                      },
+                      selectedLang: _selectedLang,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Arabic"),
-                        Radio(
-                          activeColor: AppColors.primaryLight,
-                          backgroundColor:
-                              WidgetStatePropertyAll(AppColors.white),
-                          value: "Arabic",
-                          groupValue: _selectedLang,
-                          onChanged: (val) {
-                            setState(() {
-                              _selectedLang = val!;
-                            });
-                          },
-                        ),
-                      ],
+                    _languageWidget(
+                      value: "Arabic",
+                      onChanged: (val) {
+                        setState(() {
+                          _selectedLang = val!;
+                        });
+                      },
+                      selectedLang: _selectedLang,
                     ),
                   ],
                 ),
@@ -161,4 +143,21 @@ class _SettingPageState extends State<SettingPage> {
       ),
     );
   }
+}
+
+Widget _languageWidget(
+    {required dynamic selectedLang,
+    required Function(dynamic) onChanged,
+    required String value}) {
+  return ListTile(
+    leading: SizedBox(),
+    title: Text(value, style: AppTexts.regular),
+    trailing: Radio(
+      activeColor: AppColors.primaryLight,
+      backgroundColor: WidgetStatePropertyAll(AppColors.white),
+      value: value,
+      groupValue: selectedLang,
+      onChanged: onChanged,
+    ),
+  );
 }

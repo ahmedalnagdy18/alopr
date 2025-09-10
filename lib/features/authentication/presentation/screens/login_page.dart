@@ -171,26 +171,30 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
       bottomNavigationBar: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Don’t have an account?',
-              style: AppTexts.regular.copyWith(color: Colors.grey),
-            ),
-            SizedBox(width: 4),
-            InkwellWidget(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => RegisterPage(),
-                ));
-              },
-              child: Text(
-                'Register',
-                style: AppTexts.regular.copyWith(color: AppColors.buttonLight),
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 4.r),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Don’t have an account?',
+                style: AppTexts.regular.copyWith(color: Colors.grey),
               ),
-            ),
-          ],
+              SizedBox(width: 4),
+              InkwellWidget(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => RegisterPage(),
+                  ));
+                },
+                child: Text(
+                  'Register',
+                  style:
+                      AppTexts.regular.copyWith(color: AppColors.buttonLight),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       resizeToAvoidBottomInset: true,
