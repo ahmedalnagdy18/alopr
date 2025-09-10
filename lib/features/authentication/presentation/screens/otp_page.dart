@@ -66,12 +66,12 @@ class _OtpPageState extends State<OtpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: AppColors.backgroundLight,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(
           "Verify Your Email",
-          style: AppTexts.regular.copyWith(
+          style: AppTexts.regular(context).copyWith(
             fontSize: 20.sp,
           ),
         ),
@@ -89,7 +89,7 @@ class _OtpPageState extends State<OtpPage> {
               SizedBox(height: 36.h),
               Text(
                 'We’ve sent a 4-digit code to your email. Please enter it below to verify your account.',
-                style: AppTexts.regular,
+                style: AppTexts.regular(context),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 16.h),
@@ -114,6 +114,7 @@ class _OtpPageState extends State<OtpPage> {
               ),
               SizedBox(height: 16.h),
               _rowText(
+                context: context,
                 isTime: false,
                 text: '''Didn't receive the code?''',
                 text2: 'Click Resend',
@@ -127,6 +128,7 @@ class _OtpPageState extends State<OtpPage> {
               ),
               SizedBox(height: 16.h),
               _rowText(
+                context: context,
                 isTime: true,
                 text: 'Resend in,',
                 text2: getTimerText(),
@@ -140,20 +142,22 @@ class _OtpPageState extends State<OtpPage> {
 }
 
 Widget _rowText({
+  required BuildContext context,
   required String text,
   required String text2,
   required bool isTime,
   final Function()? onTap,
 }) {
+  final textColor = Theme.of(context).brightness == Brightness.dark
+      ? AppColors.headingDark
+      : AppColors.headingLight;
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       Text(
         text,
-        style: AppTexts.regular.copyWith(
-            color: isTime == false
-                ? Colors.grey.shade600
-                : AppColors.headingLight),
+        style: AppTexts.regular(context).copyWith(
+            color: isTime == false ? Colors.grey.shade600 : textColor),
       ),
       SizedBox(width: 4),
       isTime == false
@@ -161,13 +165,14 @@ Widget _rowText({
               onTap: onTap,
               child: Text(
                 text2,
-                style: AppTexts.regular
+                style: AppTexts.regular(context)
                     .copyWith(decoration: TextDecoration.underline),
               ),
             )
           : Text(
               text2,
-              style: AppTexts.regular.copyWith(color: AppColors.buttonLight),
+              style: AppTexts.regular(context)
+                  .copyWith(color: AppColors.buttonLight),
             ),
     ],
   );

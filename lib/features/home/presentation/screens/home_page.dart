@@ -20,11 +20,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final textColor = Theme.of(context).brightness == Brightness.dark
+        ? AppColors.headingDark
+        : AppColors.headingLight;
     return Stack(
       alignment: AlignmentGeometry.bottomRight,
       children: [
         Scaffold(
-          backgroundColor: AppColors.backgroundLight,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: SingleChildScrollView(
             child: SafeArea(
               child: Padding(
@@ -38,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                         Expanded(
                           child: Text(
                             "Welcome to ALOPR Follower Dashboard",
-                            style: AppTexts.title.copyWith(
+                            style: AppTexts.title(context).copyWith(
                               fontSize: 24.sp,
                             ),
                             textAlign: TextAlign.start,
@@ -54,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                             },
                             child: Icon(
                               Icons.settings_outlined,
-                              color: AppColors.black,
+                              color: textColor,
                             ),
                           ),
                         )

@@ -61,7 +61,7 @@ class _OnCompletePageState extends State<OnCompletePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 19.h),
@@ -73,17 +73,17 @@ class _OnCompletePageState extends State<OnCompletePage> {
                 children: [
                   Text(
                     'Complete Your Profile',
-                    style: AppTexts.title.copyWith(fontSize: 24.sp),
+                    style: AppTexts.title(context).copyWith(fontSize: 24.sp),
                   ),
                   SizedBox(height: 16.h),
                   Text(
                     'Please provide the following details to personalise your ALOPR experience.',
-                    style: AppTexts.regular,
+                    style: AppTexts.regular(context),
                   ),
                   SizedBox(height: 16.h),
                   Text(
                     'Caregiver Name',
-                    style: AppTexts.paragraph,
+                    style: AppTexts.paragraph(context),
                   ),
                   SizedBox(height: 8.h),
                   AppTextField(
@@ -100,7 +100,7 @@ class _OnCompletePageState extends State<OnCompletePage> {
                   SizedBox(height: 12.h),
                   Text(
                     'Caregiver Phone Number',
-                    style: AppTexts.paragraph,
+                    style: AppTexts.paragraph(context),
                   ),
                   SizedBox(height: 8.h),
                   AppTextField(
@@ -120,7 +120,7 @@ class _OnCompletePageState extends State<OnCompletePage> {
                   SizedBox(height: 12.h),
                   Text(
                     'Condition',
-                    style: AppTexts.paragraph,
+                    style: AppTexts.paragraph(context),
                   ),
                   SizedBox(height: 8.h),
                   AppTextField(
@@ -135,10 +135,11 @@ class _OnCompletePageState extends State<OnCompletePage> {
                   SizedBox(height: 12.h),
                   Text(
                     'Gender',
-                    style: AppTexts.paragraph,
+                    style: AppTexts.paragraph(context),
                   ),
                   SizedBox(height: 8.h),
                   _ridoWidget(
+                    context: context,
                     onChanged: (val) {
                       setState(() {
                         _gender = val!;
@@ -149,6 +150,7 @@ class _OnCompletePageState extends State<OnCompletePage> {
                   ),
                   SizedBox(height: 8.h),
                   _ridoWidget(
+                    context: context,
                     onChanged: (val) {
                       setState(() {
                         _gender = val!;
@@ -160,10 +162,11 @@ class _OnCompletePageState extends State<OnCompletePage> {
                   SizedBox(height: 12.h),
                   Text(
                     'Do you have chronic diseases ?',
-                    style: AppTexts.paragraph,
+                    style: AppTexts.paragraph(context),
                   ),
                   SizedBox(height: 8.h),
                   _ridoWidget(
+                    context: context,
                     onChanged: (val) {
                       setState(() {
                         _haveDiseases = val!;
@@ -175,6 +178,7 @@ class _OnCompletePageState extends State<OnCompletePage> {
                   ),
                   SizedBox(height: 8.h),
                   _ridoWidget(
+                    context: context,
                     onChanged: (val) {
                       setState(() {
                         _haveDiseases = val!;
@@ -199,10 +203,11 @@ class _OnCompletePageState extends State<OnCompletePage> {
                   SizedBox(height: 12.h),
                   Text(
                     'Are you pregnant ?',
-                    style: AppTexts.paragraph,
+                    style: AppTexts.paragraph(context),
                   ),
                   SizedBox(height: 8.h),
                   _ridoWidget(
+                    context: context,
                     onChanged: (val) {
                       setState(() {
                         _havepregnant = val!;
@@ -213,6 +218,7 @@ class _OnCompletePageState extends State<OnCompletePage> {
                   ),
                   SizedBox(height: 8.h),
                   _ridoWidget(
+                    context: context,
                     onChanged: (val) {
                       setState(() {
                         _havepregnant = val!;
@@ -253,9 +259,13 @@ class _OnCompletePageState extends State<OnCompletePage> {
 }
 
 Widget _ridoWidget(
-    {required void Function(dynamic) onChanged,
+    {required BuildContext context,
+    required void Function(dynamic) onChanged,
     required groupValue,
     required String value}) {
+  final textColor = Theme.of(context).brightness == Brightness.dark
+      ? AppColors.headingDark
+      : AppColors.headingLight;
   return Row(
     children: [
       Transform.scale(
@@ -278,11 +288,11 @@ Widget _ridoWidget(
         onTap: () => onChanged(value),
         child: Text(
           value,
-          style: AppTexts.paragraph.copyWith(
+          style: AppTexts.paragraph(context).copyWith(
               fontSize: 10.sp,
               color: groupValue == value
-                  ? AppColors.headingLight
-                  : AppColors.headingLight.withValues(alpha: 0.6)),
+                  ? textColor
+                  : textColor.withValues(alpha: 0.6)),
         ),
       ),
     ],

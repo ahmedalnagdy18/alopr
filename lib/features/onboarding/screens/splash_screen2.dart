@@ -58,11 +58,12 @@ class _SplashScreen2State extends State<SplashScreen2> {
                 children: [
                   Text(
                     'From',
-                    style: AppTexts.regular.copyWith(color: Colors.white),
+                    style:
+                        AppTexts.regular(context).copyWith(color: Colors.white),
                   ),
                   Text(
                     'Alzheimer’s Prediction',
-                    style: AppTexts.heading.copyWith(
+                    style: AppTexts.heading(context).copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
                     ),

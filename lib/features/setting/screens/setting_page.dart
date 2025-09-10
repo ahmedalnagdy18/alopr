@@ -2,7 +2,10 @@
 
 import 'package:alopr/core/colors/app_colors.dart';
 import 'package:alopr/core/fonts/app_text.dart';
+import 'package:alopr/features/setting/cubits/theme_cubit/theme_cubit.dart';
+import 'package:alopr/features/setting/cubits/theme_cubit/theme_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -20,21 +23,25 @@ class _SettingPageState extends State<SettingPage> {
 
   @override
   Widget build(BuildContext context) {
+    final textColor = Theme.of(context).brightness == Brightness.dark
+        ? AppColors.headingDark
+        : AppColors.headingLight;
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: AppColors.backgroundLight,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         centerTitle: false,
         title: Text(
           "Settings",
-          style: AppTexts.regular.copyWith(fontSize: 20.sp),
+          style: AppTexts.regular(context)
+              .copyWith(fontSize: 20.sp, color: textColor),
         ),
         actions: [
           IconButton(
             onPressed: () {},
             icon: Icon(
               Icons.help_outline,
-              color: Colors.black,
+              color: textColor,
             ),
           )
         ],
@@ -47,37 +54,37 @@ class _SettingPageState extends State<SettingPage> {
             children: [
               Text(
                 'Accessibility',
-                style: AppTexts.subHeading
-                    .copyWith(color: AppColors.paragraphLight),
+                style: AppTexts.subHeading(context).copyWith(color: textColor),
               ),
               SizedBox(height: 16.h),
-              Row(
-                children: [
-                  SvgPicture.asset("images/dark_mood.svg"),
-                  SizedBox(width: 12.w),
-                  Text("Dark Mode", style: AppTexts.regular),
-                  Spacer(),
-                  FlutterSwitch(
-                    activeColor: AppColors.primaryLight,
-                    inactiveColor: AppColors.paragraphLight,
-                    width: 48.r,
-                    height: 24.r,
-                    toggleSize: 22.r,
-                    value: darkMood,
-                    padding: 2.r,
-                    onToggle: (val) {
-                      setState(() {
-                        darkMood = val;
-                      });
-                    },
-                  ),
-                ],
+              BlocBuilder<ThemeCubit, ThemeState>(
+                builder: (context, state) {
+                  return Row(
+                    children: [
+                      SvgPicture.asset("images/dark_mood.svg"),
+                      SizedBox(width: 12.w),
+                      Text("Dark Mode", style: AppTexts.regular(context)),
+                      Spacer(),
+                      FlutterSwitch(
+                        activeColor: AppColors.primaryLight,
+                        inactiveColor: AppColors.paragraphLight,
+                        width: 48.r,
+                        height: 24.r,
+                        toggleSize: 22.r,
+                        value: state.isDarkTheme,
+                        padding: 2.r,
+                        onToggle: (val) {
+                          context.read<ThemeCubit>().toggleTheme();
+                        },
+                      ),
+                    ],
+                  );
+                },
               ),
               SizedBox(height: 18.h),
               Text(
                 'Language',
-                style: AppTexts.subHeading
-                    .copyWith(color: AppColors.paragraphLight),
+                style: AppTexts.subHeading(context).copyWith(color: textColor),
               ),
               SizedBox(height: 12.h),
               Theme(
@@ -86,14 +93,15 @@ class _SettingPageState extends State<SettingPage> {
                   highlightColor: Colors.transparent,
                 ),
                 child: ExpansionTile(
-                  iconColor: AppColors.black,
+                  iconColor: textColor,
                   tilePadding: EdgeInsets.all(0),
                   childrenPadding: EdgeInsets.symmetric(horizontal: 10.w),
                   shape: Border.all(color: Colors.transparent),
                   leading: SvgPicture.asset('images/language.svg'),
-                  title: Text("Language", style: AppTexts.regular),
+                  title: Text("Language", style: AppTexts.regular(context)),
                   children: [
                     _languageWidget(
+                      context: context,
                       value: "English",
                       onChanged: (val) {
                         setState(() {
@@ -103,6 +111,7 @@ class _SettingPageState extends State<SettingPage> {
                       selectedLang: _selectedLang,
                     ),
                     _languageWidget(
+                      context: context,
                       value: "Arabic",
                       onChanged: (val) {
                         setState(() {
@@ -117,8 +126,7 @@ class _SettingPageState extends State<SettingPage> {
               SizedBox(height: 18.h),
               Text(
                 'Account',
-                style: AppTexts.subHeading
-                    .copyWith(color: AppColors.paragraphLight),
+                style: AppTexts.subHeading(context).copyWith(color: textColor),
               ),
               SizedBox(height: 12.h),
               Row(
@@ -127,7 +135,8 @@ class _SettingPageState extends State<SettingPage> {
                   SizedBox(width: 12.w),
                   Text(
                     "Delete Account",
-                    style: AppTexts.regular.copyWith(color: AppColors.error),
+                    style: AppTexts.regular(context)
+                        .copyWith(color: AppColors.error),
                   ),
                 ],
               ),
@@ -136,7 +145,7 @@ class _SettingPageState extends State<SettingPage> {
                 children: [
                   SvgPicture.asset("images/log_out.svg"),
                   SizedBox(width: 12.w),
-                  Text("Log Out", style: AppTexts.regular),
+                  Text("Log Out", style: AppTexts.regular(context)),
                 ],
               ),
             ],
@@ -150,12 +159,12 @@ class _SettingPageState extends State<SettingPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text('Terms and Conditions',
-                  style: AppTexts.subHeading.copyWith(
-                      color: AppColors.headingLight.withValues(alpha: 0.6))),
+                  style: AppTexts.subHeading(context)
+                      .copyWith(color: textColor.withValues(alpha: 0.6))),
               Text(
                 'From Alzheimer’s Prediction',
                 style: TextStyle(
-                  color: AppColors.headingLight.withValues(alpha: 0.5),
+                  color: textColor.withValues(alpha: 0.5),
                   fontWeight: FontWeight.w300,
                   fontSize: 12.sp,
                 ),
@@ -169,12 +178,13 @@ class _SettingPageState extends State<SettingPage> {
 }
 
 Widget _languageWidget(
-    {required dynamic selectedLang,
+    {required BuildContext context,
+    required dynamic selectedLang,
     required Function(dynamic) onChanged,
     required String value}) {
   return ListTile(
     leading: SizedBox(),
-    title: Text(value, style: AppTexts.regular),
+    title: Text(value, style: AppTexts.regular(context)),
     trailing: Radio(
       activeColor: AppColors.primaryLight,
       backgroundColor: WidgetStatePropertyAll(AppColors.white),

@@ -25,12 +25,15 @@ class UploadPage extends StatefulWidget {
 class _UploadPageState extends State<UploadPage> {
   @override
   Widget build(BuildContext context) {
+    final textColor = Theme.of(context).brightness == Brightness.dark
+        ? AppColors.headingDark
+        : AppColors.headingLight;
     return Stack(
       alignment: AlignmentGeometry.bottomRight,
       children: [
         Scaffold(
           backgroundColor: widget.isQueez == false
-              ? AppColors.backgroundLight
+              ? Theme.of(context).scaffoldBackgroundColor
               : const Color.fromARGB(255, 250, 201, 201),
           body: SingleChildScrollView(
             child: SafeArea(
@@ -46,7 +49,7 @@ class _UploadPageState extends State<UploadPage> {
                         Expanded(
                           child: Text(
                             widget.title,
-                            style: AppTexts.title.copyWith(
+                            style: AppTexts.title(context).copyWith(
                               fontSize: 24.sp,
                             ),
                             textAlign: TextAlign.start,
@@ -62,7 +65,7 @@ class _UploadPageState extends State<UploadPage> {
                             },
                             child: Icon(
                               Icons.settings_outlined,
-                              color: AppColors.black,
+                              color: textColor,
                             ),
                           ),
                         )
@@ -71,7 +74,9 @@ class _UploadPageState extends State<UploadPage> {
                     SizedBox(height: 8.h),
                     Text(
                       widget.subTitle,
-                      style: AppTexts.regular,
+                      style: AppTexts.regular(context).copyWith(
+                        color: textColor,
+                      ),
                       textAlign: TextAlign.start,
                     ),
                     if (widget.isQueez == false) ...[

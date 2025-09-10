@@ -6,6 +6,7 @@ import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/authentication/presentation/screens/register_page.dart';
 import 'package:alopr/features/authentication/presentation/widgets/field_controller_widget.dart';
 import 'package:alopr/features/authentication/presentation/widgets/title_widget.dart';
+import 'package:alopr/features/home/presentation/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -51,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         bottom: false,
         child: SingleChildScrollView(
@@ -87,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Text(
                             'Email',
-                            style: AppTexts.regular,
+                            style: AppTexts.regular(context),
                           ),
                           SizedBox(height: 4.h),
                           AppTextField(
@@ -105,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(height: 12.h),
                           Text(
                             'Password',
-                            style: AppTexts.regular,
+                            style: AppTexts.regular(context),
                           ),
                           SizedBox(height: 4.h),
                           AppTextField(
@@ -136,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(height: 4.h),
                           Text(
                             'Forgot Password?',
-                            style: AppTexts.regular.copyWith(
+                            style: AppTexts.regular(context).copyWith(
                               color: Colors.grey.shade600,
                               fontSize: 10.sp,
                               decoration: TextDecoration.underline,
@@ -154,7 +155,12 @@ class _LoginPageState extends State<LoginPage> {
                                       firstSeen = false;
                                     });
                                     if (_key.currentState!.validate()) {
-                                      print('ok Login');
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) => HomePage(
+                                          role: "patient",
+                                        ),
+                                      ));
                                     }
                                   }
                                 : null,
@@ -178,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Text(
                 'Don’t have an account?',
-                style: AppTexts.regular.copyWith(color: Colors.grey),
+                style: AppTexts.regular(context).copyWith(color: Colors.grey),
               ),
               SizedBox(width: 4),
               InkwellWidget(
@@ -189,8 +195,8 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 child: Text(
                   'Register',
-                  style:
-                      AppTexts.regular.copyWith(color: AppColors.buttonLight),
+                  style: AppTexts.regular(context)
+                      .copyWith(color: AppColors.buttonLight),
                 ),
               ),
             ],

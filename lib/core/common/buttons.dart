@@ -32,7 +32,7 @@ class MainAppButton extends StatelessWidget {
         onPressed: onPressed,
         label: Text(
           text ?? "",
-          style: AppTexts.regular.copyWith(color: Colors.white),
+          style: AppTexts.regular(context).copyWith(color: Colors.white),
         ),
         icon: icon,
         iconAlignment: IconAlignment.end,

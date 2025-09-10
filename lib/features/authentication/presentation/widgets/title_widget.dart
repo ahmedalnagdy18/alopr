@@ -30,12 +30,12 @@ class TitleWidget extends StatelessWidget {
         SizedBox(height: 16.h),
         Text(
           title,
-          style: AppTexts.title.copyWith(fontSize: 24.sp),
+          style: AppTexts.title(context).copyWith(fontSize: 24.sp),
         ),
         SizedBox(height: 16.h),
         Text(
           subTitle,
-          style: AppTexts.regular,
+          style: AppTexts.regular(context),
         ),
         SizedBox(height: 27.h),
         Row(
@@ -47,7 +47,7 @@ class TitleWidget extends StatelessWidget {
                 children: [
                   Text(
                     'Follower',
-                    style: AppTexts.regular.copyWith(
+                    style: AppTexts.regular(context).copyWith(
                         fontWeight: selectRole == 0
                             ? FontWeight.w600
                             : FontWeight.w400),
@@ -70,7 +70,7 @@ class TitleWidget extends StatelessWidget {
                 children: [
                   Text(
                     'Patient',
-                    style: AppTexts.regular.copyWith(
+                    style: AppTexts.regular(context).copyWith(
                         fontWeight: selectRole == 1
                             ? FontWeight.w600
                             : FontWeight.w400),

@@ -17,7 +17,7 @@ class EmptyDoctorWidget extends StatelessWidget {
         SizedBox(height: 24.h),
         Text(
           'You have no patients yet. Once a patient connects with you, they will appear here',
-          style: AppTexts.regular,
+          style: AppTexts.regular(context),
           textAlign: TextAlign.center,
         ),
       ],
@@ -52,7 +52,7 @@ class DoctorWidget extends StatelessWidget {
               ),
               child: Text(
                 "Ahmed Alnagdy",
-                style: AppTexts.heading,
+                style: AppTexts.heading(context),
               ),
             );
           },

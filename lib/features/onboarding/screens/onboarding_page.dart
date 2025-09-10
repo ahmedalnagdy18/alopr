@@ -93,7 +93,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                             },
                             child: Text(
                               'Skip',
-                              style: AppTexts.regular
+                              style: AppTexts.regular(context)
                                   .copyWith(color: AppColors.primaryLight),
                             ),
                           ),
@@ -103,7 +103,8 @@ class _OnboardingPageState extends State<OnboardingPage>
                   if (currentIndex == 7)
                     Text(
                       'Congratulations!',
-                      style: AppTexts.heading.copyWith(fontSize: 24.sp),
+                      style: AppTexts.heading(context).copyWith(
+                          fontSize: 24.sp, color: AppColors.headingLight),
                       textAlign: TextAlign.center,
                     ),
                   SizedBox(height: 32.h),
@@ -135,20 +136,22 @@ class _OnboardingPageState extends State<OnboardingPage>
                                   SizedBox(height: 24.h),
                                   Text(
                                     data.mainTitle,
-                                    style: AppTexts.regular,
+                                    style: AppTexts.regular(context).copyWith(
+                                        color: AppColors.headingLight),
                                     textAlign: TextAlign.center,
                                   ),
                                   SizedBox(height: 16.h),
                                   Text(
                                     data.title,
-                                    style: AppTexts.heading
-                                        .copyWith(fontSize: 20.sp),
+                                    style: AppTexts.heading(context).copyWith(
+                                        fontSize: 20.sp,
+                                        color: AppColors.headingLight),
                                     textAlign: TextAlign.center,
                                   ),
                                   SizedBox(height: 16.h),
                                   Text(
                                     data.subTitle,
-                                    style: AppTexts.regular.copyWith(
+                                    style: AppTexts.regular(context).copyWith(
                                         color: AppColors.paragraphLight),
                                     textAlign: TextAlign.center,
                                   ),
@@ -202,7 +205,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                             children: [
                               Text(
                                 'I already have an account, ',
-                                style: AppTexts.regular.copyWith(
+                                style: AppTexts.regular(context).copyWith(
                                   color: AppColors.headingLight
                                       .withValues(alpha: 0.35),
                                 ),
@@ -215,7 +218,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                                 },
                                 child: Text(
                                   'Login',
-                                  style: AppTexts.regular
+                                  style: AppTexts.regular(context)
                                       .copyWith(color: AppColors.primaryLight),
                                 ),
                               ),
@@ -238,7 +241,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                                   },
                                   child: Text(
                                     'Back',
-                                    style: AppTexts.regular.copyWith(
+                                    style: AppTexts.regular(context).copyWith(
                                         color: AppColors.primaryLight),
                                   ),
                                 ),

@@ -63,7 +63,9 @@ class AppTextField extends StatelessWidget {
       readOnly: readOnly ?? false,
       autofocus: autofocus ?? false,
       focusNode: focusNode,
-      style: AppTexts.regular,
+      style: AppTexts.regular(context).copyWith(
+        color: AppColors.headingLight,
+      ),
       onChanged: onChanged,
       obscureText: obscureText ?? false,
       maxLength: maxLength,

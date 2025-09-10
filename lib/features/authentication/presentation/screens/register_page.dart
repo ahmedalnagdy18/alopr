@@ -67,7 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         bottom: false,
         child: SingleChildScrollView(
@@ -103,7 +103,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         children: [
                           Text(
                             'Full Name',
-                            style: AppTexts.regular,
+                            style: AppTexts.regular(context),
                           ),
                           SizedBox(height: 4.h),
                           AppTextField(
@@ -121,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           SizedBox(height: 12.h),
                           Text(
                             'Email',
-                            style: AppTexts.regular,
+                            style: AppTexts.regular(context),
                           ),
                           SizedBox(height: 4.h),
                           AppTextField(
@@ -139,7 +139,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           SizedBox(height: 12.h),
                           Text(
                             'Phone Number',
-                            style: AppTexts.regular,
+                            style: AppTexts.regular(context),
                           ),
                           SizedBox(height: 4.h),
                           AppTextField(
@@ -160,7 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           SizedBox(height: 12.h),
                           Text(
                             'Password',
-                            style: AppTexts.regular,
+                            style: AppTexts.regular(context),
                           ),
                           SizedBox(height: 4.h),
                           AppTextField(
@@ -192,7 +192,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           SizedBox(height: 12.h),
                           Text(
                             'Confirm Password',
-                            style: AppTexts.regular,
+                            style: AppTexts.regular(context),
                           ),
                           SizedBox(height: 4.h),
                           AppTextField(
@@ -266,7 +266,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 children: [
                   Text(
                     'I already have an account,',
-                    style: AppTexts.regular.copyWith(color: Colors.grey),
+                    style:
+                        AppTexts.regular(context).copyWith(color: Colors.grey),
                   ),
                   SizedBox(width: 4),
                   InkwellWidget(
@@ -277,7 +278,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                     child: Text(
                       'Login',
-                      style: AppTexts.regular
+                      style: AppTexts.regular(context)
                           .copyWith(color: AppColors.buttonLight),
                     ),
                   ),

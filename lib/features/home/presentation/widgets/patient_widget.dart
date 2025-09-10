@@ -13,6 +13,7 @@ class PatientWidget extends StatelessWidget {
       children: [
         SizedBox(height: 70.h),
         _coustomBox(
+          context: context,
           title: "Upload Test",
           subTitle: "Upload your latest medical test results for review",
           onTap: () {
@@ -29,6 +30,7 @@ class PatientWidget extends StatelessWidget {
         ),
         SizedBox(height: 16.h),
         _coustomBox(
+          context: context,
           title: "Upload MRI",
           subTitle: "Share your brain MRI for analysis",
           onTap: () {
@@ -44,6 +46,7 @@ class PatientWidget extends StatelessWidget {
         ),
         SizedBox(height: 16.h),
         _coustomBox(
+          context: context,
           title: "ALOPR Cognitive Test",
           subTitle:
               "Try our in-app cognitive test to check your memory and focus",
@@ -64,7 +67,8 @@ class PatientWidget extends StatelessWidget {
 }
 
 Widget _coustomBox(
-    {required String title,
+    {required BuildContext context,
+    required String title,
     required String subTitle,
     required Function() onTap}) {
   return GestureDetector(
@@ -84,12 +88,12 @@ Widget _coustomBox(
         children: [
           Text(
             title,
-            style: AppTexts.heading,
+            style: AppTexts.heading(context),
           ),
           SizedBox(height: 6.h),
           Text(
             subTitle,
-            style: AppTexts.paragraph,
+            style: AppTexts.paragraph(context),
           ),
         ],
       ),

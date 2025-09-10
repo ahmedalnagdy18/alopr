@@ -1,4 +1,3 @@
-import 'package:alopr/core/colors/app_colors.dart';
 import 'package:alopr/core/common/buttons.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/home/presentation/screens/on_complete_page.dart';
@@ -13,7 +12,7 @@ class VerificationSuccessfulPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -29,7 +28,7 @@ class VerificationSuccessfulPage extends StatelessWidget {
                       SizedBox(height: 16.h),
                       Text(
                         "Verification Successful!",
-                        style: AppTexts.title.copyWith(
+                        style: AppTexts.title(context).copyWith(
                           fontSize: 24.sp,
                         ),
                         textAlign: TextAlign.center,
@@ -37,7 +36,7 @@ class VerificationSuccessfulPage extends StatelessWidget {
                       SizedBox(height: 25.h),
                       Text(
                         'Your email has been verified. Welcome to ALOPR!',
-                        style: AppTexts.regular,
+                        style: AppTexts.regular(context),
                       )
                     ],
                   ),
