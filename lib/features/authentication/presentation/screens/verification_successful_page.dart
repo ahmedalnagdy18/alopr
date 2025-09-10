@@ -1,6 +1,7 @@
 import 'package:alopr/core/colors/app_colors.dart';
 import 'package:alopr/core/common/buttons.dart';
 import 'package:alopr/core/fonts/app_text.dart';
+import 'package:alopr/features/home/presentation/screens/on_complete_page.dart';
 import 'package:alopr/features/home/presentation/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,7 +54,11 @@ class VerificationSuccessfulPage extends StatelessWidget {
                             ),
                           ));
                         } else if (role == "patient") {
-                          print("Patient");
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => OnCompletePage(
+                              role: role,
+                            ),
+                          ));
                         }
                       },
                       text: 'Continue to Home'),

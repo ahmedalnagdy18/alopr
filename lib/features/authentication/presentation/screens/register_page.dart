@@ -115,7 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             autovalidateMode: !firstSeen
                                 ? AutovalidateMode.onUserInteraction
                                 : null,
-                            validator: Validators.fullName,
+                            validator: AuthValidators.fullName,
                             hintText: "Enter your full name",
                           ),
                           SizedBox(height: 12.h),
@@ -133,7 +133,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             inputFormatters: [
                               FilteringTextInputFormatter.deny(RegExp(r'\s')),
                             ],
-                            validator: Validators.email,
+                            validator: AuthValidators.email,
                             hintText: " Please enter a valid email address",
                           ),
                           SizedBox(height: 12.h),
@@ -154,7 +154,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
                             ],
-                            validator: Validators.phone,
+                            validator: AuthValidators.phone,
                             hintText: "Enter your phone number",
                           ),
                           SizedBox(height: 12.h),
@@ -172,7 +172,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             inputFormatters: [
                               FilteringTextInputFormatter.deny(RegExp(r'\s')),
                             ],
-                            validator: Validators.password,
+                            validator: AuthValidators.password,
                             obscureText: isObscure1,
                             suffixIcon: InkwellWidget(
                               onTap: () {
@@ -204,7 +204,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             inputFormatters: [
                               FilteringTextInputFormatter.deny(RegExp(r'\s')),
                             ],
-                            validator: (val) => Validators.confirmPassword(
+                            validator: (val) => AuthValidators.confirmPassword(
                                 val, _password.controller.text),
                             obscureText: isObscure2,
                             suffixIcon: InkwellWidget(

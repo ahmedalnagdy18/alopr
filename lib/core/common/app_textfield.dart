@@ -26,6 +26,7 @@ class AppTextField extends StatelessWidget {
   final Color? hintTextColor;
   final Function(String)? onFieldSubmitted;
   final AutovalidateMode? autovalidateMode;
+  final double? hintFontSize;
 
   const AppTextField({
     super.key,
@@ -50,6 +51,7 @@ class AppTextField extends StatelessWidget {
     this.hintTextColor,
     this.onFieldSubmitted,
     this.autovalidateMode,
+    this.hintFontSize,
   });
 
   @override
@@ -114,7 +116,7 @@ class AppTextField extends StatelessWidget {
         filled: true,
         fillColor: Colors.white,
         hintStyle: TextStyle(
-          fontSize: 14.sp,
+          fontSize: hintFontSize ?? 14.sp,
           fontWeight: FontWeight.w400,
           color: hintTextColor ?? Colors.grey,
         ),

@@ -12,7 +12,7 @@ class FieldControl {
 }
 
 // validations
-class Validators {
+class AuthValidators {
   static String? fullName(String? val) {
     if (val == null || val.isEmpty) return 'Full Name is required';
     if (val.length < 3) return 'Name must be at least 3 characters';

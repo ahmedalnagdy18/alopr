@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:alopr/core/colors/app_colors.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:flutter/material.dart';
@@ -137,6 +139,27 @@ class _SettingPageState extends State<SettingPage> {
                   Text("Log Out", style: AppTexts.regular),
                 ],
               ),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 4.r),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Terms and Conditions',
+                  style: AppTexts.subHeading.copyWith(
+                      color: AppColors.headingLight.withValues(alpha: 0.6))),
+              Text(
+                'From Alzheimer’s Prediction',
+                style: TextStyle(
+                  color: AppColors.headingLight.withValues(alpha: 0.5),
+                  fontWeight: FontWeight.w300,
+                  fontSize: 12.sp,
+                ),
+              )
             ],
           ),
         ),
