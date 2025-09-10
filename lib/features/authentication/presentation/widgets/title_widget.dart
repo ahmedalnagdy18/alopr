@@ -19,6 +19,9 @@ class TitleWidget extends StatelessWidget {
   final int selectRole;
   @override
   Widget build(BuildContext context) {
+    final textColor = Theme.of(context).brightness == Brightness.dark
+        ? AppColors.headingDark
+        : AppColors.headingLight;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -48,6 +51,7 @@ class TitleWidget extends StatelessWidget {
                   Text(
                     'Follower',
                     style: AppTexts.regular(context).copyWith(
+                        color: textColor,
                         fontWeight: selectRole == 0
                             ? FontWeight.w600
                             : FontWeight.w400),
@@ -71,6 +75,7 @@ class TitleWidget extends StatelessWidget {
                   Text(
                     'Patient',
                     style: AppTexts.regular(context).copyWith(
+                        color: textColor,
                         fontWeight: selectRole == 1
                             ? FontWeight.w600
                             : FontWeight.w400),

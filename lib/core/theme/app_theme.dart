@@ -18,8 +18,8 @@ final appThemeData = {
       titleLarge: const TextStyle(color: AppColors.headingLight),
       titleMedium: const TextStyle(color: AppColors.headingLight),
       titleSmall: const TextStyle(color: AppColors.headingLight),
-      bodyMedium: const TextStyle(color: AppColors.paragraphLight),
-      bodySmall: const TextStyle(color: AppColors.paragraphLight),
+      bodyMedium: const TextStyle(color: AppColors.headingLight),
+      bodySmall: const TextStyle(color: AppColors.headingLight),
     ),
   ),
   AppTheme.dark: ThemeData(
@@ -29,8 +29,8 @@ final appThemeData = {
       titleLarge: const TextStyle(color: AppColors.headingDark),
       titleMedium: const TextStyle(color: AppColors.headingDark),
       titleSmall: const TextStyle(color: AppColors.headingDark),
-      bodyMedium: const TextStyle(color: AppColors.paragraphDark),
-      bodySmall: const TextStyle(color: AppColors.paragraphDark),
+      bodyMedium: const TextStyle(color: AppColors.headingDark),
+      bodySmall: const TextStyle(color: AppColors.headingDark),
     ),
   ),
 };

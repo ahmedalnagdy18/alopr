@@ -51,6 +51,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final textColor = Theme.of(context).brightness == Brightness.dark
+        ? AppColors.headingDark
+        : AppColors.headingLight;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
@@ -88,7 +91,9 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Text(
                             'Email',
-                            style: AppTexts.regular(context),
+                            style: AppTexts.regular(context).copyWith(
+                              color: textColor,
+                            ),
                           ),
                           SizedBox(height: 4.h),
                           AppTextField(
@@ -106,7 +111,9 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(height: 12.h),
                           Text(
                             'Password',
-                            style: AppTexts.regular(context),
+                            style: AppTexts.regular(context).copyWith(
+                              color: textColor,
+                            ),
                           ),
                           SizedBox(height: 4.h),
                           AppTextField(

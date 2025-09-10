@@ -182,6 +182,7 @@ class _OnCompletePageState extends State<OnCompletePage> {
                     onChanged: (val) {
                       setState(() {
                         _haveDiseases = val!;
+                        _specifyController.clear();
                         _updateButtonState();
                       });
                     },

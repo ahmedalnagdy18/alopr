@@ -24,6 +24,9 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     final textColor = Theme.of(context).brightness == Brightness.dark
+        ? AppColors.paragraphDark
+        : AppColors.paragraphLight;
+    final appBarTextColor = Theme.of(context).brightness == Brightness.dark
         ? AppColors.headingDark
         : AppColors.headingLight;
     return Scaffold(
@@ -34,7 +37,7 @@ class _SettingPageState extends State<SettingPage> {
         title: Text(
           "Settings",
           style: AppTexts.regular(context)
-              .copyWith(fontSize: 20.sp, color: textColor),
+              .copyWith(fontSize: 20.sp, color: appBarTextColor),
         ),
         actions: [
           IconButton(
