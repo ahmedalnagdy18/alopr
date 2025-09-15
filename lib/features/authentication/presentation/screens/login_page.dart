@@ -107,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                               FilteringTextInputFormatter.deny(RegExp(r'\s')),
                             ],
                             validator: AuthValidators.email,
-                            hintText: " Please enter a valid email address",
+                            hintText: "Email Address",
                           ),
                           SizedBox(height: 12.h),
                           Text(

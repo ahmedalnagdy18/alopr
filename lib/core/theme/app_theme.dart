@@ -15,22 +15,23 @@ final appThemeData = {
     scaffoldBackgroundColor: AppColors.backgroundLight,
     brightness: Brightness.light,
     textTheme: GoogleFonts.ibmPlexSansTextTheme().copyWith(
-      titleLarge: const TextStyle(color: AppColors.headingLight),
-      titleMedium: const TextStyle(color: AppColors.headingLight),
-      titleSmall: const TextStyle(color: AppColors.headingLight),
-      bodyMedium: const TextStyle(color: AppColors.headingLight),
-      bodySmall: const TextStyle(color: AppColors.headingLight),
+      titleLarge: GoogleFonts.ibmPlexSans(
+          color: AppColors.headingLight, fontWeight: FontWeight.w700),
+      titleMedium: GoogleFonts.ibmPlexSans(color: AppColors.headingLight),
+      titleSmall: GoogleFonts.ibmPlexSans(color: AppColors.headingLight),
+      bodyMedium: GoogleFonts.ibmPlexSans(color: AppColors.headingLight),
+      bodySmall: GoogleFonts.ibmPlexSans(color: AppColors.headingLight),
     ),
   ),
   AppTheme.dark: ThemeData(
     scaffoldBackgroundColor: AppColors.backgroundDark,
     brightness: Brightness.dark,
     textTheme: GoogleFonts.ibmPlexSansTextTheme().copyWith(
-      titleLarge: const TextStyle(color: AppColors.headingDark),
-      titleMedium: const TextStyle(color: AppColors.headingDark),
-      titleSmall: const TextStyle(color: AppColors.headingDark),
-      bodyMedium: const TextStyle(color: AppColors.headingDark),
-      bodySmall: const TextStyle(color: AppColors.headingDark),
+      titleLarge: GoogleFonts.ibmPlexSans(color: AppColors.headingDark),
+      titleMedium: GoogleFonts.ibmPlexSans(color: AppColors.headingDark),
+      titleSmall: GoogleFonts.ibmPlexSans(color: AppColors.headingDark),
+      bodyMedium: GoogleFonts.ibmPlexSans(color: AppColors.headingDark),
+      bodySmall: GoogleFonts.ibmPlexSans(color: AppColors.headingDark),
     ),
   ),
 };
