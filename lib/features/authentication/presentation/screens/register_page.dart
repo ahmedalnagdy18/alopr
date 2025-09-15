@@ -8,6 +8,7 @@ import 'package:alopr/features/authentication/presentation/screens/login_page.da
 import 'package:alopr/features/authentication/presentation/screens/otp_page.dart';
 import 'package:alopr/features/authentication/presentation/widgets/field_controller_widget.dart';
 import 'package:alopr/features/authentication/presentation/widgets/title_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -262,12 +263,15 @@ class _RegisterPageState extends State<RegisterPage> {
                           firstSeen = false;
                         });
                         if (_key.currentState!.validate()) {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => OtpPage(
-                              role:
-                                  selectRole == 0 ? role = "doctor" : "patient",
+                          Navigator.of(context).push(
+                            CupertinoPageRoute(
+                              builder: (context) => OtpPage(
+                                role: selectRole == 0
+                                    ? role = "doctor"
+                                    : "patient",
+                              ),
                             ),
-                          ));
+                          );
                         }
                       }
                     : null,
@@ -285,9 +289,11 @@ class _RegisterPageState extends State<RegisterPage> {
                   SizedBox(width: 4),
                   InkwellWidget(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => LoginPage(),
-                      ));
+                      Navigator.of(context).push(
+                        CupertinoPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ),
+                      );
                     },
                     child: Text(
                       'Login',

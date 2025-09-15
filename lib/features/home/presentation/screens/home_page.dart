@@ -4,6 +4,7 @@ import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/home/presentation/widgets/doctor_widget.dart';
 import 'package:alopr/features/home/presentation/widgets/patient_widget.dart';
 import 'package:alopr/features/setting/screens/setting_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -48,12 +49,14 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(top: 4.r),
+                          padding: EdgeInsets.only(top: 4.r, left: 40.r),
                           child: InkwellWidget(
                             onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => SettingPage(),
-                              ));
+                              Navigator.of(context).push(
+                                CupertinoPageRoute(
+                                  builder: (context) => const SettingPage(),
+                                ),
+                              );
                             },
                             child: Icon(
                               Icons.settings_outlined,

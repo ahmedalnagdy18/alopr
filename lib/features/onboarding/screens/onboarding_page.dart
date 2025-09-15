@@ -4,6 +4,7 @@ import 'package:alopr/features/authentication/presentation/screens/login_page.da
 import 'package:alopr/features/authentication/presentation/screens/register_page.dart';
 import 'package:alopr/features/onboarding/widgets/onboarding_model.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -87,9 +88,11 @@ class _OnboardingPageState extends State<OnboardingPage>
                           padding: EdgeInsets.only(right: 16).r,
                           child: InkWell(
                             onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => RegisterPage(),
-                              ));
+                              Navigator.of(context).push(
+                                CupertinoPageRoute(
+                                  builder: (context) => const RegisterPage(),
+                                ),
+                              );
                             },
                             child: Text(
                               'Skip',
@@ -181,9 +184,11 @@ class _OnboardingPageState extends State<OnboardingPage>
                             bouttonWidth: 196,
                             onPressed: () {
                               if (currentIndex == 7) {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => RegisterPage(),
-                                ));
+                                Navigator.of(context).push(
+                                  CupertinoPageRoute(
+                                    builder: (context) => const RegisterPage(),
+                                  ),
+                                );
                               } else {
                                 _pageController.nextPage(
                                   duration: const Duration(milliseconds: 300),
@@ -212,9 +217,11 @@ class _OnboardingPageState extends State<OnboardingPage>
                               ),
                               InkwellWidget(
                                 onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => LoginPage(),
-                                  ));
+                                  Navigator.of(context).push(
+                                    CupertinoPageRoute(
+                                      builder: (context) => const LoginPage(),
+                                    ),
+                                  );
                                 },
                                 child: Text(
                                   'Login',

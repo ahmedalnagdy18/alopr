@@ -6,6 +6,7 @@ import 'package:alopr/core/common/inkweel_widget.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/authentication/presentation/screens/verification_successful_page.dart';
 import 'package:alopr/features/authentication/presentation/widgets/otp_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -103,11 +104,13 @@ class _OtpPageState extends State<OtpPage> {
                 bouttonWidth: double.infinity,
                 onPressed: (otpController.text.length == 4)
                     ? () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => VerificationSuccessfulPage(
-                            role: widget.role,
+                        Navigator.of(context).push(
+                          CupertinoPageRoute(
+                            builder: (context) => VerificationSuccessfulPage(
+                              role: widget.role,
+                            ),
                           ),
-                        ));
+                        );
                       }
                     : null,
                 text: 'Verify',

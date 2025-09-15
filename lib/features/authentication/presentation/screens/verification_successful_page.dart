@@ -2,6 +2,7 @@ import 'package:alopr/core/common/buttons.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/home/presentation/screens/on_complete_page.dart';
 import 'package:alopr/features/home/presentation/screens/home_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -47,17 +48,21 @@ class VerificationSuccessfulPage extends StatelessWidget {
                       bouttonWidth: double.infinity,
                       onPressed: () {
                         if (role == "doctor") {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => HomePage(
-                              role: role,
+                          Navigator.of(context).push(
+                            CupertinoPageRoute(
+                              builder: (context) => HomePage(
+                                role: role,
+                              ),
                             ),
-                          ));
+                          );
                         } else if (role == "patient") {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => OnCompletePage(
-                              role: role,
+                          Navigator.of(context).push(
+                            CupertinoPageRoute(
+                              builder: (context) => OnCompletePage(
+                                role: role,
+                              ),
                             ),
-                          ));
+                          );
                         }
                       },
                       text: 'Continue to Home'),

@@ -7,6 +7,7 @@ import 'package:alopr/features/authentication/presentation/screens/register_page
 import 'package:alopr/features/authentication/presentation/widgets/field_controller_widget.dart';
 import 'package:alopr/features/authentication/presentation/widgets/title_widget.dart';
 import 'package:alopr/features/home/presentation/screens/home_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -162,12 +163,15 @@ class _LoginPageState extends State<LoginPage> {
                                       firstSeen = false;
                                     });
                                     if (_key.currentState!.validate()) {
-                                      Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (context) => HomePage(
-                                          role: "patient",
+                                      Navigator.of(context).push(
+                                        CupertinoPageRoute(
+                                          builder: (context) => HomePage(
+                                            role: selectRole == 0
+                                                ? "doctor"
+                                                : "patient",
+                                          ),
                                         ),
-                                      ));
+                                      );
                                     }
                                   }
                                 : null,
@@ -196,9 +200,11 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(width: 4),
               InkwellWidget(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => RegisterPage(),
-                  ));
+                  Navigator.of(context).push(
+                    CupertinoPageRoute(
+                      builder: (context) => const RegisterPage(),
+                    ),
+                  );
                 },
                 child: Text(
                   'Register',
