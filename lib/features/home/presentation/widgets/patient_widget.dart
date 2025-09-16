@@ -1,6 +1,7 @@
 import 'package:alopr/core/colors/app_colors.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/home/presentation/screens/upload_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,7 +18,7 @@ class PatientWidget extends StatelessWidget {
           title: "Upload Test",
           subTitle: "Upload your latest medical test results for review",
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
+            Navigator.of(context).push(CupertinoPageRoute(
               builder: (context) => UploadPage(
                 isQueez: false,
                 buttonName: 'Upload File',
@@ -34,7 +35,7 @@ class PatientWidget extends StatelessWidget {
           title: "Upload MRI",
           subTitle: "Share your brain MRI for analysis",
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
+            Navigator.of(context).push(CupertinoPageRoute(
               builder: (context) => UploadPage(
                 isQueez: false,
                 buttonName: 'Upload Scan',
@@ -51,7 +52,7 @@ class PatientWidget extends StatelessWidget {
           subTitle:
               "Try our in-app cognitive test to check your memory and focus",
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
+            Navigator.of(context).push(CupertinoPageRoute(
               builder: (context) => UploadPage(
                 isQueez: true,
                 title: "Upload Your Test",
@@ -71,6 +72,7 @@ Widget _coustomBox(
     required String title,
     required String subTitle,
     required Function() onTap}) {
+  final isDarkMood = Theme.of(context).brightness == Brightness.dark;
   return GestureDetector(
     onTap: onTap,
     child: Container(
@@ -79,21 +81,28 @@ Widget _coustomBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
         color: AppColors.white,
-        boxShadow: [
-          BoxShadow(color: Colors.grey, blurRadius: 6.r, offset: Offset(0, 2)),
-        ],
+        boxShadow: isDarkMood
+            ? null
+            : [
+                BoxShadow(
+                    color: Colors.grey, blurRadius: 6.r, offset: Offset(0, 2)),
+              ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
-            style: AppTexts.heading(context),
+            style: AppTexts.heading(context).copyWith(
+              color: AppColors.headingLight,
+            ),
           ),
           SizedBox(height: 6.h),
           Text(
             subTitle,
-            style: AppTexts.paragraph(context),
+            style: AppTexts.paragraph(context).copyWith(
+              color: AppColors.headingLight,
+            ),
           ),
         ],
       ),

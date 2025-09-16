@@ -41,7 +41,9 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Expanded(
                           child: Text(
-                            "Welcome to ALOPR Follower Dashboard",
+                            widget.role == "doctor"
+                                ? "Welcome to ALOPR Follower Dashboard"
+                                : "Welcome to ALOPR",
                             style: AppTexts.title(context).copyWith(
                               fontSize: 24.sp,
                             ),

@@ -163,7 +163,7 @@ class _SettingPageState extends State<SettingPage> {
             children: [
               Text('Terms and Conditions',
                   style: AppTexts.subHeading(context)
-                      .copyWith(color: textColor.withValues(alpha: 0.6))),
+                      .copyWith(color: textColor.withValues(alpha: 0.8))),
               Text(
                 'From Alzheimer’s Prediction',
                 style: TextStyle(

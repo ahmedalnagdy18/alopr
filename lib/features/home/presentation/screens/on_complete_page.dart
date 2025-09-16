@@ -5,6 +5,7 @@ import 'package:alopr/core/extentions/app_extentions.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/home/presentation/screens/home_page.dart';
 import 'package:alopr/features/home/presentation/widgets/complete_page_validator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -244,7 +245,7 @@ class _OnCompletePageState extends State<OnCompletePage> {
                     firstSeen = false;
                   });
                   if (_key.currentState!.validate()) {
-                    Navigator.of(context).push(MaterialPageRoute(
+                    Navigator.of(context).push(CupertinoPageRoute(
                       builder: (context) => HomePage(
                         role: widget.role,
                       ),
