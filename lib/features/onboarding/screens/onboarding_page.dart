@@ -181,7 +181,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                         SizedBox(height: 16.h),
                         if (currentIndex == 0 || currentIndex == 7) ...[
                           MainAppButton(
-                            bouttonWidth: 196,
+                            bouttonWidth: 196.w,
                             onPressed: () {
                               if (currentIndex == 7) {
                                 Navigator.of(context).push(
