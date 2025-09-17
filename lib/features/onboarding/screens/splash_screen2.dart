@@ -1,6 +1,7 @@
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/onboarding/screens/onboarding_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreen2 extends StatefulWidget {
   const SplashScreen2({super.key});
@@ -54,21 +55,24 @@ class _SplashScreen2State extends State<SplashScreen2> {
                   child: Image.asset('images/logo.png'),
                 ),
               ),
-              Column(
-                children: [
-                  Text(
-                    'From',
-                    style:
-                        AppTexts.regular(context).copyWith(color: Colors.white),
-                  ),
-                  Text(
-                    'Alzheimer’s Prediction',
-                    style: AppTexts.heading(context).copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
+              Padding(
+                padding: EdgeInsets.only(bottom: 28.r),
+                child: Column(
+                  children: [
+                    Text(
+                      'From',
+                      style: AppTexts.regular(context)
+                          .copyWith(color: Colors.white),
                     ),
-                  ),
-                ],
+                    Text(
+                      'Alzheimer’s Prediction',
+                      style: AppTexts.heading(context).copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

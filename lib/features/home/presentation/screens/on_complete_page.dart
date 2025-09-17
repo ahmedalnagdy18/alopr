@@ -238,7 +238,7 @@ class _OnCompletePageState extends State<OnCompletePage> {
       bottomNavigationBar: SafeArea(
         child: MainAppButton(
           backgroundColor: !isButtonEnabled ? Colors.grey : null,
-          padding: EdgeInsets.only(left: 16.r, right: 16.r, bottom: 4.r),
+          padding: EdgeInsets.only(left: 16.r, right: 16.r, bottom: 24.r),
           onPressed: isButtonEnabled
               ? () {
                   setState(() {

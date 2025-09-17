@@ -1,6 +1,8 @@
 import 'package:alopr/core/colors/app_colors.dart';
 import 'package:alopr/features/onboarding/screens/splash_screen2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen>
   late Animation<double> _scaleAnimation;
   bool showBackground = false;
 
-  final double initialSize = 64.0;
+  final double initialSize = 55.0;
   final double holdSize = 200.0;
 
   @override
@@ -62,20 +64,26 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor:
-          showBackground ? AppColors.primaryLight : AppColors.white,
-      body: Center(
-        child: showBackground
-            ? const SplashScreen2()
-            : ScaleTransition(
-                scale: _scaleAnimation,
-                child: SizedBox(
-                  width: initialSize,
-                  height: initialSize,
-                  child: Image.asset('images/icon.png'),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        systemNavigationBarColor: !showBackground ? Colors.white : Colors.black,
+        statusBarColor: Colors.transparent,
+      ),
+      child: Scaffold(
+        backgroundColor:
+            showBackground ? AppColors.primaryLight : AppColors.white,
+        body: Center(
+          child: showBackground
+              ? const SplashScreen2()
+              : ScaleTransition(
+                  scale: _scaleAnimation,
+                  child: SizedBox(
+                    width: initialSize.r,
+                    height: initialSize.r,
+                    child: Image.asset('images/icon.png'),
+                  ),
                 ),
-              ),
+        ),
       ),
     );
   }

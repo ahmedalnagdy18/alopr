@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
         ),
         SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
             child: SvgPicture.asset("images/ai_icon.svg"),
           ),
         ),

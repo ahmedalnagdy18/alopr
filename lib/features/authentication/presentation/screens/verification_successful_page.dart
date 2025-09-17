@@ -43,7 +43,7 @@ class VerificationSuccessfulPage extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 4.r),
+                  padding: EdgeInsets.only(bottom: 14.r),
                   child: MainAppButton(
                       bouttonWidth: double.infinity,
                       onPressed: () {

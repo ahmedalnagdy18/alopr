@@ -189,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(bottom: 4.r),
+          padding: EdgeInsets.only(bottom: 24.r),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
