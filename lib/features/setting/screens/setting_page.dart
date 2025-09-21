@@ -41,6 +41,7 @@ class _SettingPageState extends State<SettingPage> {
         ),
         actions: [
           IconButton(
+            highlightColor: Colors.transparent,
             onPressed: () {},
             icon: Icon(
               Icons.help_outline,
