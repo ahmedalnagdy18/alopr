@@ -7,6 +7,7 @@ import 'package:alopr/features/authentication/presentation/screens/register_page
 import 'package:alopr/features/authentication/presentation/widgets/field_controller_widget.dart';
 import 'package:alopr/features/authentication/presentation/widgets/title_widget.dart';
 import 'package:alopr/features/home/presentation/screens/home_page.dart';
+import 'package:alopr/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -68,8 +69,8 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TitleWidget(
-                    title: 'Welcome Back!',
-                    subTitle: 'Log in to ALOPR',
+                    title: S.of(context).welcomeBack,
+                    subTitle: S.of(context).logInToALOPR,
                     selectRole: selectRole,
                     followerOnTap: () {
                       setState(() {
@@ -91,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Email',
+                            S.of(context).email,
                             style: AppTexts.regular(context).copyWith(
                               color: textColor,
                             ),
@@ -106,12 +107,13 @@ class _LoginPageState extends State<LoginPage> {
                             inputFormatters: [
                               FilteringTextInputFormatter.deny(RegExp(r'\s')),
                             ],
-                            validator: AuthValidators.email,
-                            hintText: "Email Address",
+                            validator: (val) =>
+                                AuthValidators.email(context, val),
+                            hintText: S.of(context).email,
                           ),
                           SizedBox(height: 12.h),
                           Text(
-                            'Password',
+                            S.of(context).password,
                             style: AppTexts.regular(context).copyWith(
                               color: textColor,
                             ),
@@ -140,11 +142,11 @@ class _LoginPageState extends State<LoginPage> {
                                 size: 18.r,
                               ),
                             ),
-                            hintText: "Enter your password",
+                            hintText: S.of(context).enterYourPassword,
                           ),
                           SizedBox(height: 4.h),
                           Text(
-                            'Forgot Password?',
+                            S.of(context).forgotPassword,
                             style: AppTexts.regular(context).copyWith(
                               color: Colors.grey.shade600,
                               fontSize: 10.sp,
@@ -175,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                                     }
                                   }
                                 : null,
-                            text: 'Login',
+                            text: S.of(context).login,
                           ),
                         ],
                       ),
@@ -194,7 +196,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Don’t have an account?',
+                S.of(context).dontHaveAccount,
                 style: AppTexts.regular(context).copyWith(color: Colors.grey),
               ),
               SizedBox(width: 4),
@@ -207,7 +209,7 @@ class _LoginPageState extends State<LoginPage> {
                   );
                 },
                 child: Text(
-                  'Register',
+                  S.of(context).register,
                   style: AppTexts.regular(context)
                       .copyWith(color: AppColors.buttonLight),
                 ),

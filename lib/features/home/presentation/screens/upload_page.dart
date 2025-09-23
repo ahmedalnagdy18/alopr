@@ -30,7 +30,9 @@ class _UploadPageState extends State<UploadPage> {
         ? AppColors.headingDark
         : AppColors.headingLight;
     return Stack(
-      alignment: AlignmentGeometry.bottomRight,
+      alignment: Directionality.of(context) == TextDirection.rtl
+          ? Alignment.bottomLeft
+          : Alignment.bottomRight,
       children: [
         Scaffold(
           backgroundColor: widget.isQueez == false

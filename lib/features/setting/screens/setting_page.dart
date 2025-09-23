@@ -2,8 +2,11 @@
 
 import 'package:alopr/core/colors/app_colors.dart';
 import 'package:alopr/core/fonts/app_text.dart';
+import 'package:alopr/features/setting/cubits/language_cubit/local_cubit.dart';
+import 'package:alopr/features/setting/cubits/language_cubit/local_state.dart';
 import 'package:alopr/features/setting/cubits/theme_cubit/theme_cubit.dart';
 import 'package:alopr/features/setting/cubits/theme_cubit/theme_state.dart';
+import 'package:alopr/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,7 +22,7 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> {
   bool darkMood = false;
-  String _selectedLang = "English";
+  String? _selectedLang;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class _SettingPageState extends State<SettingPage> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         centerTitle: false,
         title: Text(
-          "Settings",
+          S.of(context).settings,
           style: AppTexts.regular(context)
               .copyWith(fontSize: 20.sp, color: appBarTextColor),
         ),
@@ -57,7 +60,7 @@ class _SettingPageState extends State<SettingPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Accessibility',
+                S.of(context).accessibility,
                 style: AppTexts.subHeading(context).copyWith(color: textColor),
               ),
               SizedBox(height: 16.h),
@@ -67,7 +70,8 @@ class _SettingPageState extends State<SettingPage> {
                     children: [
                       SvgPicture.asset("images/dark_mood.svg"),
                       SizedBox(width: 12.w),
-                      Text("Dark Mode", style: AppTexts.regular(context)),
+                      Text(S.of(context).darkMode,
+                          style: AppTexts.regular(context)),
                       Spacer(),
                       FlutterSwitch(
                         activeColor: AppColors.primaryLight,
@@ -87,7 +91,7 @@ class _SettingPageState extends State<SettingPage> {
               ),
               SizedBox(height: 18.h),
               Text(
-                'Language',
+                S.of(context).language,
                 style: AppTexts.subHeading(context).copyWith(color: textColor),
               ),
               SizedBox(height: 12.h),
@@ -96,40 +100,62 @@ class _SettingPageState extends State<SettingPage> {
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                 ),
-                child: ExpansionTile(
-                  iconColor: textColor,
-                  tilePadding: EdgeInsets.all(0),
-                  childrenPadding: EdgeInsets.symmetric(horizontal: 10.w),
-                  shape: Border.all(color: Colors.transparent),
-                  leading: SvgPicture.asset('images/language.svg'),
-                  title: Text("Language", style: AppTexts.regular(context)),
-                  children: [
-                    _languageWidget(
-                      context: context,
-                      value: "English",
-                      onChanged: (val) {
-                        setState(() {
-                          _selectedLang = val!;
-                        });
-                      },
-                      selectedLang: _selectedLang,
-                    ),
-                    _languageWidget(
-                      context: context,
-                      value: "Arabic",
-                      onChanged: (val) {
-                        setState(() {
-                          _selectedLang = val!;
-                        });
-                      },
-                      selectedLang: _selectedLang,
-                    ),
-                  ],
+                child: BlocConsumer<LocaleCubit, ChangeLocaleState>(
+                  listener: (context, state) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          S.of(context).langSnakBar,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.grey.shade800,
+                        duration: const Duration(seconds: 1),
+                      ),
+                    );
+                  },
+                  builder: (context, state) {
+                    _selectedLang = state.locale.languageCode == "ar"
+                        ? S.of(context).arabic
+                        : S.of(context).english;
+                    return ExpansionTile(
+                      iconColor: textColor,
+                      tilePadding: EdgeInsets.all(0),
+                      childrenPadding: EdgeInsets.symmetric(horizontal: 10.w),
+                      shape: Border.all(color: Colors.transparent),
+                      leading: SvgPicture.asset('images/language.svg'),
+                      title: Text(S.of(context).language,
+                          style: AppTexts.regular(context)),
+                      children: [
+                        _languageWidget(
+                          context: context,
+                          value: S.of(context).english,
+                          onChanged: (val) {
+                            setState(() {
+                              _selectedLang = val!;
+                            });
+                            context.read<LocaleCubit>().changeLanguage("en");
+                          },
+                          selectedLang: _selectedLang,
+                        ),
+                        _languageWidget(
+                          context: context,
+                          value: S.of(context).arabic,
+                          onChanged: (val) {
+                            setState(() {
+                              _selectedLang = val!;
+                            });
+                            context.read<LocaleCubit>().changeLanguage("ar");
+                          },
+                          selectedLang: _selectedLang,
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
               SizedBox(height: 18.h),
               Text(
-                'Account',
+                S.of(context).account,
                 style: AppTexts.subHeading(context).copyWith(color: textColor),
               ),
               SizedBox(height: 12.h),
@@ -138,7 +164,7 @@ class _SettingPageState extends State<SettingPage> {
                   SvgPicture.asset("images/delete_acc.svg"),
                   SizedBox(width: 12.w),
                   Text(
-                    "Delete Account",
+                    S.of(context).deleteAccount,
                     style: AppTexts.regular(context)
                         .copyWith(color: AppColors.error),
                   ),
@@ -149,7 +175,7 @@ class _SettingPageState extends State<SettingPage> {
                 children: [
                   SvgPicture.asset("images/log_out.svg"),
                   SizedBox(width: 12.w),
-                  Text("Log Out", style: AppTexts.regular(context)),
+                  Text(S.of(context).logOut, style: AppTexts.regular(context)),
                 ],
               ),
             ],
@@ -162,11 +188,11 @@ class _SettingPageState extends State<SettingPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Terms and Conditions',
+              Text(S.of(context).termsAndConditions,
                   style: AppTexts.subHeading(context)
                       .copyWith(color: textColor.withValues(alpha: 0.8))),
               Text(
-                'From Alzheimer’s Prediction',
+                S.of(context).fromAlzheimersPrediction,
                 style: TextStyle(
                   color: textColor.withValues(alpha: 0.5),
                   fontWeight: FontWeight.w300,

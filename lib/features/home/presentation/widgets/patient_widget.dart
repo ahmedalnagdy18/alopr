@@ -1,6 +1,7 @@
 import 'package:alopr/core/colors/app_colors.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/home/presentation/screens/upload_page.dart';
+import 'package:alopr/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,16 +16,15 @@ class PatientWidget extends StatelessWidget {
         SizedBox(height: 70.h),
         _coustomBox(
           context: context,
-          title: "Upload Test",
-          subTitle: "Upload your latest medical test results for review",
+          title: S.of(context).uploadTest,
+          subTitle: S.of(context).upload1Subtitle,
           onTap: () {
             Navigator.of(context).push(CupertinoPageRoute(
               builder: (context) => UploadPage(
                 isQueez: false,
-                buttonName: 'Upload File',
-                title: "Upload Your Test",
-                subTitle:
-                    "Please upload your latest medical test results in PDF or image format",
+                buttonName: S.of(context).uploadFile,
+                title: S.of(context).uploadYourTest,
+                subTitle: S.of(context).uploadPageSubtitle1,
               ),
             ));
           },
@@ -32,15 +32,15 @@ class PatientWidget extends StatelessWidget {
         SizedBox(height: 16.h),
         _coustomBox(
           context: context,
-          title: "Upload MRI",
-          subTitle: "Share your brain MRI for analysis",
+          title: S.of(context).uploadMRI,
+          subTitle: S.of(context).upload2Subtitle,
           onTap: () {
             Navigator.of(context).push(CupertinoPageRoute(
               builder: (context) => UploadPage(
                 isQueez: false,
-                buttonName: 'Upload Scan',
-                title: "Upload Your MRI",
-                subTitle: "Please upload your brain MRI image for analysis",
+                buttonName: S.of(context).uploadScan,
+                title: S.of(context).uploadYourMRI,
+                subTitle: S.of(context).uploadPageSubtitle2,
               ),
             ));
           },
@@ -48,16 +48,14 @@ class PatientWidget extends StatelessWidget {
         SizedBox(height: 16.h),
         _coustomBox(
           context: context,
-          title: "ALOPR Cognitive Test",
-          subTitle:
-              "Try our in-app cognitive test to check your memory and focus",
+          title: S.of(context).aloprCognitiveTest,
+          subTitle: S.of(context).upload3Subtitle,
           onTap: () {
             Navigator.of(context).push(CupertinoPageRoute(
               builder: (context) => UploadPage(
                 isQueez: true,
-                title: "Upload Your Test",
-                subTitle:
-                    "Take our quick memory and focus test to evaluate your cognitive skills",
+                title: S.of(context).uploadYourTest,
+                subTitle: S.of(context).uploadPageSubtitle3,
               ),
             ));
           },

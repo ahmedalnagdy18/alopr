@@ -4,6 +4,7 @@ import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/home/presentation/widgets/doctor_widget.dart';
 import 'package:alopr/features/home/presentation/widgets/patient_widget.dart';
 import 'package:alopr/features/setting/screens/setting_page.dart';
+import 'package:alopr/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,7 +26,9 @@ class _HomePageState extends State<HomePage> {
         ? AppColors.headingDark
         : AppColors.headingLight;
     return Stack(
-      alignment: AlignmentGeometry.bottomRight,
+      alignment: Directionality.of(context) == TextDirection.rtl
+          ? Alignment.bottomLeft
+          : Alignment.bottomRight,
       children: [
         Scaffold(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -42,8 +45,8 @@ class _HomePageState extends State<HomePage> {
                         Expanded(
                           child: Text(
                             widget.role == "doctor"
-                                ? "Welcome to ALOPR Follower Dashboard"
-                                : "Welcome to ALOPR",
+                                ? S.of(context).welcomeToAloprFollowerDashboard
+                                : S.of(context).welcomeToALOPR,
                             style: AppTexts.title(context).copyWith(
                               fontSize: 24.sp,
                             ),
@@ -51,7 +54,12 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(top: 4.r, left: 40.r),
+                          padding: EdgeInsets.only(
+                              top: 4.r,
+                              left: Directionality.of(context) ==
+                                      TextDirection.rtl
+                                  ? 0.r
+                                  : 40.r),
                           child: InkwellWidget(
                             onTap: () {
                               Navigator.of(context).push(

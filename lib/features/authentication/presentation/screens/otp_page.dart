@@ -6,6 +6,7 @@ import 'package:alopr/core/common/inkweel_widget.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/authentication/presentation/screens/verification_successful_page.dart';
 import 'package:alopr/features/authentication/presentation/widgets/otp_widget.dart';
+import 'package:alopr/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -71,7 +72,7 @@ class _OtpPageState extends State<OtpPage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(
-          "Verify Your Email",
+          S.of(context).verifyYourEmail,
           style: AppTexts.regular(context).copyWith(
             fontSize: 20.sp,
           ),
@@ -89,7 +90,7 @@ class _OtpPageState extends State<OtpPage> {
             children: [
               SizedBox(height: 36.h),
               Text(
-                'We’ve sent a 4-digit code to your email. Please enter it below to verify your account.',
+                S.of(context).otpMessage,
                 style: AppTexts.regular(context),
                 textAlign: TextAlign.center,
               ),
@@ -113,14 +114,14 @@ class _OtpPageState extends State<OtpPage> {
                         );
                       }
                     : null,
-                text: 'Verify',
+                text: S.of(context).verify,
               ),
               SizedBox(height: 16.h),
               _rowText(
                 context: context,
                 isTime: false,
-                text: '''Didn't receive the code?''',
-                text2: 'Click Resend',
+                text: S.of(context).didReceiveCode,
+                text2: S.of(context).clickResend,
                 onTap: _isTimerEnded
                     ? () {
                         //todo: resend
@@ -133,7 +134,7 @@ class _OtpPageState extends State<OtpPage> {
               _rowText(
                 context: context,
                 isTime: true,
-                text: 'Resend in,',
+                text: S.of(context).resendIn,
                 text2: getTimerText(),
               ),
             ],
@@ -168,8 +169,10 @@ Widget _rowText({
               onTap: onTap,
               child: Text(
                 text2,
-                style: AppTexts.regular(context)
-                    .copyWith(decoration: TextDecoration.underline),
+                style: AppTexts.regular(context).copyWith(
+                    decoration: Directionality.of(context) == TextDirection.rtl
+                        ? null
+                        : TextDecoration.underline),
               ),
             )
           : Text(

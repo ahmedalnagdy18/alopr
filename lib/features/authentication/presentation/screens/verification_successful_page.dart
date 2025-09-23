@@ -2,6 +2,7 @@ import 'package:alopr/core/common/buttons.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/home/presentation/screens/on_complete_page.dart';
 import 'package:alopr/features/home/presentation/screens/home_page.dart';
+import 'package:alopr/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,7 +29,7 @@ class VerificationSuccessfulPage extends StatelessWidget {
                       SvgPicture.asset("images/sucsess.svg"),
                       SizedBox(height: 16.h),
                       Text(
-                        "Verification Successful!",
+                        S.of(context).verificationSuccessful,
                         style: AppTexts.title(context).copyWith(
                           fontSize: 24.sp,
                         ),
@@ -36,7 +37,7 @@ class VerificationSuccessfulPage extends StatelessWidget {
                       ),
                       SizedBox(height: 25.h),
                       Text(
-                        'Your email has been verified. Welcome to ALOPR!',
+                        S.of(context).verifiedMessage,
                         style: AppTexts.regular(context),
                       )
                     ],
@@ -65,7 +66,7 @@ class VerificationSuccessfulPage extends StatelessWidget {
                           );
                         }
                       },
-                      text: 'Continue to Home'),
+                      text: S.of(context).continueToHome),
                 )
               ],
             ),

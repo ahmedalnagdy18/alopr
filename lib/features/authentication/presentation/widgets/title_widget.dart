@@ -1,6 +1,7 @@
 import 'package:alopr/core/colors/app_colors.dart';
 import 'package:alopr/core/common/inkweel_widget.dart';
 import 'package:alopr/core/fonts/app_text.dart';
+import 'package:alopr/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -49,7 +50,7 @@ class TitleWidget extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Follower',
+                    S.of(context).follower,
                     style: AppTexts.regular(context).copyWith(
                         color: textColor,
                         fontWeight: selectRole == 0
@@ -73,7 +74,7 @@ class TitleWidget extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Patient',
+                    S.of(context).patient,
                     style: AppTexts.regular(context).copyWith(
                         color: textColor,
                         fontWeight: selectRole == 1

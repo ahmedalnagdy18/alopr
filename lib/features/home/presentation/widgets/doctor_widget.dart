@@ -1,5 +1,6 @@
 import 'package:alopr/core/colors/app_colors.dart';
 import 'package:alopr/core/fonts/app_text.dart';
+import 'package:alopr/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,7 +17,7 @@ class EmptyDoctorWidget extends StatelessWidget {
             height: 276.h, child: SvgPicture.asset("images/doctor_home.svg")),
         SizedBox(height: 24.h),
         Text(
-          'You have no patients yet. Once a patient connects with you, they will appear here',
+          S.of(context).emptyDocWidgetTitle,
           style: AppTexts.regular(context),
           textAlign: TextAlign.center,
         ),

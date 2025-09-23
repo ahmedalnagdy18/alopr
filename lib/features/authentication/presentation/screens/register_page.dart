@@ -8,6 +8,7 @@ import 'package:alopr/features/authentication/presentation/screens/login_page.da
 import 'package:alopr/features/authentication/presentation/screens/otp_page.dart';
 import 'package:alopr/features/authentication/presentation/widgets/field_controller_widget.dart';
 import 'package:alopr/features/authentication/presentation/widgets/title_widget.dart';
+import 'package:alopr/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -83,8 +84,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TitleWidget(
-                    title: 'Get Started with ALOPR',
-                    subTitle: 'Create your account',
+                    title: S.of(context).getStartedwithALOPR,
+                    subTitle: S.of(context).createyouraccount,
                     selectRole: selectRole,
                     followerOnTap: () {
                       setState(() {
@@ -106,7 +107,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Full Name',
+                            S.of(context).fullName,
                             style: AppTexts.regular(context).copyWith(
                               color: textColor,
                             ),
@@ -121,12 +122,13 @@ class _RegisterPageState extends State<RegisterPage> {
                             autovalidateMode: !firstSeen
                                 ? AutovalidateMode.onUserInteraction
                                 : null,
-                            validator: AuthValidators.fullName,
-                            hintText: "Enter your full name",
+                            validator: (val) =>
+                                AuthValidators.fullName(context, val),
+                            hintText: S.of(context).enteryourfullname,
                           ),
                           SizedBox(height: 12.h),
                           Text(
-                            'Email',
+                            S.of(context).email,
                             style: AppTexts.regular(context).copyWith(
                               color: textColor,
                             ),
@@ -141,12 +143,13 @@ class _RegisterPageState extends State<RegisterPage> {
                             inputFormatters: [
                               FilteringTextInputFormatter.deny(RegExp(r'\s')),
                             ],
-                            validator: AuthValidators.email,
-                            hintText: " Please enter a valid email address",
+                            validator: (val) =>
+                                AuthValidators.email(context, val),
+                            hintText: S.of(context).pleaseEnterValidEmail,
                           ),
                           SizedBox(height: 12.h),
                           Text(
-                            'Phone Number',
+                            S.of(context).phoneNumber,
                             style: AppTexts.regular(context).copyWith(
                               color: textColor,
                             ),
@@ -164,12 +167,13 @@ class _RegisterPageState extends State<RegisterPage> {
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
                             ],
-                            validator: AuthValidators.phone,
-                            hintText: "Enter your phone number",
+                            validator: (val) =>
+                                AuthValidators.phone(context, val),
+                            hintText: S.of(context).enterYourPhoneNumber,
                           ),
                           SizedBox(height: 12.h),
                           Text(
-                            'Password',
+                            S.of(context).password,
                             style: AppTexts.regular(context).copyWith(
                               color: textColor,
                             ),
@@ -184,7 +188,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             inputFormatters: [
                               FilteringTextInputFormatter.deny(RegExp(r'\s')),
                             ],
-                            validator: AuthValidators.password,
+                            validator: (val) =>
+                                AuthValidators.password(context, val),
                             obscureText: isObscure1,
                             suffixIcon: InkwellWidget(
                               onTap: () {
@@ -199,11 +204,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                 size: 18.r,
                               ),
                             ),
-                            hintText: "Enter your password",
+                            hintText: S.of(context).enterYourPassword,
                           ),
                           SizedBox(height: 12.h),
                           Text(
-                            'Confirm Password',
+                            S.of(context).confirmPassword,
                             style: AppTexts.regular(context).copyWith(
                               color: textColor,
                             ),
@@ -219,7 +224,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               FilteringTextInputFormatter.deny(RegExp(r'\s')),
                             ],
                             validator: (val) => AuthValidators.confirmPassword(
-                                val, _password.controller.text),
+                                context, val, _password.controller.text),
                             obscureText: isObscure2,
                             suffixIcon: InkwellWidget(
                               onTap: () {
@@ -234,7 +239,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 size: 18.r,
                               ),
                             ),
-                            hintText: "Re-enter your password",
+                            hintText: S.of(context).reenteryourpassword,
                           ),
                           SizedBox(height: 12.h),
                         ],
@@ -275,14 +280,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         }
                       }
                     : null,
-                text: 'Create Account',
+                text: S.of(context).createAccount,
               ),
               SizedBox(height: 6.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'I already have an account,',
+                    S.of(context).iAlreadyHaveAccount,
                     style:
                         AppTexts.regular(context).copyWith(color: Colors.grey),
                   ),
@@ -296,7 +301,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       );
                     },
                     child: Text(
-                      'Login',
+                      S.of(context).login,
                       style: AppTexts.regular(context)
                           .copyWith(color: AppColors.buttonLight),
                     ),

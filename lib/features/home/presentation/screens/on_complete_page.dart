@@ -5,6 +5,7 @@ import 'package:alopr/core/extentions/app_extentions.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/home/presentation/screens/home_page.dart';
 import 'package:alopr/features/home/presentation/widgets/complete_page_validator.dart';
+import 'package:alopr/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,9 +19,9 @@ class OnCompletePage extends StatefulWidget {
 }
 
 class _OnCompletePageState extends State<OnCompletePage> {
-  String _gender = "Male";
-  String _haveDiseases = "No";
-  String _havepregnant = "No";
+  String? gender;
+  String? haveDiseases;
+  String? havepregnant;
   bool firstSeen = true;
   bool isButtonEnabled = false;
 
@@ -32,6 +33,10 @@ class _OnCompletePageState extends State<OnCompletePage> {
 
   @override
   void initState() {
+    gender = S.current.male;
+    haveDiseases = S.current.no;
+    havepregnant = S.current.no;
+
     _nameController.addListener(_updateButtonState);
     _phoneController.addListener(_updateButtonState);
     _conditionController.addListener(_updateButtonState);
@@ -44,7 +49,7 @@ class _OnCompletePageState extends State<OnCompletePage> {
       isButtonEnabled = _nameController.text.isNotEmpty &&
           _phoneController.text.isNotEmpty &&
           _conditionController.text.isNotEmpty &&
-          (_haveDiseases == "Yes"
+          (haveDiseases == S.of(context).yes
               ? _specifyController.text.isNotEmpty
               : _specifyController.text.isEmpty);
     });
@@ -73,44 +78,46 @@ class _OnCompletePageState extends State<OnCompletePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Complete Your Profile',
+                    S.of(context).completeYourProfile,
                     style: AppTexts.title(context).copyWith(fontSize: 24.sp),
                   ),
                   SizedBox(height: 16.h),
                   Text(
-                    'Please provide the following details to personalise your ALOPR experience.',
+                    S.of(context).completeProfileSubTitle,
                     style: AppTexts.regular(context),
                   ),
                   SizedBox(height: 16.h),
                   Text(
-                    'Caregiver Name',
+                    S.of(context).caregiverName,
                     style: AppTexts.paragraph(context),
                   ),
                   SizedBox(height: 8.h),
                   AppTextField(
                     controller: _nameController,
-                    validator: CompletePageValidator.name,
+                    validator: (val) =>
+                        CompletePageValidator.name(context, val),
                     autovalidateMode:
                         !firstSeen ? AutovalidateMode.onUserInteraction : null,
                     hintFontSize: 10.sp,
-                    hintText: "Name of the person taking care of the patient",
+                    hintText: S.of(context).caregiverField,
                     inputFormatters: [
                       PreventStartingSpaceInputFormatter(),
                     ],
                   ),
                   SizedBox(height: 12.h),
                   Text(
-                    'Caregiver Phone Number',
+                    S.of(context).caregiverPhoneNumber,
                     style: AppTexts.paragraph(context),
                   ),
                   SizedBox(height: 8.h),
                   AppTextField(
                     controller: _phoneController,
-                    validator: CompletePageValidator.phone,
+                    validator: (val) =>
+                        CompletePageValidator.phone(context, val),
                     autovalidateMode:
                         !firstSeen ? AutovalidateMode.onUserInteraction : null,
                     hintFontSize: 10.sp,
-                    hintText: "Phone Number",
+                    hintText: S.of(context).phoneNumber,
                     keyboardType: TextInputType.number,
                     maxLength: 11,
                     counterText: '',
@@ -120,22 +127,22 @@ class _OnCompletePageState extends State<OnCompletePage> {
                   ),
                   SizedBox(height: 12.h),
                   Text(
-                    'Condition',
+                    S.of(context).condition,
                     style: AppTexts.paragraph(context),
                   ),
                   SizedBox(height: 8.h),
                   AppTextField(
                     controller: _conditionController,
-                    validator: CompletePageValidator.condation,
+                    validator: (val) =>
+                        CompletePageValidator.condition(context, val),
                     autovalidateMode:
                         !firstSeen ? AutovalidateMode.onUserInteraction : null,
                     hintFontSize: 10.sp,
-                    hintText:
-                        "e.g., Mild memory loss, Moderate Alzheimer’s, Advanced Alzheimer’s",
+                    hintText: S.of(context).conditionField,
                   ),
                   SizedBox(height: 12.h),
                   Text(
-                    'Gender',
+                    S.of(context).gender,
                     style: AppTexts.paragraph(context),
                   ),
                   SizedBox(height: 8.h),
@@ -143,26 +150,26 @@ class _OnCompletePageState extends State<OnCompletePage> {
                     context: context,
                     onChanged: (val) {
                       setState(() {
-                        _gender = val!;
+                        gender = val!;
                       });
                     },
-                    groupValue: _gender,
-                    value: 'Male',
+                    groupValue: gender,
+                    value: S.of(context).male,
                   ),
                   SizedBox(height: 8.h),
                   _ridoWidget(
                     context: context,
                     onChanged: (val) {
                       setState(() {
-                        _gender = val!;
+                        gender = val!;
                       });
                     },
-                    groupValue: _gender,
-                    value: 'Female',
+                    groupValue: gender,
+                    value: S.of(context).female,
                   ),
                   SizedBox(height: 12.h),
                   Text(
-                    'Do you have chronic diseases ?',
+                    S.of(context).doYouHaveChronicDiseases,
                     style: AppTexts.paragraph(context),
                   ),
                   SizedBox(height: 8.h),
@@ -170,41 +177,42 @@ class _OnCompletePageState extends State<OnCompletePage> {
                     context: context,
                     onChanged: (val) {
                       setState(() {
-                        _haveDiseases = val!;
+                        haveDiseases = val!;
                         _updateButtonState();
                       });
                     },
-                    groupValue: _haveDiseases,
-                    value: 'Yes',
+                    groupValue: haveDiseases,
+                    value: S.of(context).yes,
                   ),
                   SizedBox(height: 8.h),
                   _ridoWidget(
                     context: context,
                     onChanged: (val) {
                       setState(() {
-                        _haveDiseases = val!;
+                        haveDiseases = val!;
                         _specifyController.clear();
                         _updateButtonState();
                       });
                     },
-                    groupValue: _haveDiseases,
-                    value: 'No',
+                    groupValue: haveDiseases,
+                    value: S.of(context).no,
                   ),
-                  if (_haveDiseases == "Yes") ...[
+                  if (haveDiseases == S.of(context).yes) ...[
                     SizedBox(height: 8.h),
                     AppTextField(
                       controller: _specifyController,
-                      validator: CompletePageValidator.specify,
+                      validator: (val) =>
+                          CompletePageValidator.specify(context, val),
                       autovalidateMode: !firstSeen
                           ? AutovalidateMode.onUserInteraction
                           : null,
                       hintFontSize: 10.sp,
-                      hintText: "specify",
+                      hintText: S.of(context).specify,
                     ),
                   ],
                   SizedBox(height: 12.h),
                   Text(
-                    'Are you pregnant ?',
+                    S.of(context).areYouPregnant,
                     style: AppTexts.paragraph(context),
                   ),
                   SizedBox(height: 8.h),
@@ -212,22 +220,22 @@ class _OnCompletePageState extends State<OnCompletePage> {
                     context: context,
                     onChanged: (val) {
                       setState(() {
-                        _havepregnant = val!;
+                        havepregnant = val!;
                       });
                     },
-                    groupValue: _havepregnant,
-                    value: 'Yes',
+                    groupValue: havepregnant,
+                    value: S.of(context).yes,
                   ),
                   SizedBox(height: 8.h),
                   _ridoWidget(
                     context: context,
                     onChanged: (val) {
                       setState(() {
-                        _havepregnant = val!;
+                        havepregnant = val!;
                       });
                     },
-                    groupValue: _havepregnant,
-                    value: 'No',
+                    groupValue: havepregnant,
+                    value: S.of(context).no,
                   ),
                 ],
               ),
@@ -253,7 +261,7 @@ class _OnCompletePageState extends State<OnCompletePage> {
                   }
                 }
               : null,
-          text: 'Finish',
+          text: S.of(context).finish,
         ),
       ),
     );

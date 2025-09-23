@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:alopr/generated/l10n.dart'; // import localization
 
 class FieldControl {
   final controller = TextEditingController();
@@ -13,45 +14,46 @@ class FieldControl {
 
 // validations
 class AuthValidators {
-  static String? fullName(String? val) {
-    if (val == null || val.isEmpty) return 'Full Name is required';
-    if (val.length < 3) return 'Name must be at least 3 characters';
+  static String? fullName(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) return S.of(context).fullNameRequired;
+    if (val.length < 3) return S.of(context).nameTooShort;
     return null;
   }
 
-  static String? email(String? val) {
-    if (val == null || val.isEmpty) return 'Email is required';
+  static String? email(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) return S.of(context).emailRequired;
     if (!EmailValidator.validate(val)) {
-      return 'Please enter a valid email address';
+      return S.of(context).invalidEmail;
     }
     return null;
   }
 
-  static String? phone(String? val) {
+  static String? phone(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Phone number is required';
+      return S.of(context).phoneRequired;
     } else if (val.length < 11) {
-      return 'Enter a valid phone number';
+      return S.of(context).invalidPhone;
     } else {
       return null;
     }
   }
 
-  static String? password(String? val) {
+  static String? password(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Password is required';
+      return S.of(context).passwordRequired;
     } else if (val.length < 8) {
-      return 'Password must be at least 8 characters';
+      return S.of(context).passwordTooShort;
     } else {
       return null;
     }
   }
 
-  static String? confirmPassword(String? val, String password) {
+  static String? confirmPassword(
+      BuildContext context, String? val, String password) {
     if (val == null || val.isEmpty) {
-      return 'Confirm Password is required';
+      return S.of(context).confirmPasswordRequired;
     } else if (val != password) {
-      return 'Passwords do not match';
+      return S.of(context).passwordsDoNotMatch;
     }
     return null;
   }
