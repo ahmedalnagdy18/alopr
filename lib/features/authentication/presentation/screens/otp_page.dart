@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:alopr/core/colors/app_colors.dart';
 import 'package:alopr/core/common/buttons.dart';
 import 'package:alopr/core/common/inkweel_widget.dart';
+import 'package:alopr/core/extentions/app_extentions.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/authentication/presentation/screens/verification_successful_page.dart';
 import 'package:alopr/features/authentication/presentation/widgets/otp_widget.dart';
@@ -105,13 +106,19 @@ class _OtpPageState extends State<OtpPage> {
                 bouttonWidth: double.infinity,
                 onPressed: (otpController.text.length == 4)
                     ? () {
-                        Navigator.of(context).push(
-                          CupertinoPageRoute(
-                            builder: (context) => VerificationSuccessfulPage(
-                              role: widget.role,
+                        if (otpController.text == "1234") {
+                          Navigator.of(context).pushAndRemoveUntil(
+                            CupertinoPageRoute(
+                              builder: (context) => VerificationSuccessfulPage(
+                                role: widget.role,
+                              ),
                             ),
-                          ),
-                        );
+                            (Route<dynamic> route) => false,
+                          );
+                        } else {
+                          showErrorToastMessage(
+                              message: 'Verification code is wrong');
+                        }
                       }
                     : null,
                 text: S.of(context).verify,

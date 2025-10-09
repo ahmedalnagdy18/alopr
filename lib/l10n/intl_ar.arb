@@ -87,5 +87,6 @@
     "phoneInvalid": "أدخل رقم هاتف صحيح",
     "conditionRequired": "الحالة مطلوبة",
     "specifyRequired": "التحديد مطلوب",
-    "langSnakBar": "Language changed successfully"
+    "langSnakBar": "Language changed successfully",
+    "loading": "تحميل..."
 }

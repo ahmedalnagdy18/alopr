@@ -95,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "langSnakBar":
             MessageLookupByLibrary.simpleMessage("تم تغيير اللغة بنجاح"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "loading": MessageLookupByLibrary.simpleMessage("Loading..."),
         "logInToALOPR": MessageLookupByLibrary.simpleMessage("Log in to ALOPR"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),

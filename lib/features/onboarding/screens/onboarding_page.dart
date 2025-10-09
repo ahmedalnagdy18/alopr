@@ -88,10 +88,11 @@ class _OnboardingPageState extends State<OnboardingPage>
                           padding: EdgeInsets.only(right: 16).r,
                           child: InkWell(
                             onTap: () {
-                              Navigator.of(context).push(
+                              Navigator.of(context).pushAndRemoveUntil(
                                 CupertinoPageRoute(
                                   builder: (context) => const RegisterPage(),
                                 ),
+                                (Route<dynamic> route) => false,
                               );
                             },
                             child: Text(

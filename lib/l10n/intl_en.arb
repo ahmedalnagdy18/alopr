@@ -87,5 +87,6 @@
     "phoneInvalid": "Enter a valid phone number",
     "conditionRequired": "Condition is required",
     "specifyRequired": "Specify is required",
-    "langSnakBar": "تم تغيير اللغة بنجاح"
+    "langSnakBar": "تم تغيير اللغة بنجاح",
+    "loading": "Loading..."
 }

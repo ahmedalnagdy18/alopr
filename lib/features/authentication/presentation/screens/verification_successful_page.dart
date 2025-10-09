@@ -49,20 +49,22 @@ class VerificationSuccessfulPage extends StatelessWidget {
                       bouttonWidth: double.infinity,
                       onPressed: () {
                         if (role == "doctor") {
-                          Navigator.of(context).push(
+                          Navigator.of(context).pushAndRemoveUntil(
                             CupertinoPageRoute(
                               builder: (context) => HomePage(
                                 role: role,
                               ),
                             ),
+                            (Route<dynamic> route) => false,
                           );
                         } else if (role == "patient") {
-                          Navigator.of(context).push(
+                          Navigator.of(context).pushAndRemoveUntil(
                             CupertinoPageRoute(
                               builder: (context) => OnCompletePage(
                                 role: role,
                               ),
                             ),
+                            (Route<dynamic> route) => false,
                           );
                         }
                       },
