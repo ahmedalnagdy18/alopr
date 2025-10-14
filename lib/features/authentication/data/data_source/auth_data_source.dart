@@ -1,11 +1,12 @@
 import 'dart:convert';
 
+import 'package:alopr/core/shared_prefrances/shared_prefrances.dart';
 import 'package:alopr/features/authentication/data/model/api_register_model.dart';
 import 'package:alopr/features/authentication/domain/entity/login_input.dart';
 import 'package:alopr/features/authentication/domain/entity/register_input.dart';
 import 'package:http/http.dart' as http;
 
-class RemoteDataSource {
+class AuthDataSource {
   final String baseUrl =
       'https://68e6528121dd31f22cc51662.mockapi.io'; // can move to constants later
 
@@ -23,7 +24,6 @@ class RemoteDataSource {
         (u) => u['email'] == input.email,
         orElse: () => null,
       );
-
       if (existingUser != null) {
         throw Exception('Email already registered. Please login instead.');
       }
@@ -40,6 +40,11 @@ class RemoteDataSource {
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       final Map<String, dynamic> data = jsonDecode(response.body);
+      final apiUser = ApiRegisterModel.fromJson(data);
+
+      // ✅ 4️⃣ Save user ID to shared preferences
+      await SharedPrefrance.instanc.saveRegisterId(apiUser.id);
+      await SharedPrefrance.instanc.saveUserRole(apiUser.role);
       return ApiRegisterModel.fromJson(data);
     } else {
       throw Exception(
@@ -71,9 +76,11 @@ class RemoteDataSource {
         throw Exception(
             'Incorrect role. Please login as a ${user['role']} instead.');
       }
-
+      final apiUser = ApiRegisterModel.fromJson(user);
+      await SharedPrefrance.instanc.saveRegisterId(apiUser.id);
+      await SharedPrefrance.instanc.saveUserRole(apiUser.role);
       // Everything matches → return user
-      return ApiRegisterModel.fromJson(user);
+      return apiUser;
     } else {
       throw Exception(
           'Failed to fetch users. Status code: ${response.statusCode}');

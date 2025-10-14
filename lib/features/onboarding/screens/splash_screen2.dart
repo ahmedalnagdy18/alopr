@@ -1,4 +1,6 @@
 import 'package:alopr/core/fonts/app_text.dart';
+import 'package:alopr/core/shared_prefrances/shared_prefrances.dart';
+import 'package:alopr/features/home/presentation/screens/home_page.dart';
 import 'package:alopr/features/onboarding/screens/onboarding_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,29 +15,39 @@ class SplashScreen2 extends StatefulWidget {
 class _SplashScreen2State extends State<SplashScreen2> {
   bool showContent = false;
   bool showOnBoarding = false;
+  String? registerId;
+  String? role;
 
   @override
   void initState() {
     super.initState();
+    _init(); // run async initialization here
+  }
+
+  Future<void> _init() async {
+    registerId = await SharedPrefrance.instanc.getRegisterId();
+    role = await SharedPrefrance.instanc.getUserRole();
 
     // بعد ثانية واحدة يبدأ يظهر اللوجو + الكتابة مع بعض
-    Future.delayed(const Duration(seconds: 1), () {
-      setState(() {
-        showContent = true;
-      });
+    await Future.delayed(const Duration(seconds: 1));
+    if (!mounted) return;
+    setState(() {
+      showContent = true;
+    });
 
-      Future.delayed(const Duration(seconds: 1), () {
-        setState(() {
-          showOnBoarding = true;
-        });
-      });
+    await Future.delayed(const Duration(seconds: 1));
+    if (!mounted) return;
+    setState(() {
+      showOnBoarding = true;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     if (showOnBoarding) {
-      return OnboardingPage();
+      return registerId != null
+          ? HomePage(role: role ?? "patient")
+          : OnboardingPage();
     }
 
     return Center(

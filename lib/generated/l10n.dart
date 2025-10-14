@@ -949,6 +949,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Patient Details`
+  String get patientDetails {
+    return Intl.message(
+      'Patient Details',
+      name: 'patientDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Basic information provided by the patient.`
+  String get patientDetailsSubTitle {
+    return Intl.message(
+      'Basic information provided by the patient.',
+      name: 'patientDetailsSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

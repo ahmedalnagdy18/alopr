@@ -117,6 +117,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordsDoNotMatch":
             MessageLookupByLibrary.simpleMessage("كلمتا المرور غير متطابقتين"),
         "patient": MessageLookupByLibrary.simpleMessage("مريض"),
+        "patientDetails": MessageLookupByLibrary.simpleMessage("تفاصيل المريض"),
+        "patientDetailsSubTitle": MessageLookupByLibrary.simpleMessage(
+            "المعلومات الأساسية التي يقدمها المريض."),
         "phoneInvalid":
             MessageLookupByLibrary.simpleMessage("أدخل رقم هاتف صحيح"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),

@@ -1,12 +1,16 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:alopr/core/colors/app_colors.dart';
+import 'package:alopr/core/common/inkweel_widget.dart';
 import 'package:alopr/core/fonts/app_text.dart';
+import 'package:alopr/core/shared_prefrances/shared_prefrances.dart';
+import 'package:alopr/features/authentication/presentation/screens/login_page.dart';
 import 'package:alopr/features/setting/cubits/language_cubit/local_cubit.dart';
 import 'package:alopr/features/setting/cubits/language_cubit/local_state.dart';
 import 'package:alopr/features/setting/cubits/theme_cubit/theme_cubit.dart';
 import 'package:alopr/features/setting/cubits/theme_cubit/theme_state.dart';
 import 'package:alopr/generated/l10n.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -171,12 +175,28 @@ class _SettingPageState extends State<SettingPage> {
                 ],
               ),
               SizedBox(height: 6.h),
-              Row(
-                children: [
-                  SvgPicture.asset("images/log_out.svg"),
-                  SizedBox(width: 12.w),
-                  Text(S.of(context).logOut, style: AppTexts.regular(context)),
-                ],
+              InkwellWidget(
+                onTap: () async {
+                  await SharedPrefrance.instanc.removeRegisterId();
+                  await SharedPrefrance.instanc.removeUserRole();
+
+                  if (context.mounted) {
+                    Navigator.of(context).pushAndRemoveUntil(
+                      CupertinoPageRoute(
+                        builder: (context) => const LoginPage(),
+                      ),
+                      (Route<dynamic> route) => false,
+                    );
+                  }
+                },
+                child: Row(
+                  children: [
+                    SvgPicture.asset("images/log_out.svg"),
+                    SizedBox(width: 12.w),
+                    Text(S.of(context).logOut,
+                        style: AppTexts.regular(context)),
+                  ],
+                ),
               ),
             ],
           ),

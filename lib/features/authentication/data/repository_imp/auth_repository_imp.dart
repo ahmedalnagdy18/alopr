@@ -4,7 +4,7 @@ import 'package:alopr/features/authentication/domain/entity/register_input.dart'
 import 'package:alopr/features/authentication/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImp extends AuthRepository {
-  final RemoteDataSource remoteDataSource;
+  final AuthDataSource remoteDataSource;
 
   AuthRepositoryImp({required this.remoteDataSource});
 

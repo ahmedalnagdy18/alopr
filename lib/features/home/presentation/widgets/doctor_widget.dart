@@ -1,5 +1,8 @@
 import 'package:alopr/core/colors/app_colors.dart';
+import 'package:alopr/core/common/inkweel_widget.dart';
 import 'package:alopr/core/fonts/app_text.dart';
+import 'package:alopr/features/home/domain/entity/model/user_data_model.dart';
+import 'package:alopr/features/home/presentation/screens/patient_details_page.dart';
 import 'package:alopr/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,10 +30,11 @@ class EmptyDoctorWidget extends StatelessWidget {
 }
 
 class DoctorWidget extends StatelessWidget {
-  const DoctorWidget({super.key});
-
+  const DoctorWidget({super.key, required this.userData});
+  final List<UserDataModel> userData;
   @override
   Widget build(BuildContext context) {
+    final isDarkMood = Theme.of(context).brightness == Brightness.dark;
     return Column(
       children: [
         SizedBox(height: 36.h),
@@ -38,27 +42,43 @@ class DoctorWidget extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            return Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(16.r),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.r),
-                color: AppColors.white,
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 6.r,
-                      offset: Offset(0, 2)),
-                ],
-              ),
-              child: Text(
-                "Ahmed Alnagdy",
-                style: AppTexts.heading(context),
+            final patient = userData[index];
+            return InkwellWidget(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PatientDetailsPage(
+                        patient: patient,
+                      ),
+                    ));
+              },
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(16.r),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.r),
+                  color: AppColors.white,
+                  boxShadow: isDarkMood
+                      ? null
+                      : [
+                          BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 6.r,
+                              offset: Offset(0, 2)),
+                        ],
+                ),
+                child: Text(
+                  userData[index].fullName ?? "",
+                  style: AppTexts.heading(context).copyWith(
+                    color: AppColors.headingLight,
+                  ),
+                ),
               ),
             );
           },
           separatorBuilder: (context, index) => SizedBox(height: 16.h),
-          itemCount: 4,
+          itemCount: userData.length,
         ),
       ],
     );

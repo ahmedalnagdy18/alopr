@@ -1,3 +1,4 @@
+import 'package:alopr/core/shared_prefrances/shared_prefrances.dart';
 import 'package:alopr/features/onboarding/screens/splash_screen.dart';
 import 'package:alopr/features/setting/cubits/language_cubit/local_cubit.dart';
 import 'package:alopr/features/setting/cubits/language_cubit/local_state.dart';
@@ -14,6 +15,7 @@ import 'injection_container.dart' as di;
 void main() async {
   await di.init();
   WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefrance.instanc.initialization();
   runApp(const MyApp());
 }
 

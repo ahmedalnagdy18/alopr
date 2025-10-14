@@ -88,5 +88,7 @@
     "conditionRequired": "الحالة مطلوبة",
     "specifyRequired": "التحديد مطلوب",
     "langSnakBar": "Language changed successfully",
-    "loading": "تحميل..."
+    "loading": "تحميل...",
+    "patientDetails": "تفاصيل المريض",
+    "patientDetailsSubTitle": "المعلومات الأساسية التي يقدمها المريض."
 }
