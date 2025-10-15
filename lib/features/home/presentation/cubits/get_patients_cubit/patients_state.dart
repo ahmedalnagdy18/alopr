@@ -17,6 +17,8 @@ class SuccessPatients extends PatientsState {
   const SuccessPatients({required this.data});
 }
 
+class EmptyPatients extends PatientsState {}
+
 class ErrorPatients extends PatientsState {
   final String message;
 

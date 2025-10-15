@@ -7,16 +7,25 @@ part 'complete_profile_state.dart';
 
 class CompleteProfileCubit extends Cubit<CompleteProfileState> {
   final CompleteProfileUsecase completeProfileUsecase;
+
   CompleteProfileCubit({required this.completeProfileUsecase})
       : super(CompleteProfileInitial());
 
-  void completeProfileFuc({required CompleteProfileInput input}) async {
+  Future<void> completeProfileFuc({required CompleteProfileInput input}) async {
     try {
       emit(LoadingCompleteProfile());
-      await completeProfileUsecase.excute(input);
+
+      // ✅ لو id فاضي → المستخدم أول مرة بيكمّل البروفايل → POST
+      // ✅ لو id موجود → تعديل البروفايل الحالي → PUT
+      if (input.id == null || input.id!.isEmpty) {
+        await completeProfileUsecase.excute(input);
+      } else {
+        await completeProfileUsecase.update(input);
+      }
+
       emit(SuccessCompleteProfile());
     } catch (e) {
-      emit(ErrorCompleteProfile(message: '$e'));
+      emit(ErrorCompleteProfile(message: e.toString()));
     }
   }
 }

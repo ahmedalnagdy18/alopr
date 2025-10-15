@@ -101,19 +101,49 @@ class _HomePageState extends State<_HomePage> {
                           PatientWidget(),
                         ],
                         if (widget.role == "doctor") ...[
-                          state is LoadingPatients
-                              ? Column(
-                                  children: [
-                                    SizedBox(height: 200.h),
-                                    Center(
-                                        child: CircularProgressIndicator(
-                                            color: Colors.grey)),
-                                  ],
-                                )
-                              : (state is SuccessPatients &&
-                                      state.data.isNotEmpty)
-                                  ? DoctorWidget(userData: state.data)
-                                  : EmptyDoctorWidget(),
+                          if (state is LoadingPatients)
+                            Column(
+                              children: [
+                                SizedBox(height: 100.h),
+                                const Center(
+                                    child: CircularProgressIndicator(
+                                        color: Colors.grey)),
+                              ],
+                            )
+                          else if (state is SuccessPatients &&
+                              state.data.isNotEmpty)
+                            DoctorWidget(
+                              userData: state.data,
+                              onPressed: () =>
+                                  context.read<PatientsCubit>().getPatients(),
+                            )
+                          else if (state is EmptyPatients)
+                            EmptyDoctorWidget(
+                              onPressed: () =>
+                                  context.read<PatientsCubit>().getPatients(),
+                            )
+                          else if (state is ErrorPatients)
+                            Center(child: Text("Error loading patients"))
+
+                          // state is LoadingPatients
+                          //     ? CircularProgressIndicator()
+                          //     : (state is SuccessPatients &&
+                          //             state.data.isNotEmpty)
+                          //         ? DoctorWidget(
+                          //             userData: state.data,
+                          //             onPressed: () {
+                          //               context
+                          //                   .read<PatientsCubit>()
+                          //                   .getPatients();
+                          //             },
+                          //           )
+                          //         : EmptyDoctorWidget(
+                          //             onPressed: () {
+                          //               context
+                          //                   .read<PatientsCubit>()
+                          //                   .getPatients();
+                          //             },
+                          //           ),
                         ],
                       ],
                     ),

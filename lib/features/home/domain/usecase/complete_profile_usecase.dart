@@ -9,4 +9,8 @@ class CompleteProfileUsecase {
   Future<void> excute(CompleteProfileInput input) async {
     return await repository.completeProfile(input);
   }
+
+  Future<void> update(CompleteProfileInput input) async {
+    return await repository.updateCompleteProfile(input);
+  }
 }

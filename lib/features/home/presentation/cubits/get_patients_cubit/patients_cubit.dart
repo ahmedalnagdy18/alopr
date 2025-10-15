@@ -13,7 +13,10 @@ class PatientsCubit extends Cubit<PatientsState> {
     emit(LoadingPatients());
     try {
       final data = await patientsUsecase.excute();
-      if (data.isNotEmpty) {
+
+      if (data.isEmpty) {
+        emit(EmptyPatients());
+      } else if (data.isNotEmpty) {
         emit(SuccessPatients(data: data));
       }
     } catch (e) {

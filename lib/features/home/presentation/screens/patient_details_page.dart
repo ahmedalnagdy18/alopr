@@ -41,8 +41,6 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
     super.didChangeDependencies();
     final profile = widget.patient.completedProfile;
 
-    // Move context-based localization here
-
     gender =
         profile?.gender == "Male" ? S.of(context).male : S.of(context).female;
     haveDiseases =

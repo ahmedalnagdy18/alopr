@@ -7,7 +7,9 @@ import 'package:alopr/features/home/data/data_source/home_data_source.dart';
 import 'package:alopr/features/home/data/repository_imp/home_repository_imp.dart';
 import 'package:alopr/features/home/domain/repository/home_repository.dart';
 import 'package:alopr/features/home/domain/usecase/complete_profile_usecase.dart';
+import 'package:alopr/features/home/domain/usecase/get_user_completed_data.dart';
 import 'package:alopr/features/home/domain/usecase/patients_usecase.dart';
+import 'package:alopr/features/home/domain/usecase/upload_usecase.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
@@ -25,6 +27,12 @@ Future<void> init() async {
 
   sl.registerLazySingleton<PatientsUsecase>(
       () => PatientsUsecase(repository: sl()));
+
+  sl.registerLazySingleton<UploadUsecase>(
+      () => UploadUsecase(repository: sl()));
+
+  sl.registerLazySingleton<GetUserCompletedData>(
+      () => GetUserCompletedData(repository: sl()));
 
 // Repository
 

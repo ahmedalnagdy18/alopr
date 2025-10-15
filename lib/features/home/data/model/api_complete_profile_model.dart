@@ -9,6 +9,8 @@ class ApiCompleteProfileModel {
     required this.pregnantStatus,
     required this.id,
     required this.registerId,
+    required this.testImage,
+    required this.brainImage,
   });
 
   final String? caregiver;
@@ -20,6 +22,8 @@ class ApiCompleteProfileModel {
   final bool? pregnantStatus;
   final String? id;
   final String? registerId;
+  final String? testImage;
+  final String? brainImage;
 
   factory ApiCompleteProfileModel.fromJson(Map<String, dynamic> json) {
     return ApiCompleteProfileModel(
@@ -32,6 +36,8 @@ class ApiCompleteProfileModel {
       pregnantStatus: json["pregnantStatus"],
       id: json["id"],
       registerId: json["registerId"],
+      brainImage: json["brainImage"],
+      testImage: json["testImage"],
     );
   }
 }

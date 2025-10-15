@@ -9,8 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class EmptyDoctorWidget extends StatelessWidget {
-  const EmptyDoctorWidget({super.key});
-
+  const EmptyDoctorWidget({super.key, required this.onPressed});
+  final void Function() onPressed;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,14 +24,18 @@ class EmptyDoctorWidget extends StatelessWidget {
           style: AppTexts.regular(context),
           textAlign: TextAlign.center,
         ),
+        SizedBox(height: 12.h),
+        IconButton(onPressed: onPressed, icon: Icon(Icons.refresh))
       ],
     );
   }
 }
 
 class DoctorWidget extends StatelessWidget {
-  const DoctorWidget({super.key, required this.userData});
+  const DoctorWidget(
+      {super.key, required this.userData, required this.onPressed});
   final List<UserDataModel> userData;
+  final void Function() onPressed;
   @override
   Widget build(BuildContext context) {
     final isDarkMood = Theme.of(context).brightness == Brightness.dark;
@@ -79,6 +83,10 @@ class DoctorWidget extends StatelessWidget {
           },
           separatorBuilder: (context, index) => SizedBox(height: 16.h),
           itemCount: userData.length,
+        ),
+        IconButton(
+          icon: const Icon(Icons.refresh),
+          onPressed: onPressed,
         ),
       ],
     );

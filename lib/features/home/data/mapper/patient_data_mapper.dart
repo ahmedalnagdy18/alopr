@@ -13,6 +13,8 @@ extension ConvertUserDataToApi on ApiCompleteProfileModel {
       pregnantStatus: pregnantStatus,
       registerId: registerId,
       specify: specify,
+      brainImage: brainImage,
+      testImage: testImage,
     );
   }
 }
