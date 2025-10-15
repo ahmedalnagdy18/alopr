@@ -146,6 +146,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadFile": MessageLookupByLibrary.simpleMessage("تحميل الملف"),
         "uploadMRI": MessageLookupByLibrary.simpleMessage(
             "تحميل صور الرنين المغناطيسي الخاصة بك"),
+        "uploadNewone": MessageLookupByLibrary.simpleMessage("استبدال الصورة"),
         "uploadPageSubtitle1": MessageLookupByLibrary.simpleMessage(
             "يرجى تحميل نتائج فحوصاتك الطبية الأخيرة بصيغة PDF أو صورة"),
         "uploadPageSubtitle2": MessageLookupByLibrary.simpleMessage(

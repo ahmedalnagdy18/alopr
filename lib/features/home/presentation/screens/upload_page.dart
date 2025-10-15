@@ -124,8 +124,7 @@ class _UploadPageState extends State<_UploadPage> {
                           // Optional: show success message
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                                content:
-                                    Text("Profile updated successfully ✅")),
+                                content: Text("Profile updated successfully")),
                           );
                         }
 
@@ -260,7 +259,37 @@ class _UploadPageState extends State<_UploadPage> {
                                                   null &&
                                               state.data.completedProfile!
                                                   .testImage!.isNotEmpty)))
-                                  ? SizedBox()
+                                  ? BlocBuilder<UploadCubit, UploadState>(
+                                      builder: (context, state) {
+                                        return Column(
+                                          children: [
+                                            SizedBox(height: 22.h),
+                                            MainAppButton(
+                                              onPressed: () {
+                                                showModalBottomSheet<void>(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return OpenGallaryWidget(
+                                                        videosTap: () {},
+                                                        photosTap: () {
+                                                          pickImage();
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                      );
+                                                    });
+                                              },
+                                              text: state is LoadingUpload
+                                                  ? S.current.loading
+                                                  : S.current.uploadNewone,
+                                              icon: Icon(
+                                                  Icons.file_upload_outlined),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    )
                                   : BlocBuilder<UploadCubit, UploadState>(
                                       builder: (context, state) {
                                         return MainAppButton(

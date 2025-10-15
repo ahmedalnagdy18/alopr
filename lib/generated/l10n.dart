@@ -969,6 +969,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Change image`
+  String get uploadNewone {
+    return Intl.message(
+      'Change image',
+      name: 'uploadNewone',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -90,5 +90,6 @@
     "langSnakBar": "Language changed successfully",
     "loading": "تحميل...",
     "patientDetails": "تفاصيل المريض",
-    "patientDetailsSubTitle": "المعلومات الأساسية التي يقدمها المريض."
+    "patientDetailsSubTitle": "المعلومات الأساسية التي يقدمها المريض.",
+    "uploadNewone": "استبدال الصورة"
 }

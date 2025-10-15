@@ -144,6 +144,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Try our in-app cognitive test to check your memory and focus"),
         "uploadFile": MessageLookupByLibrary.simpleMessage("Upload File"),
         "uploadMRI": MessageLookupByLibrary.simpleMessage("Upload MRI"),
+        "uploadNewone": MessageLookupByLibrary.simpleMessage("Change image"),
         "uploadPageSubtitle1": MessageLookupByLibrary.simpleMessage(
             "Please upload your latest medical test results in PDF or image format"),
         "uploadPageSubtitle2": MessageLookupByLibrary.simpleMessage(
