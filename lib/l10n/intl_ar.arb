@@ -91,5 +91,11 @@
     "loading": "تحميل...",
     "patientDetails": "تفاصيل المريض",
     "patientDetailsSubTitle": "المعلومات الأساسية التي يقدمها المريض.",
-    "uploadNewone": "استبدال الصورة"
+    "uploadNewone": "استبدال الصورة",
+    "pleaseCompleteYourProfile": "من فضلك أكمل ملفك الشخصي",
+    "imageUploadedSuccessfully": "تم رفع الصورة بنجاح",
+    "completeYourProfileFirst": "يرجى إكمال ملفك الشخصي أولاً",
+    "ok": "حسناً",
+    "logoutTitle": "تسجيل الخروج",
+    "logoutMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
 }

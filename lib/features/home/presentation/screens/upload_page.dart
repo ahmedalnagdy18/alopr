@@ -4,6 +4,7 @@ import 'package:alopr/core/colors/app_colors.dart';
 import 'package:alopr/core/common/buttons.dart';
 import 'package:alopr/core/common/inkweel_widget.dart';
 import 'package:alopr/core/common/open_gallary_widget.dart';
+import 'package:alopr/core/extentions/app_extentions.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/core/shared_prefrances/shared_prefrances.dart';
 import 'package:alopr/features/home/domain/entity/inputs/complete_profile_input.dart';
@@ -78,9 +79,8 @@ class _UploadPage extends StatefulWidget {
 class _UploadPageState extends State<_UploadPage> {
   XFile? uploadedImage;
 
-  Future<void> pickImage() async {
-    final pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+  Future<void> pickImage({required ImageSource source}) async {
+    final pickedImage = await ImagePicker().pickImage(source: source);
     setState(() {
       uploadedImage = pickedImage;
       _uploadButton(context, File(uploadedImage!.path));
@@ -122,16 +122,13 @@ class _UploadPageState extends State<_UploadPage> {
                             }
                           });
                           // Optional: show success message
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                                content: Text("Profile updated successfully")),
-                          );
+                          showToastMessage(
+                              message: S.current.imageUploadedSuccessfully);
                         }
 
                         if (state is ErrorCompleteProfile) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Error: ${state.message}")),
-                          );
+                          showErrorToastMessage(
+                              message: "Error: ${state.message}");
                         }
                       },
                       child: BlocListener<UploadCubit, UploadState>(
@@ -171,9 +168,7 @@ class _UploadPageState extends State<_UploadPage> {
                                   .completeProfileFuc(input: updatedInput);
                             }
                           } else if (uploadState is ErrorUpload) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(uploadState.message)),
-                            );
+                            showErrorToastMessage(message: uploadState.message);
                           }
                         },
                         child: Column(
@@ -271,9 +266,19 @@ class _UploadPageState extends State<_UploadPage> {
                                                     builder:
                                                         (BuildContext context) {
                                                       return OpenGallaryWidget(
-                                                        videosTap: () {},
+                                                        cameraTap: () {
+                                                          pickImage(
+                                                              source:
+                                                                  ImageSource
+                                                                      .camera);
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
                                                         photosTap: () {
-                                                          pickImage();
+                                                          pickImage(
+                                                              source:
+                                                                  ImageSource
+                                                                      .gallery);
                                                           Navigator.pop(
                                                               context);
                                                         },
@@ -299,9 +304,16 @@ class _UploadPageState extends State<_UploadPage> {
                                                 builder:
                                                     (BuildContext context) {
                                                   return OpenGallaryWidget(
-                                                    videosTap: () {},
+                                                    cameraTap: () {
+                                                      pickImage(
+                                                          source: ImageSource
+                                                              .camera);
+                                                      Navigator.pop(context);
+                                                    },
                                                     photosTap: () {
-                                                      pickImage();
+                                                      pickImage(
+                                                          source: ImageSource
+                                                              .gallery);
                                                       Navigator.pop(context);
                                                     },
                                                   );

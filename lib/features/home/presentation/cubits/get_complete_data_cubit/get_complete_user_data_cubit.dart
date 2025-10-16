@@ -16,6 +16,8 @@ class GetCompleteUserDataCubit extends Cubit<GetCompleteUserDataState> {
       final data = await getUserCompletedData.excute(registerId: registerId);
       if (data != null) {
         emit(SuccessUserCompleteProfile(data: data));
+      } else {
+        emit(ErrorUserCompleteProfile(message: "No data found"));
       }
     } catch (e) {
       emit(ErrorUserCompleteProfile(message: "$e"));

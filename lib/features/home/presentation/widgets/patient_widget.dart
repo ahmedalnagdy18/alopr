@@ -1,7 +1,10 @@
 import 'package:alopr/core/colors/app_colors.dart';
+import 'package:alopr/core/common/alert_dialog_widget.dart';
+import 'package:alopr/core/common/inkweel_widget.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/core/shared_prefrances/shared_prefrances.dart';
 import 'package:alopr/features/home/presentation/cubits/get_complete_data_cubit/get_complete_user_data_cubit.dart';
+import 'package:alopr/features/home/presentation/screens/on_complete_page.dart';
 import 'package:alopr/features/home/presentation/screens/upload_page.dart';
 import 'package:alopr/generated/l10n.dart';
 import 'package:alopr/injection_container.dart';
@@ -53,69 +56,26 @@ class _PatientWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GetCompleteUserDataCubit, GetCompleteUserDataState>(
       builder: (context, state) {
-        return Column(
-          children: [
-            SizedBox(height: 70.h),
-            _coustomBox(
-                context: context,
-                title: S.of(context).uploadTest,
-                subTitle: S.of(context).upload1Subtitle,
-                onTap: () {
-                  Navigator.of(context).push(
-                    CupertinoPageRoute(
-                      builder: (_) => BlocProvider.value(
-                        value: context.read<GetCompleteUserDataCubit>(),
-                        child: UploadPage(
-                          imageId: "1",
-                          isQueez: false,
-                          buttonName: S.of(context).uploadFile,
-                          title: S.of(context).uploadYourTest,
-                          subTitle: S.of(context).uploadPageSubtitle1,
-                        ),
-                      ),
-                    ),
-                  );
-                }),
-            SizedBox(height: 16.h),
-            _coustomBox(
-              context: context,
-              title: S.of(context).uploadMRI,
-              subTitle: S.of(context).upload2Subtitle,
-              onTap: () {
-                Navigator.of(context).push(CupertinoPageRoute(
-                  builder: (_) => BlocProvider.value(
-                    value: context.read<GetCompleteUserDataCubit>(),
-                    child: UploadPage(
-                      imageId: "2",
-                      isQueez: false,
-                      buttonName: S.of(context).uploadScan,
-                      title: S.of(context).uploadYourMRI,
-                      subTitle: S.of(context).uploadPageSubtitle2,
-                    ),
-                  ),
-                ));
-              },
-            ),
-            SizedBox(height: 16.h),
-            _coustomBox(
-              context: context,
-              title: S.of(context).aloprCognitiveTest,
-              subTitle: S.of(context).upload3Subtitle,
-              onTap: () {
-                Navigator.of(context).push(CupertinoPageRoute(
-                  builder: (_) => BlocProvider.value(
-                    value: context.read<GetCompleteUserDataCubit>(),
-                    child: UploadPage(
-                      isQueez: true,
-                      title: S.of(context).uploadYourTest,
-                      subTitle: S.of(context).uploadPageSubtitle3,
-                    ),
-                  ),
-                ));
-              },
-            ),
-          ],
-        );
+        if (state is LoadingUserCompleteProfile) {
+          return Column(
+            children: [
+              SizedBox(height: 100.h),
+              CircularProgressIndicator(color: Colors.grey),
+            ],
+          );
+        }
+        if (state is SuccessUserCompleteProfile) {
+          return patientBody(context, state);
+        }
+        if (state is ErrorUserCompleteProfile) {
+          return Column(
+            children: [
+              completeProfileAlert(context),
+              patientBody(context, state),
+            ],
+          );
+        }
+        return SizedBox();
       },
     );
   }
@@ -125,7 +85,7 @@ Widget _coustomBox(
     {required BuildContext context,
     required String title,
     required String subTitle,
-    required Function() onTap}) {
+    required Function()? onTap}) {
   final isDarkMood = Theme.of(context).brightness == Brightness.dark;
   return GestureDetector(
     onTap: onTap,
@@ -161,5 +121,127 @@ Widget _coustomBox(
         ],
       ),
     ),
+  );
+}
+
+Widget completeProfileAlert(BuildContext context) {
+  return Column(
+    children: [
+      SizedBox(height: 20.h),
+      InkwellWidget(
+        onTap: () {
+          Navigator.of(context).push(
+            CupertinoPageRoute(
+              builder: (context) => OnCompletePage(
+                role: "patient",
+              ),
+            ),
+          );
+        },
+        child: Container(
+          padding: EdgeInsets.all(4.r),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(6),
+            color: Colors.amber,
+          ),
+          child: Row(
+            children: [
+              Icon(
+                Icons.warning,
+                color: Colors.black,
+              ),
+              SizedBox(width: 4),
+              Text(
+                S.current.pleaseCompleteYourProfile,
+                style: AppTexts.regular(context).copyWith(color: Colors.black),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget patientBody(BuildContext context, state) {
+  return Column(
+    children: [
+      SizedBox(height: 70.h),
+      _coustomBox(
+          context: context,
+          title: S.of(context).uploadTest,
+          subTitle: S.of(context).upload1Subtitle,
+          onTap: () {
+            if (state is SuccessUserCompleteProfile) {
+              Navigator.of(context).push(
+                CupertinoPageRoute(
+                  builder: (_) => BlocProvider.value(
+                    value: context.read<GetCompleteUserDataCubit>(),
+                    child: UploadPage(
+                      imageId: "1",
+                      isQueez: false,
+                      buttonName: S.of(context).uploadFile,
+                      title: S.of(context).uploadYourTest,
+                      subTitle: S.of(context).uploadPageSubtitle1,
+                    ),
+                  ),
+                ),
+              );
+            } else {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialogWidget();
+                },
+              );
+            }
+          }),
+      SizedBox(height: 16.h),
+      _coustomBox(
+          context: context,
+          title: S.of(context).uploadMRI,
+          subTitle: S.of(context).upload2Subtitle,
+          onTap: () {
+            if (state is SuccessUserCompleteProfile) {
+              Navigator.of(context).push(CupertinoPageRoute(
+                builder: (_) => BlocProvider.value(
+                  value: context.read<GetCompleteUserDataCubit>(),
+                  child: UploadPage(
+                    imageId: "2",
+                    isQueez: false,
+                    buttonName: S.of(context).uploadScan,
+                    title: S.of(context).uploadYourMRI,
+                    subTitle: S.of(context).uploadPageSubtitle2,
+                  ),
+                ),
+              ));
+            } else {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialogWidget();
+                },
+              );
+            }
+          }),
+      SizedBox(height: 16.h),
+      _coustomBox(
+        context: context,
+        title: S.of(context).aloprCognitiveTest,
+        subTitle: S.of(context).upload3Subtitle,
+        onTap: () {
+          Navigator.of(context).push(CupertinoPageRoute(
+            builder: (_) => BlocProvider.value(
+              value: context.read<GetCompleteUserDataCubit>(),
+              child: UploadPage(
+                isQueez: true,
+                title: S.of(context).uploadYourTest,
+                subTitle: S.of(context).uploadPageSubtitle3,
+              ),
+            ),
+          ));
+        },
+      ),
+    ],
   );
 }

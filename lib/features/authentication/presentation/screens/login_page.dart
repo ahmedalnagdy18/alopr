@@ -76,12 +76,13 @@ class _LoginPageState extends State<_LoginPage> {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSucsess) {
-          Navigator.of(context).push(
+          Navigator.of(context).pushAndRemoveUntil(
             CupertinoPageRoute(
               builder: (context) => HomePage(
                 role: selectRole == 0 ? "doctor" : "patient",
               ),
             ),
+            (Route<dynamic> route) => false,
           );
         }
         if (state is LoginError) {

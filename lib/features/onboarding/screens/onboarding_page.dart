@@ -1,5 +1,6 @@
 import 'package:alopr/core/common/buttons.dart';
 import 'package:alopr/core/common/inkweel_widget.dart';
+import 'package:alopr/core/shared_prefrances/shared_prefrances.dart';
 import 'package:alopr/features/authentication/presentation/screens/login_page.dart';
 import 'package:alopr/features/authentication/presentation/screens/register_page.dart';
 import 'package:alopr/features/onboarding/widgets/onboarding_model.dart';
@@ -87,7 +88,10 @@ class _OnboardingPageState extends State<OnboardingPage>
                         Padding(
                           padding: EdgeInsets.only(right: 16).r,
                           child: InkWell(
-                            onTap: () {
+                            onTap: () async {
+                              await SharedPrefrance.instanc
+                                  .setOnboardingShown(true);
+                              if (!context.mounted) return;
                               Navigator.of(context).pushAndRemoveUntil(
                                 CupertinoPageRoute(
                                   builder: (context) => const RegisterPage(),
@@ -183,8 +187,12 @@ class _OnboardingPageState extends State<OnboardingPage>
                         if (currentIndex == 0 || currentIndex == 7) ...[
                           MainAppButton(
                             bouttonWidth: 196.w,
-                            onPressed: () {
+                            onPressed: () async {
                               if (currentIndex == 7) {
+                                await SharedPrefrance.instanc
+                                    .setOnboardingShown(true);
+
+                                if (!context.mounted) return;
                                 Navigator.of(context).push(
                                   CupertinoPageRoute(
                                     builder: (context) => const RegisterPage(),
@@ -257,7 +265,12 @@ class _OnboardingPageState extends State<OnboardingPage>
                               MaterialButton(
                                 minWidth: 0,
                                 elevation: 0,
-                                onPressed: () {
+                                onPressed: () async {
+                                  if (currentIndex == 6) {
+                                    await SharedPrefrance.instanc
+                                        .setOnboardingShown(true);
+                                  }
+
                                   _pageController.nextPage(
                                     duration: const Duration(milliseconds: 300),
                                     curve: Curves.easeInOut,

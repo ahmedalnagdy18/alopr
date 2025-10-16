@@ -1,5 +1,6 @@
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/core/shared_prefrances/shared_prefrances.dart';
+import 'package:alopr/features/authentication/presentation/screens/login_page.dart';
 import 'package:alopr/features/home/presentation/screens/home_page.dart';
 import 'package:alopr/features/onboarding/screens/onboarding_page.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class _SplashScreen2State extends State<SplashScreen2> {
   bool showOnBoarding = false;
   String? registerId;
   String? role;
-
+  bool? hasSeenOnboarding;
   @override
   void initState() {
     super.initState();
@@ -27,6 +28,7 @@ class _SplashScreen2State extends State<SplashScreen2> {
   Future<void> _init() async {
     registerId = await SharedPrefrance.instanc.getRegisterId();
     role = await SharedPrefrance.instanc.getUserRole();
+    hasSeenOnboarding = SharedPrefrance.instanc.isOnboardingShown();
 
     // بعد ثانية واحدة يبدأ يظهر اللوجو + الكتابة مع بعض
     await Future.delayed(const Duration(seconds: 1));
@@ -47,7 +49,9 @@ class _SplashScreen2State extends State<SplashScreen2> {
     if (showOnBoarding) {
       return registerId != null
           ? HomePage(role: role ?? "patient")
-          : OnboardingPage();
+          : hasSeenOnboarding == false
+              ? OnboardingPage()
+              : LoginPage();
     }
 
     return Center(

@@ -41,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "يرجى تقديم التفاصيل التالية لتخصيص تجربة ALOPR الخاصة بك."),
         "completeYourProfile":
             MessageLookupByLibrary.simpleMessage("أكمل ملفك الشخصي"),
+        "completeYourProfileFirst": MessageLookupByLibrary.simpleMessage(
+            "يرجى إكمال ملفك الشخصي أولاً"),
         "condition": MessageLookupByLibrary.simpleMessage("الحالة"),
         "conditionField": MessageLookupByLibrary.simpleMessage(
             "مثال: فقدان ذاكرة خفيف، زهايمر متوسط، زهايمر متقدم"),
@@ -89,6 +91,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ابدأ مع ALOPR"),
         "iAlreadyHaveAccount":
             MessageLookupByLibrary.simpleMessage("لدي حساب بالفعل،"),
+        "imageUploadedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("تم رفع الصورة بنجاح"),
         "invalidEmail": MessageLookupByLibrary.simpleMessage(
             "يرجى إدخال بريد إلكتروني صحيح"),
         "invalidPhone":
@@ -101,12 +105,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تسجيل الدخول إلى ALOPR"),
         "logOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "logoutMessage": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد أنك تريد تسجيل الخروج؟"),
+        "logoutTitle": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "male": MessageLookupByLibrary.simpleMessage("ذكر"),
         "nameMinLength": MessageLookupByLibrary.simpleMessage(
             "يجب أن يكون الاسم 3 أحرف على الأقل"),
         "nameTooShort": MessageLookupByLibrary.simpleMessage(
             "الاسم يجب أن يكون 3 أحرف على الأقل"),
         "no": MessageLookupByLibrary.simpleMessage("لا"),
+        "ok": MessageLookupByLibrary.simpleMessage("حسناً"),
         "otpMessage": MessageLookupByLibrary.simpleMessage(
             "لقد أرسلنا رمزًا مكونًا من أربعة أرقام إلى بريدك الإلكتروني. يُرجى إدخاله أدناه للتحقق من حسابك."),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
@@ -125,6 +133,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
         "phoneRequired":
             MessageLookupByLibrary.simpleMessage("رقم الهاتف مطلوب"),
+        "pleaseCompleteYourProfile":
+            MessageLookupByLibrary.simpleMessage("من فضلك أكمل ملفك الشخصي"),
         "pleaseEnterValidEmail":
             MessageLookupByLibrary.simpleMessage("بريدك الإلكتروني"),
         "reenteryourpassword":

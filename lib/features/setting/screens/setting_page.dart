@@ -2,6 +2,7 @@
 
 import 'package:alopr/core/colors/app_colors.dart';
 import 'package:alopr/core/common/inkweel_widget.dart';
+import 'package:alopr/core/common/main_app_dialog.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/core/shared_prefrances/shared_prefrances.dart';
 import 'package:alopr/features/authentication/presentation/screens/login_page.dart';
@@ -176,18 +177,26 @@ class _SettingPageState extends State<SettingPage> {
               ),
               SizedBox(height: 6.h),
               InkwellWidget(
-                onTap: () async {
-                  await SharedPrefrance.instanc.removeRegisterId();
-                  await SharedPrefrance.instanc.removeUserRole();
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => MainAppDialog(
+                      onConfirm: () async {
+                        await SharedPrefrance.instanc.removeRegisterId();
+                        await SharedPrefrance.instanc.removeUserRole();
 
-                  if (context.mounted) {
-                    Navigator.of(context).pushAndRemoveUntil(
-                      CupertinoPageRoute(
-                        builder: (context) => const LoginPage(),
-                      ),
-                      (Route<dynamic> route) => false,
-                    );
-                  }
+                        if (context.mounted) {
+                          Navigator.of(context).pushAndRemoveUntil(
+                            CupertinoPageRoute(
+                              builder: (context) => const LoginPage(),
+                            ),
+                            (Route<dynamic> route) => false,
+                          );
+                        }
+                      },
+                      onCancel: () => Navigator.pop(context),
+                    ),
+                  );
                 },
                 child: Row(
                   children: [

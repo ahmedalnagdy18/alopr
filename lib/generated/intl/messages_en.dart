@@ -39,6 +39,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please provide the following details to personalise your ALOPR experience."),
         "completeYourProfile":
             MessageLookupByLibrary.simpleMessage("Complete Your Profile"),
+        "completeYourProfileFirst":
+            MessageLookupByLibrary.simpleMessage("Complete your profile first"),
         "condition": MessageLookupByLibrary.simpleMessage("Condition"),
         "conditionField": MessageLookupByLibrary.simpleMessage(
             "e.g., Mild memory loss, Moderate Alzheimer’s, Advanced Alzheimer’s"),
@@ -88,6 +90,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Get Started with ALOPR"),
         "iAlreadyHaveAccount":
             MessageLookupByLibrary.simpleMessage("I already have an account,"),
+        "imageUploadedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Image uploaded successfully"),
         "invalidEmail": MessageLookupByLibrary.simpleMessage(
             "Please enter a valid email address"),
         "invalidPhone":
@@ -99,12 +103,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "logInToALOPR": MessageLookupByLibrary.simpleMessage("Log in to ALOPR"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "logoutMessage": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to log out?"),
+        "logoutTitle": MessageLookupByLibrary.simpleMessage("Logout"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "nameMinLength": MessageLookupByLibrary.simpleMessage(
             "Name must be at least 3 characters"),
         "nameTooShort": MessageLookupByLibrary.simpleMessage(
             "Name must be at least 3 characters"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
+        "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "otpMessage": MessageLookupByLibrary.simpleMessage(
             "We’ve sent a 4-digit code to your email. Please enter it below to verify your account."),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
@@ -124,6 +132,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "phoneRequired":
             MessageLookupByLibrary.simpleMessage("Phone number is required"),
+        "pleaseCompleteYourProfile": MessageLookupByLibrary.simpleMessage(
+            "Please complete your profile"),
         "pleaseEnterValidEmail": MessageLookupByLibrary.simpleMessage(
             "Please enter a valid email address"),
         "reenteryourpassword":

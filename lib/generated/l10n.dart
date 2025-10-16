@@ -979,6 +979,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Please complete your profile`
+  String get pleaseCompleteYourProfile {
+    return Intl.message(
+      'Please complete your profile',
+      name: 'pleaseCompleteYourProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image uploaded successfully`
+  String get imageUploadedSuccessfully {
+    return Intl.message(
+      'Image uploaded successfully',
+      name: 'imageUploadedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complete your profile first`
+  String get completeYourProfileFirst {
+    return Intl.message(
+      'Complete your profile first',
+      name: 'completeYourProfileFirst',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get ok {
+    return Intl.message(
+      'Ok',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logoutTitle {
+    return Intl.message(
+      'Logout',
+      name: 'logoutTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to log out?`
+  String get logoutMessage {
+    return Intl.message(
+      'Are you sure you want to log out?',
+      name: 'logoutMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

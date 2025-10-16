@@ -91,5 +91,11 @@
     "loading": "Loading...",
     "patientDetails": "Patient Details",
     "patientDetailsSubTitle": "Basic information provided by the patient.",
-    "uploadNewone": "Change image"
+    "uploadNewone": "Change image",
+    "pleaseCompleteYourProfile": "Please complete your profile",
+    "imageUploadedSuccessfully": "Image uploaded successfully",
+    "completeYourProfileFirst": "Complete your profile first",
+    "ok": "Ok",
+    "logoutTitle": "Logout",
+    "logoutMessage": "Are you sure you want to log out?"
 }

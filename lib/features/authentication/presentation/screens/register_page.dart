@@ -88,20 +88,7 @@ class _RegisterPageState extends State<_RegisterPage> {
         ? AppColors.headingDark
         : AppColors.headingLight;
     return BlocConsumer<RegisterCubit, RegisterState>(
-      listener: (context, state) {
-        if (state is RegisterError) {
-          showErrorToastMessage(message: state.message);
-        }
-        if (state is RegisterSucsess) {
-          Navigator.of(context).push(
-            CupertinoPageRoute(
-              builder: (context) => OtpPage(
-                role: selectRole == 0 ? role = "doctor" : "patient",
-              ),
-            ),
-          );
-        }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -305,13 +292,33 @@ class _RegisterPageState extends State<_RegisterPage> {
                               firstSeen = false;
                             });
                             if (_key.currentState!.validate()) {
-                              _registerButton(context);
+                              //   _registerButton(context);
+                              Navigator.of(context).push(
+                                CupertinoPageRoute(
+                                  builder: (_) => BlocProvider.value(
+                                    value: context.read<RegisterCubit>(),
+                                    child: OtpPage(
+                                      role: selectRole == 0
+                                          ? role = "doctor"
+                                          : "patient",
+                                      registerInput: RegisterInput(
+                                        id: "",
+                                        fullName: _fullName.controller.text,
+                                        email: _email.controller.text,
+                                        phone: _phone.controller.text,
+                                        password: _password.controller.text,
+                                        role: selectRole == 0
+                                            ? role = "doctor"
+                                            : "patient",
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
                             }
                           }
                         : null,
-                    text: state is RegisterLoading
-                        ? S.of(context).loading
-                        : S.of(context).createAccount,
+                    text: S.of(context).createAccount,
                   ),
                   SizedBox(height: 6.h),
                   Row(
@@ -347,17 +354,5 @@ class _RegisterPageState extends State<_RegisterPage> {
         );
       },
     );
-  }
-
-  void _registerButton(BuildContext context) {
-    BlocProvider.of<RegisterCubit>(context).registerFuc(
-        input: RegisterInput(
-      id: "",
-      fullName: _fullName.controller.text,
-      email: _email.controller.text,
-      phone: _phone.controller.text,
-      password: _password.controller.text,
-      role: selectRole == 0 ? role = "doctor" : "patient",
-    ));
   }
 }

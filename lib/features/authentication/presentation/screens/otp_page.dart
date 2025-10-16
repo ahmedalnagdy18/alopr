@@ -5,16 +5,20 @@ import 'package:alopr/core/common/buttons.dart';
 import 'package:alopr/core/common/inkweel_widget.dart';
 import 'package:alopr/core/extentions/app_extentions.dart';
 import 'package:alopr/core/fonts/app_text.dart';
+import 'package:alopr/features/authentication/domain/entity/register_input.dart';
+import 'package:alopr/features/authentication/presentation/cubits/register_cubit/register_cubit.dart';
 import 'package:alopr/features/authentication/presentation/screens/verification_successful_page.dart';
 import 'package:alopr/features/authentication/presentation/widgets/otp_widget.dart';
 import 'package:alopr/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OtpPage extends StatefulWidget {
-  const OtpPage({super.key, required this.role});
+  const OtpPage({super.key, required this.role, required this.registerInput});
   final String role;
+  final RegisterInput registerInput;
   @override
   State<OtpPage> createState() => _OtpPageState();
 }
@@ -68,87 +72,107 @@ class _OtpPageState extends State<OtpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: Text(
-          S.of(context).verifyYourEmail,
-          style: AppTexts.regular(context).copyWith(
-            fontSize: 20.sp,
+    return BlocConsumer<RegisterCubit, RegisterState>(
+      listener: (context, state) {
+        if (state is RegisterSucsess) {
+          Navigator.of(context).pushAndRemoveUntil(
+            CupertinoPageRoute(
+              builder: (context) => VerificationSuccessfulPage(
+                role: widget.role,
+              ),
+            ),
+            (Route<dynamic> route) => false,
+          );
+        }
+        if (state is RegisterError) {
+          showErrorToastMessage(message: state.message);
+          Navigator.pop(context);
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            title: Text(
+              S.of(context).verifyYourEmail,
+              style: AppTexts.regular(context).copyWith(
+                fontSize: 20.sp,
+              ),
+            ),
+            centerTitle: false,
+            iconTheme: IconThemeData(
+              size: 24.r,
+            ),
           ),
-        ),
-        centerTitle: false,
-        iconTheme: IconThemeData(
-          size: 24.r,
-        ),
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 36.h),
-              Text(
-                S.of(context).otpMessage,
-                style: AppTexts.regular(context),
-                textAlign: TextAlign.center,
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 36.h),
+                  Text(
+                    S.of(context).otpMessage,
+                    style: AppTexts.regular(context),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 16.h),
+                  OtpWidget(
+                    color: AppColors.primaryLight,
+                    controller: otpController,
+                    onCompleted: (val) {},
+                  ),
+                  SizedBox(height: 16.h),
+                  MainAppButton(
+                    bouttonWidth: double.infinity,
+                    onPressed: (otpController.text.length == 4)
+                        ? () {
+                            if (otpController.text == "1234") {
+                              _registerButton(context);
+                            } else {
+                              showErrorToastMessage(
+                                  message: 'Verification code is wrong');
+                            }
+                          }
+                        : null,
+                    text: state is RegisterLoading
+                        ? S.of(context).loading
+                        : S.of(context).verify,
+                  ),
+                  SizedBox(height: 16.h),
+                  _rowText(
+                    context: context,
+                    isTime: false,
+                    text: S.of(context).didReceiveCode,
+                    text2: S.of(context).clickResend,
+                    onTap: _isTimerEnded
+                        ? () {
+                            //todo: resend
+                            //    sendCodeAgian();
+                            resetTimer();
+                          }
+                        : null,
+                  ),
+                  SizedBox(height: 16.h),
+                  _rowText(
+                    context: context,
+                    isTime: true,
+                    text: S.of(context).resendIn,
+                    text2: getTimerText(),
+                  ),
+                ],
               ),
-              SizedBox(height: 16.h),
-              OtpWidget(
-                color: AppColors.primaryLight,
-                controller: otpController,
-                onCompleted: (val) {},
-              ),
-              SizedBox(height: 16.h),
-              MainAppButton(
-                bouttonWidth: double.infinity,
-                onPressed: (otpController.text.length == 4)
-                    ? () {
-                        if (otpController.text == "1234") {
-                          Navigator.of(context).pushAndRemoveUntil(
-                            CupertinoPageRoute(
-                              builder: (context) => VerificationSuccessfulPage(
-                                role: widget.role,
-                              ),
-                            ),
-                            (Route<dynamic> route) => false,
-                          );
-                        } else {
-                          showErrorToastMessage(
-                              message: 'Verification code is wrong');
-                        }
-                      }
-                    : null,
-                text: S.of(context).verify,
-              ),
-              SizedBox(height: 16.h),
-              _rowText(
-                context: context,
-                isTime: false,
-                text: S.of(context).didReceiveCode,
-                text2: S.of(context).clickResend,
-                onTap: _isTimerEnded
-                    ? () {
-                        //todo: resend
-                        //    sendCodeAgian();
-                        resetTimer();
-                      }
-                    : null,
-              ),
-              SizedBox(height: 16.h),
-              _rowText(
-                context: context,
-                isTime: true,
-                text: S.of(context).resendIn,
-                text2: getTimerText(),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
+  }
+
+  void _registerButton(BuildContext context) {
+    BlocProvider.of<RegisterCubit>(context)
+        .registerFuc(input: widget.registerInput);
   }
 }
 

@@ -7,10 +7,10 @@ class OpenGallaryWidget extends StatelessWidget {
   const OpenGallaryWidget({
     super.key,
     required this.photosTap,
-    required this.videosTap,
+    required this.cameraTap,
   });
   final Function()? photosTap;
-  final Function()? videosTap;
+  final Function()? cameraTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -69,7 +69,7 @@ class OpenGallaryWidget extends StatelessWidget {
               ),
               SizedBox(height: 25.h),
               InkwellWidget(
-                onTap: videosTap,
+                onTap: cameraTap,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -80,7 +80,7 @@ class OpenGallaryWidget extends StatelessWidget {
                     ),
                     SizedBox(width: 14.w),
                     Text(
-                      'videos',
+                      'camera',
                       style: AppTexts.regular(context),
                     )
                   ],
