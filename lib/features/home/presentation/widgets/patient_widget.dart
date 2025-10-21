@@ -65,9 +65,32 @@ class _PatientWidget extends StatelessWidget {
           );
         }
         if (state is SuccessUserCompleteProfile) {
-          return patientBody(context, state);
+          if (state.data.completedProfile == null) {
+            return Column(
+              children: [
+                completeProfileAlert(context),
+                patientBody(context, state),
+              ],
+            );
+          } else {
+            return patientBody(context, state);
+          }
         }
         if (state is ErrorUserCompleteProfile) {
+          // final status = state.hashCode;
+          // if (status >= 500) {
+          //   return Column(
+          //     children: [
+          //       SizedBox(height: 100.h),
+          //       Container(
+          //           constraints: BoxConstraints(
+          //             maxHeight: 250.h,
+          //             minWidth: double.infinity,
+          //           ),
+          //           child: SvgPicture.asset("images/server_error.svg")),
+          //     ],
+          //   );
+          // }
           return Column(
             children: [
               completeProfileAlert(context),

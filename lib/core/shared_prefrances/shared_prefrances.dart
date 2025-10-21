@@ -59,6 +59,11 @@ class SharedPrefrance {
     return sharedPreferences.remove(key);
   }
 
+  Future<void> clearAll() async {
+    await _ensureInitialized();
+    await sharedPreferences.clear();
+  }
+
   bool isInitialized() {
     // ignore: unnecessary_null_comparison
     return sharedPreferences != null;

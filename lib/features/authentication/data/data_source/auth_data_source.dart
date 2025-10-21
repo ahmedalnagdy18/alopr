@@ -86,4 +86,64 @@ class AuthDataSource {
           'Failed to fetch users. Status code: ${response.statusCode}');
     }
   }
+
+  Future<void> deleteAccount() async {
+    final prefs = SharedPrefrance.instanc;
+    final registerId = await prefs.getRegisterId();
+
+    if (registerId == null) {
+      return;
+    }
+
+    // 1️⃣ Get all complete profiles
+    final getUrl = Uri.parse('$baseUrl/completeProfile');
+    final getResponse = await http.get(getUrl);
+
+    if (getResponse.statusCode == 200) {
+      final List profiles = jsonDecode(getResponse.body);
+
+      // 2️⃣ Get all profiles that belong to this registerId
+      final targets = profiles
+          .where((p) => p['registerId'].toString() == registerId.toString())
+          .toList();
+
+      if (targets.isNotEmpty) {
+        // 3️⃣ Delete each matching profile
+        for (final target in targets) {
+          final completeId = target['id'].toString();
+          final deleteUrl = Uri.parse(
+            'https://68e6528121dd31f22cc51662.mockapi.io/register/$registerId/completeProfile/$completeId',
+          );
+
+          final deleteResponse = await http.delete(deleteUrl);
+
+          if (deleteResponse.statusCode == 200 ||
+              deleteResponse.statusCode == 204) {
+          } else {
+            // print(
+            //     "⚠️ Failed to delete complete profile (ID: $completeId). Status: ${deleteResponse.statusCode}");
+          }
+        }
+      } else {
+        //  print("⚠️ No complete profiles found for registerId: $registerId");
+      }
+    } else {
+      // print(
+      //     "❌ Failed to fetch complete profiles. Status: ${getResponse.statusCode}");
+    }
+
+    // 4️⃣ Delete register
+    final deleteRegisterUrl = Uri.parse('$baseUrl/register/$registerId');
+    final deleteRegisterResponse = await http.delete(deleteRegisterUrl);
+
+    if (deleteRegisterResponse.statusCode == 200 ||
+        deleteRegisterResponse.statusCode == 204) {
+    } else {
+      // print(
+      //     "⚠️ Failed to delete register. Status: ${deleteRegisterResponse.statusCode}");
+    }
+
+    // 5️⃣ Clear local data
+    await prefs.clearAll();
+  }
 }

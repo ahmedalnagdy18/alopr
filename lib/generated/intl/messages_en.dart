@@ -57,6 +57,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create your account"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
         "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete Account"),
+        "deleteAccountMessage": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete your account? This action cannot be undone."),
+        "deleteAccountTitle":
+            MessageLookupByLibrary.simpleMessage("Delete Account"),
         "didReceiveCode":
             MessageLookupByLibrary.simpleMessage("Didn\'t receive the code?"),
         "doYouHaveChronicDiseases": MessageLookupByLibrary.simpleMessage(
@@ -127,6 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Patient Details"),
         "patientDetailsSubTitle": MessageLookupByLibrary.simpleMessage(
             "Basic information provided by the patient."),
+        "patientNotCompletProfile": MessageLookupByLibrary.simpleMessage(
+            "The patient hasn’t completed their profile yet"),
         "phoneInvalid":
             MessageLookupByLibrary.simpleMessage("Enter a valid phone number"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),

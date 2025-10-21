@@ -7,11 +7,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class MainAppDialog extends StatelessWidget {
   final VoidCallback onConfirm;
   final VoidCallback onCancel;
-
+  final String title;
+  final String content;
+  final IconData icon;
   const MainAppDialog({
     super.key,
     required this.onConfirm,
     required this.onCancel,
+    required this.title,
+    required this.content,
+    required this.icon,
   });
 
   @override
@@ -27,13 +32,13 @@ class MainAppDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
-            Icons.logout_rounded,
+            icon,
             color: Colors.redAccent,
             size: 40,
           ),
           const SizedBox(height: 10),
           Text(
-            S.of(context).logoutTitle,
+            title,
             textAlign: TextAlign.center,
             style: AppTexts.heading(context).copyWith(
               color: isDark ? Colors.white : Colors.black,
@@ -42,7 +47,7 @@ class MainAppDialog extends StatelessWidget {
         ],
       ),
       content: Text(
-        S.of(context).logoutMessage,
+        content,
         textAlign: TextAlign.center,
         style: AppTexts.regular(context).copyWith(
           color: isDark ? Colors.white70 : Colors.black87,

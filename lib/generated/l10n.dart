@@ -1039,6 +1039,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Delete Account`
+  String get deleteAccountTitle {
+    return Intl.message(
+      'Delete Account',
+      name: 'deleteAccountTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete your account? This action cannot be undone.`
+  String get deleteAccountMessage {
+    return Intl.message(
+      'Are you sure you want to delete your account? This action cannot be undone.',
+      name: 'deleteAccountMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The patient hasn’t completed their profile yet`
+  String get patientNotCompletProfile {
+    return Intl.message(
+      'The patient hasn’t completed their profile yet',
+      name: 'patientNotCompletProfile',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -17,4 +17,9 @@ class AuthRepositoryImp extends AuthRepository {
   Future<void> login(LoginInput input) async {
     await remoteDataSource.login(input);
   }
+
+  @override
+  Future<void> deleteAccount() async {
+    await remoteDataSource.deleteAccount();
+  }
 }

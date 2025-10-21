@@ -1,6 +1,7 @@
 import 'package:alopr/features/authentication/data/data_source/auth_data_source.dart';
 import 'package:alopr/features/authentication/data/repository_imp/auth_repository_imp.dart';
 import 'package:alopr/features/authentication/domain/repository/auth_repository.dart';
+import 'package:alopr/features/authentication/domain/usecase/delete_usecase.dart';
 import 'package:alopr/features/authentication/domain/usecase/login_usecase.dart';
 import 'package:alopr/features/authentication/domain/usecase/register_usecase.dart';
 import 'package:alopr/features/home/data/data_source/home_data_source.dart';
@@ -33,6 +34,9 @@ Future<void> init() async {
 
   sl.registerLazySingleton<GetUserCompletedData>(
       () => GetUserCompletedData(repository: sl()));
+
+  sl.registerLazySingleton<DeleteUsecase>(
+      () => DeleteUsecase(repository: sl()));
 
 // Repository
 

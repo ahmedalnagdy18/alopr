@@ -68,129 +68,137 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
           size: 24.r,
         ),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  S.of(context).patientDetailsSubTitle,
-                  style: AppTexts.regular(context),
-                ),
-                SizedBox(height: 16.h),
-                Text(
-                  S.of(context).caregiverName,
-                  style: AppTexts.paragraph(context),
-                ),
-                SizedBox(height: 8.h),
-                AppTextField(
-                  fillColor: AppColors.paragraphDark,
-                  controller: _nameController,
-                  readOnly: true,
-                  hintFontSize: 10.sp,
-                  hintText: S.of(context).caregiverField,
-                ),
-                SizedBox(height: 12.h),
-                Text(
-                  S.of(context).caregiverPhoneNumber,
-                  style: AppTexts.paragraph(context),
-                ),
-                SizedBox(height: 8.h),
-                AppTextField(
-                  fillColor: AppColors.paragraphDark,
-                  controller: _phoneController,
-                  readOnly: true,
-                  hintFontSize: 10.sp,
-                  hintText: S.of(context).phoneNumber,
-                  keyboardType: TextInputType.number,
-                ),
-                SizedBox(height: 12.h),
-                Text(
-                  S.of(context).condition,
-                  style: AppTexts.paragraph(context),
-                ),
-                SizedBox(height: 8.h),
-                AppTextField(
-                  fillColor: AppColors.paragraphDark,
-                  controller: _conditionController,
-                  readOnly: true,
-                  hintFontSize: 10.sp,
-                  hintText: S.of(context).conditionField,
-                ),
-                SizedBox(height: 12.h),
-                Text(
-                  S.of(context).gender,
-                  style: AppTexts.paragraph(context),
-                ),
-                SizedBox(height: 8.h),
-                _ridoWidget(
-                  context: context,
-                  onChanged: (val) {},
-                  groupValue: gender,
-                  value: S.of(context).male,
-                ),
-                SizedBox(height: 8.h),
-                _ridoWidget(
-                  context: context,
-                  onChanged: (val) {},
-                  groupValue: gender,
-                  value: S.of(context).female,
-                ),
-                SizedBox(height: 12.h),
-                Text(
-                  S.of(context).doYouHaveChronicDiseases,
-                  style: AppTexts.paragraph(context),
-                ),
-                SizedBox(height: 8.h),
-                _ridoWidget(
-                  context: context,
-                  onChanged: (val) {},
-                  groupValue: haveDiseases,
-                  value: S.of(context).yes,
-                ),
-                SizedBox(height: 8.h),
-                _ridoWidget(
-                  context: context,
-                  onChanged: (val) {},
-                  groupValue: haveDiseases,
-                  value: S.of(context).no,
-                ),
-                if (haveDiseases == S.of(context).yes) ...[
-                  SizedBox(height: 8.h),
-                  AppTextField(
-                    fillColor: AppColors.paragraphDark,
-                    controller: _specifyController,
-                    readOnly: true,
-                    hintFontSize: 10.sp,
-                    hintText: S.of(context).specify,
+      body: widget.patient.completedProfile == null
+          ? Center(
+              child: Text(
+                S.of(context).patientNotCompletProfile,
+                textAlign: TextAlign.center,
+                style: AppTexts.subHeading(context),
+              ),
+            )
+          : SafeArea(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        S.of(context).patientDetailsSubTitle,
+                        style: AppTexts.regular(context),
+                      ),
+                      SizedBox(height: 16.h),
+                      Text(
+                        S.of(context).caregiverName,
+                        style: AppTexts.paragraph(context),
+                      ),
+                      SizedBox(height: 8.h),
+                      AppTextField(
+                        fillColor: AppColors.paragraphDark,
+                        controller: _nameController,
+                        readOnly: true,
+                        hintFontSize: 10.sp,
+                        hintText: S.of(context).caregiverField,
+                      ),
+                      SizedBox(height: 12.h),
+                      Text(
+                        S.of(context).caregiverPhoneNumber,
+                        style: AppTexts.paragraph(context),
+                      ),
+                      SizedBox(height: 8.h),
+                      AppTextField(
+                        fillColor: AppColors.paragraphDark,
+                        controller: _phoneController,
+                        readOnly: true,
+                        hintFontSize: 10.sp,
+                        hintText: S.of(context).phoneNumber,
+                        keyboardType: TextInputType.number,
+                      ),
+                      SizedBox(height: 12.h),
+                      Text(
+                        S.of(context).condition,
+                        style: AppTexts.paragraph(context),
+                      ),
+                      SizedBox(height: 8.h),
+                      AppTextField(
+                        fillColor: AppColors.paragraphDark,
+                        controller: _conditionController,
+                        readOnly: true,
+                        hintFontSize: 10.sp,
+                        hintText: S.of(context).conditionField,
+                      ),
+                      SizedBox(height: 12.h),
+                      Text(
+                        S.of(context).gender,
+                        style: AppTexts.paragraph(context),
+                      ),
+                      SizedBox(height: 8.h),
+                      _ridoWidget(
+                        context: context,
+                        onChanged: (val) {},
+                        groupValue: gender,
+                        value: S.of(context).male,
+                      ),
+                      SizedBox(height: 8.h),
+                      _ridoWidget(
+                        context: context,
+                        onChanged: (val) {},
+                        groupValue: gender,
+                        value: S.of(context).female,
+                      ),
+                      SizedBox(height: 12.h),
+                      Text(
+                        S.of(context).doYouHaveChronicDiseases,
+                        style: AppTexts.paragraph(context),
+                      ),
+                      SizedBox(height: 8.h),
+                      _ridoWidget(
+                        context: context,
+                        onChanged: (val) {},
+                        groupValue: haveDiseases,
+                        value: S.of(context).yes,
+                      ),
+                      SizedBox(height: 8.h),
+                      _ridoWidget(
+                        context: context,
+                        onChanged: (val) {},
+                        groupValue: haveDiseases,
+                        value: S.of(context).no,
+                      ),
+                      if (haveDiseases == S.of(context).yes) ...[
+                        SizedBox(height: 8.h),
+                        AppTextField(
+                          fillColor: AppColors.paragraphDark,
+                          controller: _specifyController,
+                          readOnly: true,
+                          hintFontSize: 10.sp,
+                          hintText: S.of(context).specify,
+                        ),
+                      ],
+                      SizedBox(height: 12.h),
+                      Text(
+                        S.of(context).areYouPregnant,
+                        style: AppTexts.paragraph(context),
+                      ),
+                      SizedBox(height: 8.h),
+                      _ridoWidget(
+                        context: context,
+                        onChanged: (val) {},
+                        groupValue: havepregnant,
+                        value: S.of(context).yes,
+                      ),
+                      SizedBox(height: 8.h),
+                      _ridoWidget(
+                        context: context,
+                        onChanged: (val) {},
+                        groupValue: havepregnant,
+                        value: S.of(context).no,
+                      ),
+                    ],
                   ),
-                ],
-                SizedBox(height: 12.h),
-                Text(
-                  S.of(context).areYouPregnant,
-                  style: AppTexts.paragraph(context),
                 ),
-                SizedBox(height: 8.h),
-                _ridoWidget(
-                  context: context,
-                  onChanged: (val) {},
-                  groupValue: havepregnant,
-                  value: S.of(context).yes,
-                ),
-                SizedBox(height: 8.h),
-                _ridoWidget(
-                  context: context,
-                  onChanged: (val) {},
-                  groupValue: havepregnant,
-                  value: S.of(context).no,
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }

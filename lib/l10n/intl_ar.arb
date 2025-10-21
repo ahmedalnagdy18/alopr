@@ -97,5 +97,8 @@
     "completeYourProfileFirst": "يرجى إكمال ملفك الشخصي أولاً",
     "ok": "حسناً",
     "logoutTitle": "تسجيل الخروج",
-    "logoutMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
+    "logoutMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+    "deleteAccountTitle": "حذف الحساب",
+    "deleteAccountMessage": "هل أنت متأكد أنك تريد حذف حسابك؟ هذا الإجراء لا يمكن التراجع عنه.",
+    "patientNotCompletProfile": "المريض لم يُكمل ملفه الشخصي بعد."
 }

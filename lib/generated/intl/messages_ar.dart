@@ -59,6 +59,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أنشـئ حسابك"),
         "darkMode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
         "deleteAccount": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
+        "deleteAccountMessage": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد أنك تريد حذف حسابك؟ هذا الإجراء لا يمكن التراجع عنه."),
+        "deleteAccountTitle":
+            MessageLookupByLibrary.simpleMessage("حذف الحساب"),
         "didReceiveCode":
             MessageLookupByLibrary.simpleMessage("لم تستلم الرمز؟"),
         "doYouHaveChronicDiseases":
@@ -128,6 +132,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "patientDetails": MessageLookupByLibrary.simpleMessage("تفاصيل المريض"),
         "patientDetailsSubTitle": MessageLookupByLibrary.simpleMessage(
             "المعلومات الأساسية التي يقدمها المريض."),
+        "patientNotCompletProfile": MessageLookupByLibrary.simpleMessage(
+            "المريض لم يُكمل ملفه الشخصي بعد."),
         "phoneInvalid":
             MessageLookupByLibrary.simpleMessage("أدخل رقم هاتف صحيح"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
