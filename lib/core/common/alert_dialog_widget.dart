@@ -26,7 +26,9 @@ class AlertDialogWidget extends StatelessWidget {
           Text(
             S.current.completeYourProfileFirst,
             textAlign: TextAlign.center,
-            style: AppTexts.heading(context),
+            style: AppTexts.heading(context).copyWith(
+              color: Colors.black,
+            ),
           ),
           const SizedBox(height: 20),
           SizedBox(

@@ -8,6 +8,7 @@ class MainAppDialog extends StatelessWidget {
   final VoidCallback onConfirm;
   final VoidCallback onCancel;
   final String title;
+  final String? buttonTitle;
   final String content;
   final IconData icon;
   const MainAppDialog({
@@ -17,6 +18,7 @@ class MainAppDialog extends StatelessWidget {
     required this.title,
     required this.content,
     required this.icon,
+    this.buttonTitle,
   });
 
   @override
@@ -71,7 +73,7 @@ class MainAppDialog extends StatelessWidget {
               ),
               onPressed: onConfirm,
               child: Text(
-                S.of(context).yes,
+                buttonTitle ?? S.of(context).yes,
                 style: AppTexts.regular(context)
                     .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
               ),

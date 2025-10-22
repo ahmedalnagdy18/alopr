@@ -195,7 +195,8 @@ Widget patientBody(BuildContext context, state) {
           title: S.of(context).uploadTest,
           subTitle: S.of(context).upload1Subtitle,
           onTap: () {
-            if (state is SuccessUserCompleteProfile) {
+            if (state is SuccessUserCompleteProfile &&
+                state.data.completedProfile != null) {
               Navigator.of(context).push(
                 CupertinoPageRoute(
                   builder: (_) => BlocProvider.value(
@@ -225,7 +226,8 @@ Widget patientBody(BuildContext context, state) {
           title: S.of(context).uploadMRI,
           subTitle: S.of(context).upload2Subtitle,
           onTap: () {
-            if (state is SuccessUserCompleteProfile) {
+            if (state is SuccessUserCompleteProfile &&
+                state.data.completedProfile != null) {
               Navigator.of(context).push(CupertinoPageRoute(
                 builder: (_) => BlocProvider.value(
                   value: context.read<GetCompleteUserDataCubit>(),
