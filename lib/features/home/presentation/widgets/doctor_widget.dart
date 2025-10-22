@@ -33,18 +33,19 @@ class EmptyDoctorWidget extends StatelessWidget {
 
 class DoctorWidget extends StatelessWidget {
   const DoctorWidget(
-      {super.key, required this.userData, required this.onPressed});
+      {super.key, required this.userData, required this.onRefresh});
   final List<UserDataModel> userData;
-  final void Function() onPressed;
+  final Future<void> Function() onRefresh;
   @override
   Widget build(BuildContext context) {
     final isDarkMood = Theme.of(context).brightness == Brightness.dark;
-    return Column(
-      children: [
-        SizedBox(height: 36.h),
-        ListView.separated(
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
+    return Expanded(
+      child: RefreshIndicator(
+        backgroundColor: AppColors.primaryLight,
+        color: Colors.white,
+        onRefresh: onRefresh,
+        child: ListView.separated(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
           itemBuilder: (context, index) {
             final patient = userData[index];
             return InkwellWidget(
@@ -84,11 +85,7 @@ class DoctorWidget extends StatelessWidget {
           separatorBuilder: (context, index) => SizedBox(height: 16.h),
           itemCount: userData.length,
         ),
-        IconButton(
-          icon: const Icon(Icons.refresh),
-          onPressed: onPressed,
-        ),
-      ],
+      ),
     );
   }
 }
