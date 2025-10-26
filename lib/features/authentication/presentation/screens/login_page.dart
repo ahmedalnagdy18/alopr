@@ -87,6 +87,7 @@ class _LoginPageState extends State<_LoginPage> {
         }
         if (state is LoginError) {
           showErrorToastMessage(message: state.message);
+          print(state.message);
         }
       },
       builder: (context, state) {

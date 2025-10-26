@@ -1,6 +1,8 @@
 import 'package:alopr/core/colors/app_colors.dart';
 import 'package:alopr/core/common/inkweel_widget.dart';
+import 'package:alopr/core/common/no_internet_widget.dart';
 import 'package:alopr/core/fonts/app_text.dart';
+import 'package:alopr/core/utils/internet_connection_mixin.dart';
 import 'package:alopr/features/home/presentation/cubits/get_patients_cubit/patients_cubit.dart';
 import 'package:alopr/features/home/presentation/widgets/doctor_widget.dart';
 import 'package:alopr/features/home/presentation/widgets/patient_widget.dart';
@@ -34,7 +36,7 @@ class _HomePage extends StatefulWidget {
   State<_HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<_HomePage> {
+class _HomePageState extends State<_HomePage> with InternetConnectionMixin {
   @override
   Widget build(BuildContext context) {
     final textColor = Theme.of(context).brightness == Brightness.dark
@@ -50,90 +52,108 @@ class _HomePageState extends State<_HomePage> {
           builder: (context, state) {
             return Scaffold(
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              body: SafeArea(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 16.w, vertical: 24.h),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              body: !hasInternet
+                  ? NoInternetWidget()
+                  : SafeArea(
+                      child: Column(
                         children: [
-                          Expanded(
-                            child: Text(
-                              widget.role == "doctor"
-                                  ? S
-                                      .of(context)
-                                      .welcomeToAloprFollowerDashboard
-                                  : S.of(context).welcomeToALOPR,
-                              style: AppTexts.title(context).copyWith(
-                                fontSize: 24.sp,
-                              ),
-                              textAlign: TextAlign.start,
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.w, vertical: 24.h),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    widget.role == "doctor"
+                                        ? S
+                                            .of(context)
+                                            .welcomeToAloprFollowerDashboard
+                                        : S.of(context).welcomeToALOPR,
+                                    style: AppTexts.title(context).copyWith(
+                                      fontSize: 24.sp,
+                                    ),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      top: 4.r,
+                                      left: Directionality.of(context) ==
+                                              TextDirection.rtl
+                                          ? 0.r
+                                          : 40.r),
+                                  child: InkwellWidget(
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                        CupertinoPageRoute(
+                                          builder: (context) =>
+                                              const SettingPage(),
+                                        ),
+                                      );
+                                    },
+                                    child: Icon(
+                                      Icons.settings_outlined,
+                                      color: textColor,
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: 4.r,
-                                left: Directionality.of(context) ==
-                                        TextDirection.rtl
-                                    ? 0.r
-                                    : 40.r),
-                            child: InkwellWidget(
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  CupertinoPageRoute(
-                                    builder: (context) => const SettingPage(),
-                                  ),
-                                );
-                              },
-                              child: Icon(
-                                Icons.settings_outlined,
-                                color: textColor,
-                              ),
+                          if (widget.role == "patient") ...[
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 16.w),
+                              child: PatientWidget(),
                             ),
-                          )
+                          ],
+                          if (widget.role == "doctor") ...[
+                            if (state is LoadingPatients)
+                              Column(
+                                children: [
+                                  SizedBox(height: 100.h),
+                                  const Center(
+                                      child: CircularProgressIndicator(
+                                          color: Colors.grey)),
+                                ],
+                              )
+                            else if (state is SuccessPatients &&
+                                state.data.isNotEmpty)
+                              DoctorWidget(
+                                userData: state.data,
+                                onRefresh: () =>
+                                    context.read<PatientsCubit>().getPatients(),
+                              )
+                            else if (state is EmptyPatients)
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                                child: EmptyDoctorWidget(
+                                  onPressed: () => context
+                                      .read<PatientsCubit>()
+                                      .getPatients(),
+                                ),
+                              )
+                            else if (state is ErrorPatients)
+                              Center(
+                                  child: Column(
+                                children: [
+                                  SizedBox(height: 100.h),
+                                  Text("Error loading patients"),
+                                  SizedBox(height: 8.h),
+                                  IconButton(
+                                      onPressed: () {
+                                        context
+                                            .read<PatientsCubit>()
+                                            .getPatients();
+                                      },
+                                      icon: Icon(Icons.refresh))
+                                ],
+                              ))
+                          ],
                         ],
                       ),
                     ),
-                    if (widget.role == "patient") ...[
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        child: PatientWidget(),
-                      ),
-                    ],
-                    if (widget.role == "doctor") ...[
-                      if (state is LoadingPatients)
-                        Column(
-                          children: [
-                            SizedBox(height: 100.h),
-                            const Center(
-                                child: CircularProgressIndicator(
-                                    color: Colors.grey)),
-                          ],
-                        )
-                      else if (state is SuccessPatients &&
-                          state.data.isNotEmpty)
-                        DoctorWidget(
-                          userData: state.data,
-                          onRefresh: () =>
-                              context.read<PatientsCubit>().getPatients(),
-                        )
-                      else if (state is EmptyPatients)
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.w),
-                          child: EmptyDoctorWidget(
-                            onPressed: () =>
-                                context.read<PatientsCubit>().getPatients(),
-                          ),
-                        )
-                      else if (state is ErrorPatients)
-                        Center(child: Text("Error loading patients"))
-                    ],
-                  ],
-                ),
-              ),
             );
           },
         ),
