@@ -43,9 +43,10 @@ final List<OnboardingModel> onboardingData = [
   ),
   OnboardingModel(
     image: 'images/onboarding4.svg',
-    mainTitle: 'Location',
-    title: 'Stay safe and independent with the “Where Am I?” map',
-    subTitle: 'ALOPR helps you find your location and guides you home safely.',
+    mainTitle: 'Dark Mode',
+    title: 'Stay comfortable and focused with “Dark Mode”',
+    subTitle:
+        'ALOPR adjusts brightness to protect your eyes and ease night use.',
   ),
   OnboardingModel(
     image: 'images/onboarding5.svg',

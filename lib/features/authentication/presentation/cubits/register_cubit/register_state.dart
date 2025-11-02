@@ -18,3 +18,14 @@ class RegisterError extends RegisterState {
 
   const RegisterError({required this.message});
 }
+
+class LoadingCheckEmail extends RegisterState {}
+
+class SucsessCheckEmail extends RegisterState {}
+
+class EmailNotFound extends RegisterState {}
+
+class ErrorCheckEmail extends RegisterState {
+  final String message;
+  const ErrorCheckEmail(this.message);
+}

@@ -146,4 +146,63 @@ class AuthDataSource {
     // 5️⃣ Clear local data
     await prefs.clearAll();
   }
+
+  Future<bool> checkIfEmailExists(String email) async {
+    final url = Uri.parse('$baseUrl/register');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> users = jsonDecode(response.body);
+
+      // Check if email exists
+      final existingUser = users.firstWhere(
+        (u) => u['email'] == email,
+        orElse: () => null,
+      );
+
+      return existingUser != null; // true if found
+    } else {
+      throw Exception('Failed to fetch users. Please try again.');
+    }
+  }
+
+  Future<void> updatePassword(String email, String newPassword) async {
+    final url = Uri.parse('$baseUrl/register');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> users = jsonDecode(response.body);
+
+      // Find user by email
+      final existingUser = users.firstWhere(
+        (u) => u['email'] == email,
+        orElse: () => null,
+      );
+
+      if (existingUser == null) {
+        throw Exception('No user found with this email.');
+      }
+
+      final userId = existingUser['id'];
+
+      // Make PATCH request to update password
+      final updateUrl = Uri.parse('$baseUrl/register/$userId');
+      final updateResponse = await http.patch(
+        updateUrl,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'password': newPassword}),
+      );
+
+      if (updateResponse.statusCode == 200 ||
+          updateResponse.statusCode == 201) {
+        // Success ✅
+        return;
+      } else {
+        throw Exception(
+            'Failed to update password. Status: ${updateResponse.statusCode}');
+      }
+    } else {
+      throw Exception('Failed to fetch users. Please try again.');
+    }
+  }
 }

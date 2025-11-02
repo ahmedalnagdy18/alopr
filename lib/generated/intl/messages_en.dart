@@ -63,16 +63,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Delete Account"),
         "didReceiveCode":
             MessageLookupByLibrary.simpleMessage("Didn\'t receive the code?"),
+        "didYouForgetYourPassword": MessageLookupByLibrary.simpleMessage(
+            "Did you forget your password?"),
         "doYouHaveChronicDiseases": MessageLookupByLibrary.simpleMessage(
             "Do you have chronic diseases ?"),
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don’t have an account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emailAddress": MessageLookupByLibrary.simpleMessage("Email Address"),
         "emailRequired":
             MessageLookupByLibrary.simpleMessage("Email is required"),
         "emptyDocWidgetTitle": MessageLookupByLibrary.simpleMessage(
             "You have no patients yet. Once a patient connects with you, they will appear here"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
+        "enterYourEmailAddress":
+            MessageLookupByLibrary.simpleMessage("Enter your email address"),
         "enterYourPassword":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
         "enterYourPhoneNumber":
@@ -82,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "finish": MessageLookupByLibrary.simpleMessage("Finish"),
         "follower": MessageLookupByLibrary.simpleMessage("Follower"),
+        "forgetYoutPasswordALOPR": MessageLookupByLibrary.simpleMessage(
+            "Forget yout password in to ALOPR"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password?"),
         "fromAlzheimersPrediction":
@@ -115,11 +122,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "Name must be at least 3 characters"),
         "nameTooShort": MessageLookupByLibrary.simpleMessage(
             "Name must be at least 3 characters"),
+        "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
+        "noInternetConnection":
+            MessageLookupByLibrary.simpleMessage("No internet connection!"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "otpMessage": MessageLookupByLibrary.simpleMessage(
             "We’ve sent a 4-digit code to your email. Please enter it below to verify your account."),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "passwordChanged": MessageLookupByLibrary.simpleMessage(
+            "Your password has been changed successfully."),
         "passwordRequired":
             MessageLookupByLibrary.simpleMessage("Password is required"),
         "passwordTooShort": MessageLookupByLibrary.simpleMessage(
@@ -138,6 +150,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "phoneRequired":
             MessageLookupByLibrary.simpleMessage("Phone number is required"),
+        "pleaseCheckYourInternet": MessageLookupByLibrary.simpleMessage(
+            "Please check your internet and try again."),
         "pleaseCompleteYourProfile": MessageLookupByLibrary.simpleMessage(
             "Please complete your profile"),
         "pleaseEnterValidEmail": MessageLookupByLibrary.simpleMessage(
@@ -146,6 +160,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Re-enter your password"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "resendIn": MessageLookupByLibrary.simpleMessage("Resend in,"),
+        "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
+        "setNewPassword":
+            MessageLookupByLibrary.simpleMessage("Set a new password"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "specify": MessageLookupByLibrary.simpleMessage("specify"),
         "specifyRequired":

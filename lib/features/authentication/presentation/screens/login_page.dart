@@ -6,6 +6,7 @@ import 'package:alopr/core/extentions/app_extentions.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/authentication/domain/entity/login_input.dart';
 import 'package:alopr/features/authentication/presentation/cubits/login_cubit/login_cubit.dart';
+import 'package:alopr/features/authentication/presentation/screens/forget_password_page.dart';
 import 'package:alopr/features/authentication/presentation/screens/register_page.dart';
 import 'package:alopr/features/authentication/presentation/widgets/field_controller_widget.dart';
 import 'package:alopr/features/authentication/presentation/widgets/title_widget.dart';
@@ -87,7 +88,6 @@ class _LoginPageState extends State<_LoginPage> {
         }
         if (state is LoginError) {
           showErrorToastMessage(message: state.message);
-          print(state.message);
         }
       },
       builder: (context, state) {
@@ -183,13 +183,23 @@ class _LoginPageState extends State<_LoginPage> {
                                 hintText: S.of(context).enterYourPassword,
                               ),
                               SizedBox(height: 4.h),
-                              Text(
-                                S.of(context).forgotPassword,
-                                style: AppTexts.regular(context).copyWith(
-                                  color: Colors.grey.shade600,
-                                  fontSize: 10.sp,
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: Colors.grey.shade600,
+                              InkwellWidget(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    CupertinoPageRoute(
+                                      builder: (context) =>
+                                          const ForgetPasswordPage(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  S.of(context).forgotPassword,
+                                  style: AppTexts.regular(context).copyWith(
+                                    color: Colors.grey.shade600,
+                                    fontSize: 10.sp,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: Colors.grey.shade600,
+                                  ),
                                 ),
                               ),
                               SizedBox(height: 24.h),

@@ -100,5 +100,15 @@
     "logoutMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
     "deleteAccountTitle": "حذف الحساب",
     "deleteAccountMessage": "هل أنت متأكد أنك تريد حذف حسابك؟ هذا الإجراء لا يمكن التراجع عنه.",
-    "patientNotCompletProfile": "المريض لم يُكمل ملفه الشخصي بعد."
+    "patientNotCompletProfile": "المريض لم يُكمل ملفه الشخصي بعد.",
+    "noInternetConnection": "لا يوجد اتصال بالإنترنت!",
+    "pleaseCheckYourInternet": "من فضلك تحقق من اتصالك بالإنترنت وحاول مرة أخرى.",
+    "didYouForgetYourPassword": "هل نسيت كلمة المرور؟",
+    "forgetYoutPasswordALOPR": "نسيت كلمة المرور في تطبيق ألوبِر؟",
+    "enterYourEmailAddress": "أدخل عنوان بريدك الإلكتروني",
+    "emailAddress": "عنوان البريد الإلكتروني",
+    "resetPassword": "إعادة تعيين كلمة المرور",
+    "setNewPassword": "عيّن كلمة مرور جديدة",
+    "newPassword": "كلمة المرور الجديدة",
+    "passwordChanged": "تم تغيير كلمة المرور بنجاح."
 }

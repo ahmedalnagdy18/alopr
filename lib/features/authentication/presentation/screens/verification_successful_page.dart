@@ -1,5 +1,6 @@
 import 'package:alopr/core/common/buttons.dart';
 import 'package:alopr/core/fonts/app_text.dart';
+import 'package:alopr/features/authentication/presentation/screens/login_page.dart';
 import 'package:alopr/features/home/presentation/screens/on_complete_page.dart';
 import 'package:alopr/features/home/presentation/screens/home_page.dart';
 import 'package:alopr/generated/l10n.dart';
@@ -9,8 +10,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class VerificationSuccessfulPage extends StatelessWidget {
-  const VerificationSuccessfulPage({super.key, required this.role});
-  final String role;
+  const VerificationSuccessfulPage(
+      {super.key, this.role, required this.isFromForgetpassword});
+  final String? role;
+  final bool isFromForgetpassword;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +40,9 @@ class VerificationSuccessfulPage extends StatelessWidget {
                       ),
                       SizedBox(height: 25.h),
                       Text(
-                        S.of(context).verifiedMessage,
+                        isFromForgetpassword == true
+                            ? S.of(context).passwordChanged
+                            : S.of(context).verifiedMessage,
                         style: AppTexts.regular(context),
                       )
                     ],
@@ -46,29 +51,40 @@ class VerificationSuccessfulPage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 14.r),
                   child: MainAppButton(
-                      bouttonWidth: double.infinity,
-                      onPressed: () {
-                        if (role == "doctor") {
-                          Navigator.of(context).pushAndRemoveUntil(
-                            CupertinoPageRoute(
-                              builder: (context) => HomePage(
-                                role: role,
-                              ),
+                    bouttonWidth: double.infinity,
+                    onPressed: () {
+                      if (isFromForgetpassword == true) {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          CupertinoPageRoute(
+                            builder: (context) => LoginPage(),
+                          ),
+                          (Route<dynamic> route) => false,
+                        );
+                      }
+                      if (role == "doctor") {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          CupertinoPageRoute(
+                            builder: (context) => HomePage(
+                              role: role ?? "doctor",
                             ),
-                            (Route<dynamic> route) => false,
-                          );
-                        } else if (role == "patient") {
-                          Navigator.of(context).pushAndRemoveUntil(
-                            CupertinoPageRoute(
-                              builder: (context) => OnCompletePage(
-                                role: role,
-                              ),
+                          ),
+                          (Route<dynamic> route) => false,
+                        );
+                      } else if (role == "patient") {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          CupertinoPageRoute(
+                            builder: (context) => OnCompletePage(
+                              role: role ?? "patient",
                             ),
-                            (Route<dynamic> route) => false,
-                          );
-                        }
-                      },
-                      text: S.of(context).continueToHome),
+                          ),
+                          (Route<dynamic> route) => false,
+                        );
+                      }
+                    },
+                    text: isFromForgetpassword == true
+                        ? S.of(context).ok
+                        : S.of(context).continueToHome,
+                  ),
                 )
               ],
             ),

@@ -7,23 +7,59 @@ import 'package:alopr/core/extentions/app_extentions.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/authentication/domain/entity/register_input.dart';
 import 'package:alopr/features/authentication/presentation/cubits/register_cubit/register_cubit.dart';
+import 'package:alopr/features/authentication/presentation/screens/set_new_password_page.dart';
 import 'package:alopr/features/authentication/presentation/screens/verification_successful_page.dart';
 import 'package:alopr/features/authentication/presentation/widgets/otp_widget.dart';
 import 'package:alopr/generated/l10n.dart';
+import 'package:alopr/injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class OtpPage extends StatefulWidget {
-  const OtpPage({super.key, required this.role, required this.registerInput});
-  final String role;
-  final RegisterInput registerInput;
+class OtpPage extends StatelessWidget {
+  const OtpPage(
+      {super.key,
+      this.role,
+      this.registerInput,
+      required this.fromForgetPassword,
+      this.email});
+  final String? role;
+  final RegisterInput? registerInput;
+  final bool fromForgetPassword;
+  final String? email;
   @override
-  State<OtpPage> createState() => _OtpPageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => RegisterCubit(
+        registerUsecase: sl(),
+        checkEmailUsecase: sl(),
+      ),
+      child: _OtpPage(
+        role: role,
+        fromForgetPassword: fromForgetPassword,
+        email: email,
+        registerInput: registerInput,
+      ),
+    );
+  }
 }
 
-class _OtpPageState extends State<OtpPage> {
+class _OtpPage extends StatefulWidget {
+  const _OtpPage(
+      {this.role,
+      this.registerInput,
+      required this.fromForgetPassword,
+      this.email});
+  final String? role;
+  final RegisterInput? registerInput;
+  final bool fromForgetPassword;
+  final String? email;
+  @override
+  State<_OtpPage> createState() => _OtpPageState();
+}
+
+class _OtpPageState extends State<_OtpPage> {
   final otpController = TextEditingController();
 
   late Timer _timer;
@@ -78,7 +114,8 @@ class _OtpPageState extends State<OtpPage> {
           Navigator.of(context).pushAndRemoveUntil(
             CupertinoPageRoute(
               builder: (context) => VerificationSuccessfulPage(
-                role: widget.role,
+                isFromForgetpassword: false,
+                role: widget.role!,
               ),
             ),
             (Route<dynamic> route) => false,
@@ -87,6 +124,21 @@ class _OtpPageState extends State<OtpPage> {
         if (state is RegisterError) {
           showErrorToastMessage(message: state.message);
           Navigator.pop(context);
+        }
+        if (state is SucsessCheckEmail) {
+          Navigator.of(context).push(
+            CupertinoPageRoute(
+              builder: (context) => SetNewPasswordPage(
+                email: widget.email ?? "",
+              ),
+            ),
+          );
+        }
+        if (state is EmailNotFound) {
+          showErrorToastMessage(message: 'Email not found');
+        }
+        if (state is ErrorCheckEmail) {
+          showErrorToastMessage(message: state.message);
         }
       },
       builder: (context, state) {
@@ -129,14 +181,17 @@ class _OtpPageState extends State<OtpPage> {
                     onPressed: (otpController.text.length == 4)
                         ? () {
                             if (otpController.text == "1234") {
-                              _registerButton(context);
+                              widget.fromForgetPassword == false
+                                  ? _registerButton(context)
+                                  : _checkEmailButton(
+                                      context, widget.email ?? "");
                             } else {
                               showErrorToastMessage(
                                   message: 'Verification code is wrong');
                             }
                           }
                         : null,
-                    text: state is RegisterLoading
+                    text: state is RegisterLoading || state is LoadingCheckEmail
                         ? S.of(context).loading
                         : S.of(context).verify,
                   ),
@@ -172,7 +227,11 @@ class _OtpPageState extends State<OtpPage> {
 
   void _registerButton(BuildContext context) {
     BlocProvider.of<RegisterCubit>(context)
-        .registerFuc(input: widget.registerInput);
+        .registerFuc(input: widget.registerInput!);
+  }
+
+  void _checkEmailButton(BuildContext context, String email) {
+    BlocProvider.of<RegisterCubit>(context).checkEmail(email);
   }
 }
 

@@ -5,4 +5,6 @@ abstract class AuthRepository {
   Future<void> register(RegisterInput input);
   Future<void> login(LoginInput input);
   Future<void> deleteAccount();
+  Future<bool> checkEmail(String email);
+  Future<void> setNewPassword(String email, String newPassword);
 }

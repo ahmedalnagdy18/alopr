@@ -24,7 +24,10 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterCubit(registerUsecase: sl()),
+      create: (context) => RegisterCubit(
+        registerUsecase: sl(),
+        checkEmailUsecase: sl(),
+      ),
       child: _RegisterPage(),
     );
   }
@@ -295,22 +298,20 @@ class _RegisterPageState extends State<_RegisterPage> {
                               //   _registerButton(context);
                               Navigator.of(context).push(
                                 CupertinoPageRoute(
-                                  builder: (_) => BlocProvider.value(
-                                    value: context.read<RegisterCubit>(),
-                                    child: OtpPage(
+                                  builder: (_) => OtpPage(
+                                    fromForgetPassword: false,
+                                    role: selectRole == 0
+                                        ? role = "doctor"
+                                        : "patient",
+                                    registerInput: RegisterInput(
+                                      id: "",
+                                      fullName: _fullName.controller.text,
+                                      email: _email.controller.text,
+                                      phone: _phone.controller.text,
+                                      password: _password.controller.text,
                                       role: selectRole == 0
                                           ? role = "doctor"
                                           : "patient",
-                                      registerInput: RegisterInput(
-                                        id: "",
-                                        fullName: _fullName.controller.text,
-                                        email: _email.controller.text,
-                                        phone: _phone.controller.text,
-                                        password: _password.controller.text,
-                                        role: selectRole == 0
-                                            ? role = "doctor"
-                                            : "patient",
-                                      ),
                                     ),
                                   ),
                                 ),

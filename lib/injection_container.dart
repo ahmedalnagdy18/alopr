@@ -1,9 +1,11 @@
 import 'package:alopr/features/authentication/data/data_source/auth_data_source.dart';
 import 'package:alopr/features/authentication/data/repository_imp/auth_repository_imp.dart';
 import 'package:alopr/features/authentication/domain/repository/auth_repository.dart';
+import 'package:alopr/features/authentication/domain/usecase/check_email_usecase.dart';
 import 'package:alopr/features/authentication/domain/usecase/delete_usecase.dart';
 import 'package:alopr/features/authentication/domain/usecase/login_usecase.dart';
 import 'package:alopr/features/authentication/domain/usecase/register_usecase.dart';
+import 'package:alopr/features/authentication/domain/usecase/set_new_password_usecase.dart';
 import 'package:alopr/features/home/data/data_source/home_data_source.dart';
 import 'package:alopr/features/home/data/repository_imp/home_repository_imp.dart';
 import 'package:alopr/features/home/domain/repository/home_repository.dart';
@@ -37,6 +39,12 @@ Future<void> init() async {
 
   sl.registerLazySingleton<DeleteUsecase>(
       () => DeleteUsecase(repository: sl()));
+
+  sl.registerLazySingleton<CheckEmailUsecase>(
+      () => CheckEmailUsecase(repository: sl()));
+
+  sl.registerLazySingleton<SetNewPasswordUsecase>(
+      () => SetNewPasswordUsecase(repository: sl()));
 
 // Repository
 

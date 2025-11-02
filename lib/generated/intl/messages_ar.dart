@@ -65,16 +65,22 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("حذف الحساب"),
         "didReceiveCode":
             MessageLookupByLibrary.simpleMessage("لم تستلم الرمز؟"),
+        "didYouForgetYourPassword":
+            MessageLookupByLibrary.simpleMessage("هل نسيت كلمة المرور؟"),
         "doYouHaveChronicDiseases":
             MessageLookupByLibrary.simpleMessage("هل لديك أمراض مزمنة ؟"),
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+        "emailAddress":
+            MessageLookupByLibrary.simpleMessage("عنوان البريد الإلكتروني"),
         "emailRequired":
             MessageLookupByLibrary.simpleMessage("البريد الإلكتروني مطلوب"),
         "emptyDocWidgetTitle": MessageLookupByLibrary.simpleMessage(
             "ليس لديك أي مرضى حتى الآن. بمجرد اتصال أي مريض بك، سيظهر هنا."),
         "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
+        "enterYourEmailAddress":
+            MessageLookupByLibrary.simpleMessage("أدخل عنوان بريدك الإلكتروني"),
         "enterYourPassword": MessageLookupByLibrary.simpleMessage("كلمة مرورك"),
         "enterYourPhoneNumber":
             MessageLookupByLibrary.simpleMessage("رقم هاتفك"),
@@ -83,6 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "female": MessageLookupByLibrary.simpleMessage("أنثى"),
         "finish": MessageLookupByLibrary.simpleMessage("إنهاء"),
         "follower": MessageLookupByLibrary.simpleMessage("متابع"),
+        "forgetYoutPasswordALOPR": MessageLookupByLibrary.simpleMessage(
+            "نسيت كلمة المرور في تطبيق ألوبِر؟"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("هل نسيت كلمة السر"),
         "fromAlzheimersPrediction":
@@ -117,11 +125,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "يجب أن يكون الاسم 3 أحرف على الأقل"),
         "nameTooShort": MessageLookupByLibrary.simpleMessage(
             "الاسم يجب أن يكون 3 أحرف على الأقل"),
+        "newPassword":
+            MessageLookupByLibrary.simpleMessage("كلمة المرور الجديدة"),
         "no": MessageLookupByLibrary.simpleMessage("لا"),
+        "noInternetConnection":
+            MessageLookupByLibrary.simpleMessage("لا يوجد اتصال بالإنترنت!"),
         "ok": MessageLookupByLibrary.simpleMessage("حسناً"),
         "otpMessage": MessageLookupByLibrary.simpleMessage(
             "لقد أرسلنا رمزًا مكونًا من أربعة أرقام إلى بريدك الإلكتروني. يُرجى إدخاله أدناه للتحقق من حسابك."),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "passwordChanged":
+            MessageLookupByLibrary.simpleMessage("تم تغيير كلمة المرور بنجاح."),
         "passwordRequired":
             MessageLookupByLibrary.simpleMessage("كلمة المرور مطلوبة"),
         "passwordTooShort": MessageLookupByLibrary.simpleMessage(
@@ -139,6 +153,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
         "phoneRequired":
             MessageLookupByLibrary.simpleMessage("رقم الهاتف مطلوب"),
+        "pleaseCheckYourInternet": MessageLookupByLibrary.simpleMessage(
+            "من فضلك تحقق من اتصالك بالإنترنت وحاول مرة أخرى."),
         "pleaseCompleteYourProfile":
             MessageLookupByLibrary.simpleMessage("من فضلك أكمل ملفك الشخصي"),
         "pleaseEnterValidEmail":
@@ -147,6 +163,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أعد إدخال كلمة مرورك"),
         "register": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "resendIn": MessageLookupByLibrary.simpleMessage("إعادة الإرسال في"),
+        "resetPassword":
+            MessageLookupByLibrary.simpleMessage("إعادة تعيين كلمة المرور"),
+        "setNewPassword":
+            MessageLookupByLibrary.simpleMessage("عيّن كلمة مرور جديدة"),
         "settings": MessageLookupByLibrary.simpleMessage("إعدادات"),
         "specify": MessageLookupByLibrary.simpleMessage("حدد"),
         "specifyRequired":

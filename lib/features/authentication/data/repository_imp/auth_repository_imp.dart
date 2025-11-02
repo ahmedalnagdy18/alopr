@@ -22,4 +22,14 @@ class AuthRepositoryImp extends AuthRepository {
   Future<void> deleteAccount() async {
     await remoteDataSource.deleteAccount();
   }
+
+  @override
+  Future<bool> checkEmail(String email) async {
+    return await remoteDataSource.checkIfEmailExists(email);
+  }
+
+  @override
+  Future<void> setNewPassword(String email, String newPassword) async {
+    return await remoteDataSource.updatePassword(email, newPassword);
+  }
 }

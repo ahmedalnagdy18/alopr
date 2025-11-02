@@ -100,5 +100,15 @@
     "logoutMessage": "Are you sure you want to log out?",
     "deleteAccountTitle": "Delete Account",
     "deleteAccountMessage": "Are you sure you want to delete your account? This action cannot be undone.",
-    "patientNotCompletProfile": "The patient hasn’t completed their profile yet"
+    "patientNotCompletProfile": "The patient hasn’t completed their profile yet",
+    "noInternetConnection": "No internet connection!",
+    "pleaseCheckYourInternet": "Please check your internet and try again.",
+    "didYouForgetYourPassword": "Did you forget your password?",
+    "forgetYoutPasswordALOPR": "Forget yout password in to ALOPR",
+    "enterYourEmailAddress": "Enter your email address",
+    "emailAddress": "Email Address",
+    "resetPassword": "Reset password",
+    "setNewPassword": "Set a new password",
+    "newPassword": "New password",
+    "passwordChanged": "Your password has been changed successfully."
 }

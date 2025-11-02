@@ -1069,6 +1069,106 @@ class S {
       args: [],
     );
   }
+
+  /// `No internet connection!`
+  String get noInternetConnection {
+    return Intl.message(
+      'No internet connection!',
+      name: 'noInternetConnection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please check your internet and try again.`
+  String get pleaseCheckYourInternet {
+    return Intl.message(
+      'Please check your internet and try again.',
+      name: 'pleaseCheckYourInternet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Did you forget your password?`
+  String get didYouForgetYourPassword {
+    return Intl.message(
+      'Did you forget your password?',
+      name: 'didYouForgetYourPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forget yout password in to ALOPR`
+  String get forgetYoutPasswordALOPR {
+    return Intl.message(
+      'Forget yout password in to ALOPR',
+      name: 'forgetYoutPasswordALOPR',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your email address`
+  String get enterYourEmailAddress {
+    return Intl.message(
+      'Enter your email address',
+      name: 'enterYourEmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email Address`
+  String get emailAddress {
+    return Intl.message(
+      'Email Address',
+      name: 'emailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset password`
+  String get resetPassword {
+    return Intl.message(
+      'Reset password',
+      name: 'resetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set a new password`
+  String get setNewPassword {
+    return Intl.message(
+      'Set a new password',
+      name: 'setNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New password`
+  String get newPassword {
+    return Intl.message(
+      'New password',
+      name: 'newPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your password has been changed successfully.`
+  String get passwordChanged {
+    return Intl.message(
+      'Your password has been changed successfully.',
+      name: 'passwordChanged',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
