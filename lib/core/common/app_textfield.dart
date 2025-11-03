@@ -59,6 +59,14 @@ class AppTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      contextMenuBuilder: (context, editableTextState) {
+        if (readOnly == true) {
+          return const SizedBox.shrink();
+        }
+        return AdaptiveTextSelectionToolbar.editableText(
+          editableTextState: editableTextState,
+        );
+      },
       autovalidateMode: autovalidateMode,
       cursorColor: AppColors.primaryLight,
       onFieldSubmitted: onFieldSubmitted,

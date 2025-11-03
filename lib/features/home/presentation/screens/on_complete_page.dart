@@ -127,6 +127,8 @@ class _OnCompletePageState extends State<_OnCompletePage> {
                       ),
                       SizedBox(height: 8.h),
                       AppTextField(
+                        maxLength: 50,
+                        counterText: "",
                         controller: _nameController,
                         validator: (val) =>
                             CompletePageValidator.name(context, val),
@@ -168,6 +170,7 @@ class _OnCompletePageState extends State<_OnCompletePage> {
                       ),
                       SizedBox(height: 8.h),
                       AppTextField(
+                        maxLines: 10,
                         controller: _conditionController,
                         validator: (val) =>
                             CompletePageValidator.condition(context, val),
@@ -237,6 +240,7 @@ class _OnCompletePageState extends State<_OnCompletePage> {
                       if (haveDiseases == S.of(context).yes) ...[
                         SizedBox(height: 8.h),
                         AppTextField(
+                          maxLines: 3,
                           controller: _specifyController,
                           validator: (val) =>
                               CompletePageValidator.specify(context, val),

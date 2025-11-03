@@ -137,6 +137,8 @@ class _RegisterPageState extends State<_RegisterPage> {
                               ),
                               SizedBox(height: 4.h),
                               AppTextField(
+                                maxLength: 50,
+                                counterText: '',
                                 focusNode: _fullName.focus,
                                 controller: _fullName.controller,
                                 inputFormatters: [

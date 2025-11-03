@@ -80,6 +80,8 @@ class _UploadPageState extends State<_UploadPage> {
   XFile? uploadedImage;
 
   Future<void> pickImage({required ImageSource source}) async {
+    final uploadState = context.read<UploadCubit>().state;
+    if (uploadState is LoadingUpload) return;
     final pickedImage = await ImagePicker().pickImage(source: source);
     setState(() {
       uploadedImage = pickedImage;
@@ -298,27 +300,33 @@ class _UploadPageState extends State<_UploadPage> {
                                   : BlocBuilder<UploadCubit, UploadState>(
                                       builder: (context, state) {
                                         return MainAppButton(
-                                          onPressed: () {
-                                            showModalBottomSheet<void>(
-                                                context: context,
-                                                builder:
-                                                    (BuildContext context) {
-                                                  return OpenGallaryWidget(
-                                                    cameraTap: () {
-                                                      pickImage(
-                                                          source: ImageSource
-                                                              .camera);
-                                                      Navigator.pop(context);
-                                                    },
-                                                    photosTap: () {
-                                                      pickImage(
-                                                          source: ImageSource
-                                                              .gallery);
-                                                      Navigator.pop(context);
-                                                    },
-                                                  );
-                                                });
-                                          },
+                                          onPressed: state is LoadingUpload
+                                              ? null
+                                              : () {
+                                                  showModalBottomSheet<void>(
+                                                      context: context,
+                                                      builder: (BuildContext
+                                                          context) {
+                                                        return OpenGallaryWidget(
+                                                          cameraTap: () {
+                                                            pickImage(
+                                                                source:
+                                                                    ImageSource
+                                                                        .camera);
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          photosTap: () {
+                                                            pickImage(
+                                                                source:
+                                                                    ImageSource
+                                                                        .gallery);
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                        );
+                                                      });
+                                                },
                                           text: state is LoadingUpload
                                               ? S.current.loading
                                               : widget.buttonName,

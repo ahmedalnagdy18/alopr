@@ -2,6 +2,7 @@ import 'package:alopr/core/colors/app_colors.dart';
 import 'package:alopr/core/common/app_textfield.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/features/home/domain/entity/model/user_data_model.dart';
+import 'package:alopr/features/home/presentation/widgets/image_perviewr_widget.dart';
 import 'package:alopr/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -56,6 +57,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(
           S.of(context).patientDetails,
@@ -76,10 +78,10 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                 style: AppTexts.subHeading(context),
               ),
             )
-          : SafeArea(
+          : SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-                child: SingleChildScrollView(
+                child: SafeArea(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -94,6 +96,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                       ),
                       SizedBox(height: 8.h),
                       AppTextField(
+                        maxLines: 2,
                         fillColor: AppColors.paragraphDark,
                         controller: _nameController,
                         readOnly: true,
@@ -121,6 +124,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                       ),
                       SizedBox(height: 8.h),
                       AppTextField(
+                        maxLines: 10,
                         fillColor: AppColors.paragraphDark,
                         controller: _conditionController,
                         readOnly: true,
@@ -168,6 +172,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                       if (haveDiseases == S.of(context).yes) ...[
                         SizedBox(height: 8.h),
                         AppTextField(
+                          maxLines: 10,
                           fillColor: AppColors.paragraphDark,
                           controller: _specifyController,
                           readOnly: true,
@@ -194,6 +199,52 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                         groupValue: havepregnant,
                         value: S.of(context).no,
                       ),
+                      if (widget.patient.completedProfile?.testImage !=
+                          null) ...[
+                        SizedBox(height: 16.h),
+                        Text(
+                          "uploaded test",
+                          style: AppTexts.paragraph(context),
+                        ),
+                        SizedBox(height: 8.h),
+                        Container(
+                          clipBehavior: Clip.antiAlias,
+                          height: 291.h,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(24.r),
+                          ),
+                          child: ImagePerviewrWidget(
+                            imageUrl:
+                                widget.patient.completedProfile?.testImage ??
+                                    "",
+                          ),
+                        ),
+                      ],
+                      if (widget.patient.completedProfile?.brainImage !=
+                          null) ...[
+                        SizedBox(height: 16.h),
+                        Text(
+                          "uploaded MRI",
+                          style: AppTexts.paragraph(context),
+                        ),
+                        SizedBox(height: 8.h),
+                        Container(
+                          clipBehavior: Clip.antiAlias,
+                          height: 291.h,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(24.r),
+                          ),
+                          child: ImagePerviewrWidget(
+                            imageUrl:
+                                widget.patient.completedProfile?.brainImage ??
+                                    "",
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),

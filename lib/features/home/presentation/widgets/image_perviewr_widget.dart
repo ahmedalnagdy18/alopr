@@ -44,7 +44,10 @@ class ImagePerviewrWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
         ),
-        child: Image.network(imageUrl),
+        child: Image.network(
+          imageUrl,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
