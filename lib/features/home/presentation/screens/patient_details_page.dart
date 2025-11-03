@@ -273,7 +273,8 @@ Widget _ridoWidget(
               groupValue: groupValue,
               onChanged: onChanged,
               child: Radio(
-                // enabled: false,
+                enabled: false,
+                fillColor: WidgetStatePropertyAll(AppColors.headingLight),
                 activeColor: AppColors.headingLight,
                 backgroundColor:
                     WidgetStatePropertyAll(AppColors.paragraphDark),
