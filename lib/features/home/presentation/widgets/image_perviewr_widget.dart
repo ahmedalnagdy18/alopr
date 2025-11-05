@@ -47,6 +47,9 @@ class ImagePerviewrWidget extends StatelessWidget {
         child: Image.network(
           imageUrl,
           fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            return Icon(Icons.error_outline);
+          },
         ),
       ),
     );
