@@ -48,7 +48,10 @@ class ImagePerviewrWidget extends StatelessWidget {
           imageUrl,
           fit: BoxFit.cover,
           errorBuilder: (context, error, stackTrace) {
-            return Icon(Icons.error_outline);
+            return Icon(
+              Icons.broken_image_outlined,
+              color: Colors.black,
+            );
           },
         ),
       ),
