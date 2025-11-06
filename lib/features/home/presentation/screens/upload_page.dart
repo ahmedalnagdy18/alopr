@@ -12,6 +12,8 @@ import 'package:alopr/features/home/presentation/cubits/complete_profile_cubit/c
 import 'package:alopr/features/home/presentation/cubits/get_complete_data_cubit/get_complete_user_data_cubit.dart';
 import 'package:alopr/features/home/presentation/cubits/upload_cubit/upload_cubit.dart';
 import 'package:alopr/features/home/presentation/widgets/image_perviewr_widget.dart';
+import 'package:alopr/features/home/presentation/widgets/quiz_page_appbar_widget.dart';
+import 'package:alopr/features/home/presentation/widgets/quiz_test_widget.dart';
 import 'package:alopr/features/setting/screens/setting_page.dart';
 import 'package:alopr/generated/l10n.dart';
 import 'package:alopr/injection_container.dart';
@@ -78,7 +80,7 @@ class _UploadPage extends StatefulWidget {
 
 class _UploadPageState extends State<_UploadPage> {
   XFile? uploadedImage;
-
+  bool showAppBar = false;
   Future<void> pickImage({required ImageSource source}) async {
     final uploadState = context.read<UploadCubit>().state;
     if (uploadState is LoadingUpload) return;
@@ -102,247 +104,280 @@ class _UploadPageState extends State<_UploadPage> {
         BlocBuilder<GetCompleteUserDataCubit, GetCompleteUserDataState>(
           builder: (context, state) {
             return Scaffold(
-              backgroundColor: widget.isQueez == false
-                  ? Theme.of(context).scaffoldBackgroundColor
-                  : const Color.fromARGB(255, 250, 201, 201),
-              body: SingleChildScrollView(
-                child: SafeArea(
-                  child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
-                    child: BlocListener<CompleteProfileCubit,
-                        CompleteProfileState>(
-                      listener: (context, state) {
-                        if (state is SuccessCompleteProfile) {
-                          SharedPrefrance.instanc
-                              .getRegisterId()
-                              .then((registerId) {
-                            if (registerId != null) {
-                              context
-                                  .read<GetCompleteUserDataCubit>()
-                                  .getUserData(registerId: registerId);
-                            }
-                          });
-                          // Optional: show success message
-                          showToastMessage(
-                              message: S.current.imageUploadedSuccessfully);
-                        }
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              body: widget.isQueez
+                  ? QuizPageAppbarWidget(
+                      subTitle: widget.subTitle,
+                      title: widget.title,
+                    )
+                  : SingleChildScrollView(
+                      child: SafeArea(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16.w, vertical: 24.h),
+                          child: BlocListener<CompleteProfileCubit,
+                              CompleteProfileState>(
+                            listener: (context, state) {
+                              if (state is SuccessCompleteProfile) {
+                                SharedPrefrance.instanc
+                                    .getRegisterId()
+                                    .then((registerId) {
+                                  if (!context.mounted) return;
+                                  if (registerId != null) {
+                                    context
+                                        .read<GetCompleteUserDataCubit>()
+                                        .getUserData(registerId: registerId);
+                                  }
+                                });
+                                // Optional: show success message
+                                showToastMessage(
+                                    message:
+                                        S.current.imageUploadedSuccessfully);
+                              }
 
-                        if (state is ErrorCompleteProfile) {
-                          showErrorToastMessage(
-                              message: "Error: ${state.message}");
-                        }
-                      },
-                      child: BlocListener<UploadCubit, UploadState>(
-                        listener: (context, uploadState) {
-                          if (uploadState is SuccessUpload) {
-                            final imageUrl = uploadState.imageUrl;
-                            final getUserState =
-                                context.read<GetCompleteUserDataCubit>().state;
+                              if (state is ErrorCompleteProfile) {
+                                showErrorToastMessage(
+                                    message: "Error: ${state.message}");
+                              }
+                            },
+                            child: BlocListener<UploadCubit, UploadState>(
+                              listener: (context, uploadState) {
+                                if (uploadState is SuccessUpload) {
+                                  final imageUrl = uploadState.imageUrl;
+                                  final getUserState = context
+                                      .read<GetCompleteUserDataCubit>()
+                                      .state;
 
-                            if (getUserState is SuccessUserCompleteProfile &&
-                                getUserState.data.completedProfile != null) {
-                              final oldData =
-                                  getUserState.data.completedProfile!;
+                                  if (getUserState
+                                          is SuccessUserCompleteProfile &&
+                                      getUserState.data.completedProfile !=
+                                          null) {
+                                    final oldData =
+                                        getUserState.data.completedProfile!;
 
-                              // Create updated profile input with new image only
-                              final updatedInput = CompleteProfileInput(
-                                id: oldData.id ?? '',
-                                registerId: oldData.registerId ?? '',
-                                caregiver: oldData.caregiver ?? '',
-                                caregiverNumber: oldData.caregiverNumber ?? '',
-                                condition: oldData.condition ?? '',
-                                gender: oldData.gender ?? '',
-                                hasDiseases: oldData.hasDiseases ?? false,
-                                specify: oldData.specify ?? '',
-                                pregnantStatus: oldData.pregnantStatus ?? false,
-                                testImage: widget.imageId == "1"
-                                    ? imageUrl
-                                    : oldData.testImage,
-                                brainImage: widget.imageId == "2"
-                                    ? imageUrl
-                                    : oldData.brainImage,
-                              );
+                                    // Create updated profile input with new image only
+                                    final updatedInput = CompleteProfileInput(
+                                      id: oldData.id ?? '',
+                                      registerId: oldData.registerId ?? '',
+                                      caregiver: oldData.caregiver ?? '',
+                                      caregiverNumber:
+                                          oldData.caregiverNumber ?? '',
+                                      condition: oldData.condition ?? '',
+                                      gender: oldData.gender ?? '',
+                                      hasDiseases: oldData.hasDiseases ?? false,
+                                      specify: oldData.specify ?? '',
+                                      pregnantStatus:
+                                          oldData.pregnantStatus ?? false,
+                                      testImage: widget.imageId == "1"
+                                          ? imageUrl
+                                          : oldData.testImage,
+                                      brainImage: widget.imageId == "2"
+                                          ? imageUrl
+                                          : oldData.brainImage,
+                                    );
 
-                              // 🔹 Update instead of re-completing profile
-                              context
-                                  .read<CompleteProfileCubit>()
-                                  .completeProfileFuc(input: updatedInput);
-                            }
-                          } else if (uploadState is ErrorUpload) {
-                            showErrorToastMessage(message: uploadState.message);
-                          }
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    widget.title,
-                                    style: AppTexts.title(context).copyWith(
-                                      fontSize: 24.sp,
+                                    // 🔹 Update instead of re-completing profile
+                                    context
+                                        .read<CompleteProfileCubit>()
+                                        .completeProfileFuc(
+                                            input: updatedInput);
+                                  }
+                                } else if (uploadState is ErrorUpload) {
+                                  showErrorToastMessage(
+                                      message: uploadState.message);
+                                }
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          widget.title,
+                                          style:
+                                              AppTexts.title(context).copyWith(
+                                            fontSize: 24.sp,
+                                          ),
+                                          textAlign: TextAlign.start,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 4.r),
+                                        child: InkwellWidget(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                              CupertinoPageRoute(
+                                                builder: (context) =>
+                                                    const SettingPage(),
+                                              ),
+                                            );
+                                          },
+                                          child: Icon(
+                                            Icons.settings_outlined,
+                                            color: textColor,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(height: 8.h),
+                                  Text(
+                                    widget.subTitle,
+                                    style: AppTexts.regular(context).copyWith(
+                                      color: textColor,
                                     ),
                                     textAlign: TextAlign.start,
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 4.r),
-                                  child: InkwellWidget(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                        CupertinoPageRoute(
-                                          builder: (context) =>
-                                              const SettingPage(),
-                                        ),
-                                      );
-                                    },
-                                    child: Icon(
-                                      Icons.settings_outlined,
-                                      color: textColor,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(height: 8.h),
-                            Text(
-                              widget.subTitle,
-                              style: AppTexts.regular(context).copyWith(
-                                color: textColor,
+                                  if (widget.isQueez == false) ...[
+                                    SizedBox(height: 36.h),
+                                    if (widget.imageId == "1" &&
+                                        state is SuccessUserCompleteProfile &&
+                                        state.data.completedProfile
+                                                ?.testImage !=
+                                            null) ...[
+                                      state is LoadingUserCompleteProfile
+                                          ? CircularProgressIndicator()
+                                          : ImagePerviewrWidget(
+                                              imageUrl: state
+                                                      .data
+                                                      .completedProfile
+                                                      ?.testImage ??
+                                                  "")
+                                    ],
+                                    if (widget.imageId == "2" &&
+                                        state is SuccessUserCompleteProfile &&
+                                        state.data.completedProfile
+                                                ?.brainImage !=
+                                            null) ...[
+                                      state is LoadingUserCompleteProfile
+                                          ? CircularProgressIndicator()
+                                          : ImagePerviewrWidget(
+                                              imageUrl: state
+                                                      .data
+                                                      .completedProfile
+                                                      ?.brainImage ??
+                                                  "")
+                                    ],
+                                    (state is SuccessUserCompleteProfile &&
+                                            ((widget.imageId == "2" &&
+                                                    state.data.completedProfile
+                                                            ?.brainImage !=
+                                                        null &&
+                                                    state
+                                                        .data
+                                                        .completedProfile!
+                                                        .brainImage!
+                                                        .isNotEmpty) ||
+                                                (widget.imageId == "1" &&
+                                                    state.data.completedProfile
+                                                            ?.testImage !=
+                                                        null &&
+                                                    state
+                                                        .data
+                                                        .completedProfile!
+                                                        .testImage!
+                                                        .isNotEmpty)))
+                                        ? BlocBuilder<UploadCubit, UploadState>(
+                                            builder: (context, state) {
+                                              return Column(
+                                                children: [
+                                                  SizedBox(height: 22.h),
+                                                  MainAppButton(
+                                                    onPressed:
+                                                        state is LoadingUpload
+                                                            ? null
+                                                            : () {
+                                                                showModalBottomSheet<
+                                                                        void>(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (BuildContext
+                                                                            context) {
+                                                                      return OpenGallaryWidget(
+                                                                        cameraTap:
+                                                                            () {
+                                                                          pickImage(
+                                                                              source: ImageSource.camera);
+                                                                          Navigator.pop(
+                                                                              context);
+                                                                        },
+                                                                        photosTap:
+                                                                            () {
+                                                                          pickImage(
+                                                                              source: ImageSource.gallery);
+                                                                          Navigator.pop(
+                                                                              context);
+                                                                        },
+                                                                      );
+                                                                    });
+                                                              },
+                                                    text: state is LoadingUpload
+                                                        ? S.current.loading
+                                                        : S.current
+                                                            .uploadNewone,
+                                                    icon: Icon(Icons
+                                                        .file_upload_outlined),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          )
+                                        : BlocBuilder<UploadCubit, UploadState>(
+                                            builder: (context, state) {
+                                              return MainAppButton(
+                                                onPressed: state
+                                                        is LoadingUpload
+                                                    ? null
+                                                    : () {
+                                                        showModalBottomSheet<
+                                                                void>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return OpenGallaryWidget(
+                                                                cameraTap: () {
+                                                                  pickImage(
+                                                                      source: ImageSource
+                                                                          .camera);
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                                photosTap: () {
+                                                                  pickImage(
+                                                                      source: ImageSource
+                                                                          .gallery);
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                              );
+                                                            });
+                                                      },
+                                                text: state is LoadingUpload
+                                                    ? S.current.loading
+                                                    : widget.buttonName,
+                                                icon: Icon(
+                                                    Icons.file_upload_outlined),
+                                              );
+                                            },
+                                          ),
+                                  ],
+                                  if (widget.isQueez == true) ...[
+                                    QuizTestWidget(),
+                                  ],
+                                ],
                               ),
-                              textAlign: TextAlign.start,
                             ),
-                            if (widget.isQueez == false) ...[
-                              SizedBox(height: 36.h),
-                              if (widget.imageId == "1" &&
-                                  state is SuccessUserCompleteProfile &&
-                                  state.data.completedProfile?.testImage !=
-                                      null) ...[
-                                state is LoadingUserCompleteProfile
-                                    ? CircularProgressIndicator()
-                                    : ImagePerviewrWidget(
-                                        imageUrl: state.data.completedProfile
-                                                ?.testImage ??
-                                            "")
-                              ],
-                              if (widget.imageId == "2" &&
-                                  state is SuccessUserCompleteProfile &&
-                                  state.data.completedProfile?.brainImage !=
-                                      null) ...[
-                                state is LoadingUserCompleteProfile
-                                    ? CircularProgressIndicator()
-                                    : ImagePerviewrWidget(
-                                        imageUrl: state.data.completedProfile
-                                                ?.brainImage ??
-                                            "")
-                              ],
-                              (state is SuccessUserCompleteProfile &&
-                                      ((widget.imageId ==
-                                                  "2" &&
-                                              state.data.completedProfile
-                                                      ?.brainImage !=
-                                                  null &&
-                                              state.data.completedProfile!
-                                                  .brainImage!.isNotEmpty) ||
-                                          (widget
-                                                      .imageId ==
-                                                  "1" &&
-                                              state.data.completedProfile
-                                                      ?.testImage !=
-                                                  null &&
-                                              state.data.completedProfile!
-                                                  .testImage!.isNotEmpty)))
-                                  ? BlocBuilder<UploadCubit, UploadState>(
-                                      builder: (context, state) {
-                                        return Column(
-                                          children: [
-                                            SizedBox(height: 22.h),
-                                            MainAppButton(
-                                              onPressed: () {
-                                                showModalBottomSheet<void>(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return OpenGallaryWidget(
-                                                        cameraTap: () {
-                                                          pickImage(
-                                                              source:
-                                                                  ImageSource
-                                                                      .camera);
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                        photosTap: () {
-                                                          pickImage(
-                                                              source:
-                                                                  ImageSource
-                                                                      .gallery);
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                      );
-                                                    });
-                                              },
-                                              text: state is LoadingUpload
-                                                  ? S.current.loading
-                                                  : S.current.uploadNewone,
-                                              icon: Icon(
-                                                  Icons.file_upload_outlined),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    )
-                                  : BlocBuilder<UploadCubit, UploadState>(
-                                      builder: (context, state) {
-                                        return MainAppButton(
-                                          onPressed: state is LoadingUpload
-                                              ? null
-                                              : () {
-                                                  showModalBottomSheet<void>(
-                                                      context: context,
-                                                      builder: (BuildContext
-                                                          context) {
-                                                        return OpenGallaryWidget(
-                                                          cameraTap: () {
-                                                            pickImage(
-                                                                source:
-                                                                    ImageSource
-                                                                        .camera);
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          photosTap: () {
-                                                            pickImage(
-                                                                source:
-                                                                    ImageSource
-                                                                        .gallery);
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                        );
-                                                      });
-                                                },
-                                          text: state is LoadingUpload
-                                              ? S.current.loading
-                                              : widget.buttonName,
-                                          icon:
-                                              Icon(Icons.file_upload_outlined),
-                                        );
-                                      },
-                                    ),
-                            ],
-                          ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-              ),
             );
           },
         ),

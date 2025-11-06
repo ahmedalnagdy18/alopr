@@ -260,7 +260,7 @@ Widget patientBody(BuildContext context, state) {
               value: context.read<GetCompleteUserDataCubit>(),
               child: UploadPage(
                 isQueez: true,
-                title: S.of(context).uploadYourTest,
+                title: S.of(context).aloprCognitiveTest,
                 subTitle: S.of(context).uploadPageSubtitle3,
               ),
             ),

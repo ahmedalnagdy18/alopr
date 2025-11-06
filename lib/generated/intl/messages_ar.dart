@@ -29,6 +29,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
         "areYouPregnant":
             MessageLookupByLibrary.simpleMessage("هل انت حامل ؟ "),
+        "assessmentTitle1": MessageLookupByLibrary.simpleMessage(
+            "المستوى الأول: الذاكرة والتغيرات الملحوظة"),
+        "assessmentTitle2": MessageLookupByLibrary.simpleMessage(
+            "المستوى الثاني: أنشطة الحياة اليومية (IADL)"),
+        "assessmentTitle3": MessageLookupByLibrary.simpleMessage(
+            "المستوى الثالث: الأسباب القابلة للعكس"),
+        "assessmentTitle4": MessageLookupByLibrary.simpleMessage(
+            "المستوى الرابع: الحالة النفسية والسلوكية"),
         "caregiverField": MessageLookupByLibrary.simpleMessage(
             "اسم الشخص الذي يعتني بالمريض"),
         "caregiverName":
@@ -133,6 +141,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ok": MessageLookupByLibrary.simpleMessage("حسناً"),
         "otpMessage": MessageLookupByLibrary.simpleMessage(
             "لقد أرسلنا رمزًا مكونًا من أربعة أرقام إلى بريدك الإلكتروني. يُرجى إدخاله أدناه للتحقق من حسابك."),
+        "overallAssessment":
+            MessageLookupByLibrary.simpleMessage("التقييم العام"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "passwordChanged":
             MessageLookupByLibrary.simpleMessage("تم تغيير كلمة المرور بنجاح."),
@@ -159,6 +169,38 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("من فضلك أكمل ملفك الشخصي"),
         "pleaseEnterValidEmail":
             MessageLookupByLibrary.simpleMessage("بريدك الإلكتروني"),
+        "question1": MessageLookupByLibrary.simpleMessage(
+            "1. هل ذاكرتك الآن أسوأ مما كانت عليه قبل سنة؟"),
+        "question10": MessageLookupByLibrary.simpleMessage(
+            "10. هل تنام عدد ساعات كافية وتشعر بالراحة بعد الاستيقاظ؟"),
+        "question11": MessageLookupByLibrary.simpleMessage(
+            "11. هل تتناول أدوية بانتظام قد تؤثر على الذاكرة؟"),
+        "question12": MessageLookupByLibrary.simpleMessage(
+            "12. هل تم تشخيصك مسبقًا بنقص في فيتامينات مثل B12 أو فيتامين D؟"),
+        "question13": MessageLookupByLibrary.simpleMessage(
+            "13. هل أصبحت أكثر انعزالًا أو أقل رغبة في التفاعل مع الآخرين؟"),
+        "question14": MessageLookupByLibrary.simpleMessage(
+            "14. هل لاحظت تغيّرات في شخصيتك أو سلوكك العام (مثل اللامبالاة أو العدوانية)؟"),
+        "question15": MessageLookupByLibrary.simpleMessage(
+            "15. هل تواجه صعوبة في التعبير عن مشاعرك أو فهم مشاعر الآخرين؟"),
+        "question16": MessageLookupByLibrary.simpleMessage(
+            "16. هل أصبحت أكثر تشتتًا أو تجد صعوبة في التركيز على مهمة واحدة؟"),
+        "question2": MessageLookupByLibrary.simpleMessage(
+            "2. هل تواجه صعوبة في تذكّر الأحداث القريبة؟"),
+        "question3": MessageLookupByLibrary.simpleMessage(
+            "3. هل تكرر نفس السؤال أو الكلام أكثر من مرة دون قصد؟"),
+        "question4": MessageLookupByLibrary.simpleMessage(
+            "4. هل تضيع أحيانًا في أماكن مألوفة بالنسبة لك؟"),
+        "question5": MessageLookupByLibrary.simpleMessage(
+            "5. هل تتناول أدويتك بانتظام دون تذكير؟"),
+        "question6": MessageLookupByLibrary.simpleMessage(
+            "6. هل يمكنك التعامل مع النقود وشراء الحاجات اليومية بنفسك؟"),
+        "question7": MessageLookupByLibrary.simpleMessage(
+            "7. هل يمكنك تحضير وجبة بسيطة بنفسك دون نسيان المكونات أو الخطوات؟"),
+        "question8": MessageLookupByLibrary.simpleMessage(
+            "8. هل يمكنك التنقّل إلى أماكن قريبة دون أن تضل الطريق؟"),
+        "question9": MessageLookupByLibrary.simpleMessage(
+            "9. هل تشعر بالحزن أو فقدان الاهتمام بالأشياء التي كنت تستمتع بها؟"),
         "reenteryourpassword":
             MessageLookupByLibrary.simpleMessage("أعد إدخال كلمة مرورك"),
         "register": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),

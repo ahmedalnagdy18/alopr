@@ -29,6 +29,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
         "areYouPregnant":
             MessageLookupByLibrary.simpleMessage("Are you pregnant ?"),
+        "assessmentTitle1": MessageLookupByLibrary.simpleMessage(
+            "Level 1: Memory and noticeable changes"),
+        "assessmentTitle2": MessageLookupByLibrary.simpleMessage(
+            "Level Two: Activities of Daily Living (IADL)"),
+        "assessmentTitle3": MessageLookupByLibrary.simpleMessage(
+            "Level Three: Reversible Causes"),
+        "assessmentTitle4": MessageLookupByLibrary.simpleMessage(
+            "Level Four: Psychological and Behavioral State"),
         "caregiverField": MessageLookupByLibrary.simpleMessage(
             "Name of the person taking care of the patient"),
         "caregiverName": MessageLookupByLibrary.simpleMessage("Caregiver Name"),
@@ -129,6 +137,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "otpMessage": MessageLookupByLibrary.simpleMessage(
             "We’ve sent a 4-digit code to your email. Please enter it below to verify your account."),
+        "overallAssessment":
+            MessageLookupByLibrary.simpleMessage("Overall assessment"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordChanged": MessageLookupByLibrary.simpleMessage(
             "Your password has been changed successfully."),
@@ -156,6 +166,38 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please complete your profile"),
         "pleaseEnterValidEmail": MessageLookupByLibrary.simpleMessage(
             "Please enter a valid email address"),
+        "question1": MessageLookupByLibrary.simpleMessage(
+            "1. Is your memory worse now than it was a year ago?"),
+        "question10": MessageLookupByLibrary.simpleMessage(
+            "10. Do you get enough sleep and feel rested when you wake up?"),
+        "question11": MessageLookupByLibrary.simpleMessage(
+            "11. Do you regularly take any medications that might affect your memory?"),
+        "question12": MessageLookupByLibrary.simpleMessage(
+            "12. Have you ever been diagnosed with a vitamin deficiency, such as B12 or vitamin D?"),
+        "question13": MessageLookupByLibrary.simpleMessage(
+            "13. Have you become more withdrawn or less interested in interacting with others?"),
+        "question14": MessageLookupByLibrary.simpleMessage(
+            "14. Have you noticed any changes in your personality or general behavior (such as apathy or aggression)?"),
+        "question15": MessageLookupByLibrary.simpleMessage(
+            "15. Are you having difficulty expressing your feelings or understanding the feelings of others?"),
+        "question16": MessageLookupByLibrary.simpleMessage(
+            "16. Are you becoming more easily distracted or finding it difficult to concentrate on a single task?"),
+        "question2": MessageLookupByLibrary.simpleMessage(
+            "2. Do you have difficulty remembering recent events?"),
+        "question3": MessageLookupByLibrary.simpleMessage(
+            "3. Did you repeat the same question or statement more than once unintentionally?"),
+        "question4": MessageLookupByLibrary.simpleMessage(
+            "4. Do you sometimes get lost in places that are familiar to you?"),
+        "question5": MessageLookupByLibrary.simpleMessage(
+            "5. Do you take your medications regularly without reminders?"),
+        "question6": MessageLookupByLibrary.simpleMessage(
+            "6. Can you handle money and buy everyday necessities yourself?"),
+        "question7": MessageLookupByLibrary.simpleMessage(
+            "7. Can you prepare a simple meal yourself without forgetting the ingredients or steps?"),
+        "question8": MessageLookupByLibrary.simpleMessage(
+            "8. Can you navigate to nearby places without getting lost?"),
+        "question9": MessageLookupByLibrary.simpleMessage(
+            "9. Do you feel sad or have you lost interest in things you used to enjoy?"),
         "reenteryourpassword":
             MessageLookupByLibrary.simpleMessage("Re-enter your password"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),

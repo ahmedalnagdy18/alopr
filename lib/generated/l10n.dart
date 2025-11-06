@@ -1169,6 +1169,216 @@ class S {
       args: [],
     );
   }
+
+  /// `1. Is your memory worse now than it was a year ago?`
+  String get question1 {
+    return Intl.message(
+      '1. Is your memory worse now than it was a year ago?',
+      name: 'question1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2. Do you have difficulty remembering recent events?`
+  String get question2 {
+    return Intl.message(
+      '2. Do you have difficulty remembering recent events?',
+      name: 'question2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3. Did you repeat the same question or statement more than once unintentionally?`
+  String get question3 {
+    return Intl.message(
+      '3. Did you repeat the same question or statement more than once unintentionally?',
+      name: 'question3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `4. Do you sometimes get lost in places that are familiar to you?`
+  String get question4 {
+    return Intl.message(
+      '4. Do you sometimes get lost in places that are familiar to you?',
+      name: 'question4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `5. Do you take your medications regularly without reminders?`
+  String get question5 {
+    return Intl.message(
+      '5. Do you take your medications regularly without reminders?',
+      name: 'question5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `6. Can you handle money and buy everyday necessities yourself?`
+  String get question6 {
+    return Intl.message(
+      '6. Can you handle money and buy everyday necessities yourself?',
+      name: 'question6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `7. Can you prepare a simple meal yourself without forgetting the ingredients or steps?`
+  String get question7 {
+    return Intl.message(
+      '7. Can you prepare a simple meal yourself without forgetting the ingredients or steps?',
+      name: 'question7',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `8. Can you navigate to nearby places without getting lost?`
+  String get question8 {
+    return Intl.message(
+      '8. Can you navigate to nearby places without getting lost?',
+      name: 'question8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `9. Do you feel sad or have you lost interest in things you used to enjoy?`
+  String get question9 {
+    return Intl.message(
+      '9. Do you feel sad or have you lost interest in things you used to enjoy?',
+      name: 'question9',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `10. Do you get enough sleep and feel rested when you wake up?`
+  String get question10 {
+    return Intl.message(
+      '10. Do you get enough sleep and feel rested when you wake up?',
+      name: 'question10',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `11. Do you regularly take any medications that might affect your memory?`
+  String get question11 {
+    return Intl.message(
+      '11. Do you regularly take any medications that might affect your memory?',
+      name: 'question11',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `12. Have you ever been diagnosed with a vitamin deficiency, such as B12 or vitamin D?`
+  String get question12 {
+    return Intl.message(
+      '12. Have you ever been diagnosed with a vitamin deficiency, such as B12 or vitamin D?',
+      name: 'question12',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `13. Have you become more withdrawn or less interested in interacting with others?`
+  String get question13 {
+    return Intl.message(
+      '13. Have you become more withdrawn or less interested in interacting with others?',
+      name: 'question13',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `14. Have you noticed any changes in your personality or general behavior (such as apathy or aggression)?`
+  String get question14 {
+    return Intl.message(
+      '14. Have you noticed any changes in your personality or general behavior (such as apathy or aggression)?',
+      name: 'question14',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `15. Are you having difficulty expressing your feelings or understanding the feelings of others?`
+  String get question15 {
+    return Intl.message(
+      '15. Are you having difficulty expressing your feelings or understanding the feelings of others?',
+      name: 'question15',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `16. Are you becoming more easily distracted or finding it difficult to concentrate on a single task?`
+  String get question16 {
+    return Intl.message(
+      '16. Are you becoming more easily distracted or finding it difficult to concentrate on a single task?',
+      name: 'question16',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Level 1: Memory and noticeable changes`
+  String get assessmentTitle1 {
+    return Intl.message(
+      'Level 1: Memory and noticeable changes',
+      name: 'assessmentTitle1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Level Two: Activities of Daily Living (IADL)`
+  String get assessmentTitle2 {
+    return Intl.message(
+      'Level Two: Activities of Daily Living (IADL)',
+      name: 'assessmentTitle2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Level Three: Reversible Causes`
+  String get assessmentTitle3 {
+    return Intl.message(
+      'Level Three: Reversible Causes',
+      name: 'assessmentTitle3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Level Four: Psychological and Behavioral State`
+  String get assessmentTitle4 {
+    return Intl.message(
+      'Level Four: Psychological and Behavioral State',
+      name: 'assessmentTitle4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Overall assessment`
+  String get overallAssessment {
+    return Intl.message(
+      'Overall assessment',
+      name: 'overallAssessment',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
