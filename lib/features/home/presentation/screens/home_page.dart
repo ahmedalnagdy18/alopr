@@ -3,6 +3,7 @@ import 'package:alopr/core/common/inkweel_widget.dart';
 import 'package:alopr/core/common/no_internet_widget.dart';
 import 'package:alopr/core/fonts/app_text.dart';
 import 'package:alopr/core/utils/internet_connection_mixin.dart';
+import 'package:alopr/features/chat/presentation/pages/chat_page.dart';
 import 'package:alopr/features/home/presentation/cubits/get_patients_cubit/patients_cubit.dart';
 import 'package:alopr/features/home/presentation/widgets/doctor_widget.dart';
 import 'package:alopr/features/home/presentation/widgets/patient_widget.dart';
@@ -160,7 +161,15 @@ class _HomePageState extends State<_HomePage> with InternetConnectionMixin {
         SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-            child: SvgPicture.asset("images/ai_icon.svg"),
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    CupertinoPageRoute(
+                      builder: (context) => const ChatPage(),
+                    ),
+                  );
+                },
+                child: SvgPicture.asset("images/ai_icon.svg")),
           ),
         ),
       ],
