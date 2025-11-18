@@ -42,6 +42,7 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
+    final rtl = Directionality.of(context) == TextDirection.rtl;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final backgroundColor = Theme.of(context).brightness == Brightness.dark
         ? AppColors.backgroundDark
@@ -109,11 +110,11 @@ class _ChatPageState extends State<ChatPage> {
                     return IconButton(
                       icon: Icon(
                         Icons.send,
-                        color: _textController.text.isEmpty
+                        color: _textController.text.trim().isEmpty
                             ? Colors.grey
                             : AppColors.primaryLight,
                       ),
-                      onPressed: _textController.text.isEmpty
+                      onPressed: _textController.text.trim().isEmpty
                           ? null
                           : sendMessageCallback,
                     );
@@ -122,6 +123,7 @@ class _ChatPageState extends State<ChatPage> {
               },
             ),
             messageListOptions: MessageListOptions(
+              showDateSeparator: rtl ? false : true,
               chatFooterBuilder: _isLoading ? LoadingChatWidget() : SizedBox(),
             ),
             messageOptions: MessageOptions(
@@ -136,7 +138,9 @@ class _ChatPageState extends State<ChatPage> {
             ),
             currentUser: _currentUser,
             onSend: (ChatMessage message) {
-              _sendMessage(message);
+              if (_textController.text.trim().isNotEmpty) {
+                _sendMessage(message);
+              }
             },
             messages: _messages,
           ),
