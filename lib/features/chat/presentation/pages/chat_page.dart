@@ -18,11 +18,15 @@ class _ChatPageState extends State<ChatPage> {
   final TextEditingController _textController = TextEditingController();
   bool _isLoading = false;
 
+  ScrollController? _dashChatScrollController;
+
   Future<void> _sendMessage(ChatMessage userMessage) async {
     setState(() {
       _messages.insert(0, userMessage);
       _isLoading = true;
     });
+
+    _scrollToBottom();
 
     // Simulate an API call delay
     await Future.delayed(const Duration(seconds: 1));
@@ -38,6 +42,19 @@ class _ChatPageState extends State<ChatPage> {
       _messages.insert(0, botResponse);
       _isLoading = false;
     });
+
+    _scrollToBottom();
+  }
+
+  void _scrollToBottom() {
+    if (_dashChatScrollController != null &&
+        _dashChatScrollController!.hasClients) {
+      _dashChatScrollController!.animateTo(
+        _dashChatScrollController!.position.minScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
   }
 
   @override
@@ -47,13 +64,14 @@ class _ChatPageState extends State<ChatPage> {
     final backgroundColor = Theme.of(context).brightness == Brightness.dark
         ? AppColors.backgroundDark
         : Colors.white;
+
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).brightness == Brightness.dark
             ? AppColors.primaryDark
             : AppColors.primaryLight,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
           'Alopr Chat',
           style: TextStyle(color: Colors.white),
@@ -65,6 +83,8 @@ class _ChatPageState extends State<ChatPage> {
           child: DashChat(
             scrollToBottomOptions: ScrollToBottomOptions(
               scrollToBottomBuilder: (ScrollController scrollController) {
+                _dashChatScrollController = scrollController;
+
                 return Align(
                   alignment: Alignment.bottomCenter,
                   child: GestureDetector(
@@ -124,7 +144,8 @@ class _ChatPageState extends State<ChatPage> {
             ),
             messageListOptions: MessageListOptions(
               showDateSeparator: rtl ? false : true,
-              chatFooterBuilder: _isLoading ? LoadingChatWidget() : SizedBox(),
+              chatFooterBuilder:
+                  _isLoading ? LoadingChatWidget() : const SizedBox(),
             ),
             messageOptions: MessageOptions(
               showTime: true,
